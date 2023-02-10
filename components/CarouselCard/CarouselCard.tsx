@@ -1,12 +1,12 @@
-import styles from "@/styles/CarouselImg.module.scss";
+import styles from "./CarouselCard.module.scss";
 import { TMDB_IMAGE_URL } from "@/config/index";
 import { Play } from "@/icons/index";
 
-interface CarouselImgProps {
+interface CarouselCardProps {
   img: any;
 }
 
-export default function CarouselImg(props: CarouselImgProps) {
+export default function CarouselCard(props: CarouselCardProps) {
   const { img } = props;
 
   const imgsrc = img.poster_path || img.backdrop_path;
