@@ -1,0 +1,56 @@
+.carouselItem {
+  position: relative;
+  width: 190px;
+  height: 285px;
+
+  img {
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+  }
+  svg {
+    position: absolute;
+    top: 70%;
+    left: 35%;
+    width: 50px;
+    height: 48px;
+    background-color: var(--primaryColor100);
+    padding: 10px;
+    color: black;
+    border-radius: 50%;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+  }
+
+  &:hover {
+    .imgDescription,
+    svg {
+      visibility: visible;
+      opacity: 1;
+    }
+    img {
+      border: 5px solid var(--primaryColor100);
+      transform: scale(1.1);
+    }
+  }
+}
+
+.imgDescription {
+  padding-top: 15px;
+  position: absolute;
+  transition: opacity 0.2s, visibility 0.2s;
+  visibility: hidden;
+  opacity: 0;
+  color: var(--whiteColor200);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 210px;
+  margin-left: -5px;
+}
