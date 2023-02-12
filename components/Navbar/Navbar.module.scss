@@ -1,3 +1,4 @@
+@import "@/styles/size";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Russo+One&display=swap");
 .nav {
   display: flex;
@@ -5,7 +6,7 @@
   position: fixed;
   background-color: rgb(20, 20, 20, 0.8);
   width: 100vw;
-  min-height: 40px;
+  min-height: $navbar-height;
   top: 0;
   padding: 16px 25px 16px 16px;
   z-index: 100;
@@ -59,12 +60,18 @@
 }
 
 .movieButton {
-  &:hover + .navMovie {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    max-height: 300px;
-    border: 1px solid red;
+  &[data-dropdown="true"] {
+    background-color: var(--blackColor150);
+    opacity: 0.9;
+    border-left: 2px solid var(--primaryColor100);
+    border-top-right-radius: 8px;
+    button {
+      color: var(--primaryColor100);
+      opacity: 1;
+      svg {
+        opacity: 1;
+      }
+    }
   }
 }
 
@@ -72,11 +79,23 @@
   display: none;
   position: absolute;
   z-index: 1;
-  max-height: 300px;
-  border: 1px solid red;
-  // margin-top: 100px;
-  top: 0;
-  &:hover {
+  height: 350px;
+  width: 800px;
+  top: $navbar-height + 14px;
+  background-color: var(--blackColor150);
+  opacity: 0.9;
+  padding: 20px;
+  border-left: 2px solid var(--primaryColor100);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+
+  button {
+    min-width: 150px;
+    &:hover {
+      background-color: var(--blackColor400);
+    }
+  }
+  &[data-dropdown="true"] {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;

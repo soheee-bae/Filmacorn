@@ -4,6 +4,7 @@ import { Movie, WatchList, Search } from "@/icons/index";
 import Button, { Size, Variant } from "@/components/Button/Button";
 import { Genre } from "@/interfaces/db_interfaces";
 import clsx from "clsx";
+import { useState } from "react";
 interface NavbarProps {
   genre: Genre[];
 }
@@ -51,6 +52,8 @@ Object.freeze(navSecondItems);
 
 export default function Navbar(props: NavbarProps) {
   const { genre } = props;
+  const [dropdown, setDropdown] = useState(false);
+
   const handleOnClick = (): void => {};
 
   return (
@@ -65,6 +68,11 @@ export default function Navbar(props: NavbarProps) {
               <>
                 <Link
                   key={item.label}
+                  onMouseEnter={() =>
+                    item.label === "Movies" && setDropdown(true)
+                  }
+                  onMouseLeave={() => setDropdown(false)}
+                  data-dropdown={dropdown}
                   className={clsx(styles.item, {
                     [styles.movieButton]: item.label === "Movies",
                   })}
@@ -78,7 +86,11 @@ export default function Navbar(props: NavbarProps) {
                   </Button>
                 </Link>
                 {item.label === "Movies" && (
-                  <div className={styles.navMovie}>
+                  <div
+                    className={styles.navMovie}
+                    onMouseEnter={() => setDropdown(true)}
+                    onMouseLeave={() => setDropdown(false)}
+                    data-dropdown={dropdown}>
                     {genre.map((category) => (
                       <Button
                         onClick={handleOnClick}
