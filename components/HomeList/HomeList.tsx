@@ -26,7 +26,7 @@ export default function HomeList(props: HomeListProps) {
       {categories.map((category: HomeListItem) => {
         const { title, data } = category;
         return (
-          <div className={styles.homeListContainer}>
+          <div className={styles.homeListContainer} key={title}>
             <div className={styles.homeListHeader}>
               <p className={styles.homeListTitle}>{title}</p>
               <Link href={`/see-all/${title}`}>

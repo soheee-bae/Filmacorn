@@ -50,7 +50,8 @@ export default function CarouselLists(props: CarouselListsProps) {
       {data?.map((info: Movie) => {
         return (
           <Link
-            href={`/details/${info.id}/${info.title || info.original_title}`}>
+            href={`/details/${info.id}/${info.title || info.original_title}`}
+          >
             <CarouselCard key={info.id} info={info} />
           </Link>
         );

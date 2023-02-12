@@ -40,12 +40,14 @@ export default function NavbarLeft(props: NavbarProps) {
             className={clsx(styles.navItem, {
               [styles.movieButton]: item.label === "Movies",
             })}
-            href="">
+            href=""
+          >
             <Button
               onClick={handleOnClick}
               startIcon={item?.icon}
               variant={item?.variant}
-              size={item?.size}>
+              size={item?.size}
+            >
               {item.label}
             </Button>
           </Link>
@@ -54,12 +56,14 @@ export default function NavbarLeft(props: NavbarProps) {
               className={styles.navMovie}
               onMouseEnter={() => setDropdown(true)}
               onMouseLeave={() => setDropdown(false)}
-              data-dropdown={dropdown}>
+              data-dropdown={dropdown}
+            >
               {genre.map((category) => (
                 <Button
                   onClick={handleOnClick}
                   key={category.id}
-                  variant="text-outlined">
+                  variant="text-outlined"
+                >
                   {category.name}
                 </Button>
               ))}
