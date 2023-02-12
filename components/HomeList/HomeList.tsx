@@ -3,9 +3,11 @@ import Link from "next/link";
 import { RightArrow } from "@/icons/index";
 import { Movie } from "@/interfaces/db_interfaces";
 import Button from "@/components/Button/Button";
+import CarouselLists from "@/components/Carousel/Carousel";
+
 import styles from "./HomeList.module.scss";
 
-interface HomeListItem {
+export interface HomeListItem {
   title: string;
   data: Movie[];
 }
@@ -37,22 +39,7 @@ export default function HomeList(props: HomeListProps) {
                 </Button>
               </Link>
             </div>
-            {/* <Carousel
-              ssr={true}
-              responsive={responsive}
-              className={styles.carousel}>
-              {data?.map((img: Movie | Tv) => {
-                const categoryData = getDataWithCategorytitle(
-                  `${title}` || null
-                );
-                const mediaType = categoryData && getLinkUrl(categoryData, img);
-                return (
-                  <Link href={`/details/${mediaType}/${img.id}`}>
-                    <CarouselImg key={img.id} img={img} />
-                  </Link>
-                );
-              })}
-            </Carousel> */}
+            <CarouselLists data={data} />
           </div>
         );
       })}
