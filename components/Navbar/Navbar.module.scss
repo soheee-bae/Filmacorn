@@ -1,0 +1,47 @@
+@import "@/styles/size";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Russo+One&display=swap");
+.nav {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  background-color: rgb(20, 20, 20, 0.8);
+  width: 100vw;
+  min-height: $navbar-height;
+  top: 0;
+  padding: 16px 25px 16px 16px;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+}
+
+.navContainer {
+  max-width: 2000px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: transparent;
+}
+
+.logoItem {
+  text-decoration: none;
+  background-color: transparent;
+}
+.logo {
+  margin-right: 56px;
+  font-family: "Inter", sans-serif;
+  font-family: "Russo One", sans-serif;
+  font-size: var(--text-xl);
+  color: var(--primaryColor100);
+  background-color: transparent;
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.1);
+  }
+}

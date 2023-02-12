@@ -1,0 +1,57 @@
+@import "@/styles/size";
+
+.navItems {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  background-color: transparent;
+}
+
+.navItem {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.movieButton {
+  &[data-dropdown="true"] {
+    background-color: var(--blackColor150);
+    opacity: 0.9;
+    border-left: 2px solid var(--primaryColor100);
+    border-top-right-radius: 8px;
+    button {
+      color: var(--primaryColor100);
+      opacity: 1;
+      svg {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.navMovie {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  height: 350px;
+  width: 800px;
+  top: $navbar-height + 14px;
+  background-color: var(--blackColor150);
+  opacity: 0.9;
+  padding: 20px;
+  border-left: 2px solid var(--primaryColor100);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+
+  button {
+    min-width: 150px;
+    &:hover {
+      background-color: var(--blackColor400);
+    }
+  }
+  &[data-dropdown="true"] {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
