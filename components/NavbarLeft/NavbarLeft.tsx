@@ -2,10 +2,11 @@ import { useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 
+import styles from "./NavbarLeft.module.scss";
+
 import Button from "@/components/Button/Button";
 import { Movie, WatchList } from "@/icons/index";
-import { NavbarProps, NavItemProps } from "../Navbar/Navbar";
-import styles from "./NavbarLeft.module.scss";
+import { NavbarProps, NavItemProps } from "@/components/Navbar/Navbar";
 
 const navFirstItems: NavItemProps[] = [
   {
