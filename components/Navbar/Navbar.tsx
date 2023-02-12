@@ -2,6 +2,11 @@ import Link from "next/link";
 import styles from "./Navbar.module.scss";
 import { Movie, WatchList, Search } from "@/icons/index";
 import Button, { Size, Variant } from "@/components/Button/Button";
+import { Genre } from "@/interfaces/db_interfaces";
+import clsx from "clsx";
+interface NavbarProps {
+  genre: Genre[];
+}
 
 interface NavItemProps {
   label: string;
@@ -44,7 +49,8 @@ const navSecondItems: NavItemProps[] = [
 ];
 Object.freeze(navSecondItems);
 
-export default function Navbar() {
+export default function Navbar(props: NavbarProps) {
+  const { genre } = props;
   const handleOnClick = (): void => {};
 
   return (
@@ -56,15 +62,34 @@ export default function Navbar() {
           </Link>
           <div className={styles.navItems}>
             {navFirstItems.map((item) => (
-              <Link key={item.label} className={styles.item} href="">
-                <Button
-                  onClick={handleOnClick}
-                  startIcon={item?.icon}
-                  variant={item?.variant}
-                  size={item?.size}>
-                  {item.label}
-                </Button>
-              </Link>
+              <>
+                <Link
+                  key={item.label}
+                  className={clsx(styles.item, {
+                    [styles.movieButton]: item.label === "Movies",
+                  })}
+                  href="">
+                  <Button
+                    onClick={handleOnClick}
+                    startIcon={item?.icon}
+                    variant={item?.variant}
+                    size={item?.size}>
+                    {item.label}
+                  </Button>
+                </Link>
+                {item.label === "Movies" && (
+                  <div className={styles.navMovie}>
+                    {genre.map((category) => (
+                      <Button
+                        onClick={handleOnClick}
+                        key={category.id}
+                        variant="text-outlined">
+                        {category.name}
+                      </Button>
+                    ))}
+                  </div>
+                )}
+              </>
             ))}
           </div>
         </div>

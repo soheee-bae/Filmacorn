@@ -57,3 +57,28 @@
   text-decoration: none;
   background-color: transparent;
 }
+
+.movieButton {
+  &:hover + .navMovie {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 300px;
+    border: 1px solid red;
+  }
+}
+
+.navMovie {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  max-height: 300px;
+  border: 1px solid red;
+  // margin-top: 100px;
+  top: 0;
+  &:hover {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}

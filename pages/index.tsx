@@ -1,4 +1,4 @@
-import { FullData, MovieDetail } from "@/interfaces/db_interfaces";
+import { FullData, Genre, MovieDetail } from "@/interfaces/db_interfaces";
 import { GetServerSideProps } from "next";
 import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
 
@@ -12,6 +12,7 @@ interface APIProps {
   WesternMovies: FullData;
   AnimationMovies: FullData;
   MainMovieInfo: MovieDetail;
+  Genre: Genre[];
 }
 
 export default function Home(props: APIProps) {
@@ -25,6 +26,7 @@ export default function Home(props: APIProps) {
     WesternMovies,
     AnimationMovies,
     MainMovieInfo,
+    Genre,
   } = props;
 
   const lists = [
@@ -120,10 +122,12 @@ export const getServerSideProps: GetServerSideProps = async () => {
   );
   const MainMovieInfo = await MainMovieData.json();
 
-  // /* Genre */
-  // const GenreData = await fetch(`${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`);
-  // const Genres = await GenreData.json();
-  // const Genre = Genres.genres;
+  /* Genre */
+  const GenreData = await fetch(
+    `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
+  );
+  const Genres = await GenreData.json();
+  const Genre = Genres.genres;
   // const MainMovieVideoData = await fetch(
   //   `${TMDB_REQUEST_URL}/movie/${MainMovie.id}/videos${API_KEY}`
   // );
@@ -141,6 +145,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       WesternMovies,
       AnimationMovies,
       MainMovieInfo,
+      Genre,
     },
   };
 };
