@@ -46,7 +46,8 @@ export default function Button(props: ButtonProps) {
         styles[`${size}`]
       )}
       data-selected={selected}
-      onClick={handleClick}>
+      onClick={handleClick}
+    >
       {startIcon}
       {children}
       {endIcon}

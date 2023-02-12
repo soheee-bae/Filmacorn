@@ -5,3 +5,4 @@ export { default as Github } from "./github.svg";
 export { default as Movie } from "./movie.svg";
 export { default as WatchList } from "./watchList.svg";
 export { default as Search } from "./search.svg";
+export { default as RightArrow } from "./rightArrow.svg";
