@@ -1,0 +1,15 @@
+.genreList {
+  color: var(--whiteColor300);
+  font-size: var(--text-xs);
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.genre {
+  &[data-genre="genre_0"] {
+    list-style-type: none;
+  }
+  margin-right: 4px;
+}

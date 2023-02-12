@@ -1,0 +1,68 @@
+.homeMainContainer {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.homeContent {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.65), var(--blackColor200));
+  display: flex;
+  justify-content: center;
+}
+
+.homeText {
+  width: 100%;
+  max-width: 2000px;
+  padding-left: 50px;
+  padding-top: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.homeTitle {
+  color: var(--whiteColor200);
+  font-weight: var(--font-bold);
+  font-size: var(--text-xxxl);
+}
+
+.homeWord {
+  color: var(--whiteColor300);
+  font-weight: var(--font-light);
+  font-size: var(--text-xl);
+  margin-bottom: 15px;
+}
+
+.buttonsContainer {
+  position: relative;
+  padding: 10px 0px;
+  min-height: 60px;
+}
+
+.homeButtons {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 7px;
+}
+
+.homeOverview {
+  color: var(--whiteColor200);
+  font-size: var(--text-md);
+  line-height: 1.5;
+  opacity: 0.8;
+  font-weight: var(--font-normal);
+  max-width: 70%;
+  padding-top: 30px;
+}

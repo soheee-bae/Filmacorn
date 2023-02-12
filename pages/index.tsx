@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
 import HomeList from "@/components/HomeList/HomeList";
 import styles from "./Home.module.scss";
+import HomeMain from "@/components/HomeMain/HomeMain";
 
 interface APIProps {
   SpotLights: FullData;
@@ -67,6 +68,7 @@ export default function Home(props: APIProps) {
   ];
   return (
     <div className={styles.homeContainer}>
+      <HomeMain mainMovie={MainMovieInfo} />
       <HomeList categories={lists} />
     </div>
   );
@@ -134,6 +136,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   );
   const Genres = await GenreData.json();
   const Genre = Genres.genres;
+
   // const MainMovieVideoData = await fetch(
   //   `${TMDB_REQUEST_URL}/movie/${MainMovie.id}/videos${API_KEY}`
   // );
