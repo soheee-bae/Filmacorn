@@ -1,4 +1,3 @@
-import { TMDB_IMAGE_URL } from "@/config/index";
 import { Play } from "@/icons/index";
 import { MovieDetail } from "@/interfaces/db_interfaces";
 import { useRouter } from "next/router";
@@ -9,16 +8,17 @@ import styles from "./HomeMain.module.scss";
 
 interface HomeMainProps {
   mainMovie: MovieDetail;
+  mainMovieVideo: any;
 }
 
 export default function HomeMain(props: HomeMainProps) {
-  const { mainMovie } = props;
+  const { mainMovie, mainMovieVideo } = props;
   const router = useRouter();
 
-  console.log(mainMovie);
+  console.log(mainMovieVideo);
   const imgSrc = mainMovie.backdrop_path || mainMovie.poster_path;
   const genreList = mainMovie.genres;
-  // const videoLink = video.find((v: any) => v.site === "YouTube");
+  const videoLink = mainMovieVideo.find((v: any) => v.site === "YouTube");
 
   const handleWatchNow = () => {
     // window.open(`https://www.youtube.com/watch?v=${videoLink?.key}`);

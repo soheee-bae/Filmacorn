@@ -15,6 +15,7 @@ interface APIProps {
   WesternMovies: FullData;
   AnimationMovies: FullData;
   MainMovieInfo: MovieDetail;
+  MainMovieVideos: any;
   Genre: Genre[];
 }
 
@@ -29,6 +30,7 @@ export default function Home(props: APIProps) {
     WesternMovies,
     AnimationMovies,
     MainMovieInfo,
+    MainMovieVideos,
     Genre,
   } = props;
 
@@ -68,7 +70,7 @@ export default function Home(props: APIProps) {
   ];
   return (
     <div className={styles.homeContainer}>
-      <HomeMain mainMovie={MainMovieInfo} />
+      <HomeMain mainMovie={MainMovieInfo} mainMovieVideo={MainMovieVideos} />
       <HomeList categories={lists} />
     </div>
   );
@@ -124,11 +126,17 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const AnimationMovies = await AnimationMoviesData.json();
 
   /* Main Movie */
-  const MainMovie = TopRatedMovies.results[0];
+  const MainMovie = PopularMovies.results[0];
   const MainMovieData = await fetch(
     `${TMDB_REQUEST_URL}/movie/${MainMovie.id}${API_KEY}&language=en-US`
   );
   const MainMovieInfo = await MainMovieData.json();
+
+  const MainMovieVideoData = await fetch(
+    `${TMDB_REQUEST_URL}/movie/${MainMovie.id}/videos${API_KEY}`
+  );
+  const MainMovieVideo = await MainMovieVideoData.json();
+  const MainMovieVideos = MainMovieVideo.results;
 
   /* Genre */
   const GenreData = await fetch(
@@ -136,12 +144,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
   );
   const Genres = await GenreData.json();
   const Genre = Genres.genres;
-
-  // const MainMovieVideoData = await fetch(
-  //   `${TMDB_REQUEST_URL}/movie/${MainMovie.id}/videos${API_KEY}`
-  // );
-  // const MainMovieVideo = await MainMovieVideoData.json();
-  // const MainMovieVideos = MainMovieVideo.results;
 
   return {
     props: {
@@ -154,6 +156,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       WesternMovies,
       AnimationMovies,
       MainMovieInfo,
+      MainMovieVideos,
       Genre,
     },
   };
