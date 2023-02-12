@@ -1,6 +1,6 @@
 import { FullData, MovieDetail } from "@/interfaces/db_interfaces";
 import { GetServerSideProps } from "next";
-import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "../config";
+import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
 
 interface APIProps {
   SpotLights: FullData;
@@ -8,6 +8,7 @@ interface APIProps {
   UpcomingMovies: FullData;
   TopRatedMovies: FullData;
   ThrillerMovies: FullData;
+  FamilyMovies: FullData;
   WesternMovies: FullData;
   AnimationMovies: FullData;
   MainMovieInfo: MovieDetail;
@@ -20,11 +21,47 @@ export default function Home(props: APIProps) {
     UpcomingMovies,
     TopRatedMovies,
     ThrillerMovies,
+    FamilyMovies,
     WesternMovies,
     AnimationMovies,
     MainMovieInfo,
   } = props;
-  return <main>Hello from main!</main>;
+
+  const lists = [
+    {
+      title: "Spotlight",
+      data: SpotLights.results,
+    },
+    {
+      title: "Popular Movies",
+      data: PopularMovies.results,
+    },
+    {
+      title: "Upcoming Movies",
+      data: UpcomingMovies.results,
+    },
+    {
+      title: "Top rated Movies",
+      data: TopRatedMovies.results,
+    },
+    {
+      title: "Thriller",
+      data: ThrillerMovies,
+    },
+    {
+      title: "Family",
+      data: FamilyMovies,
+    },
+    {
+      title: "Western",
+      data: WesternMovies,
+    },
+    {
+      title: "Animation",
+      data: AnimationMovies,
+    },
+  ];
+  return <div>Hello</div>;
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -100,6 +137,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       UpcomingMovies,
       TopRatedMovies,
       ThrillerMovies,
+      FamilyMovies,
       WesternMovies,
       AnimationMovies,
       MainMovieInfo,

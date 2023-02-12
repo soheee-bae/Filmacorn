@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
 
+@import "../styles/color";
+@import "../styles/breakpoint";
+@import "../styles/mixin";
+@import "../styles/size";
+@import "../styles/typography";
+
 * {
   box-sizing: border-box;
   padding: 0;

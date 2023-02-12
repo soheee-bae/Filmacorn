@@ -1,0 +1,32 @@
+.footer {
+  background-color: var(--blackColor150);
+  width: 100%;
+  color: var(--whiteColor300);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 50px;
+  padding: 80px;
+  font-size: var(--text-sm);
+  font-weight: var(--font-normal);
+}
+
+.footerMediaIcons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 25px;
+  svg {
+    color: var(--whiteColor300);
+    height: 30px;
+    width: 30px;
+    opacity: 0.8;
+    transition: all 0.2s;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+}
