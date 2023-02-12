@@ -1,0 +1,36 @@
+.homeList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+.homeListContainer {
+  max-width: 2000px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 0px 40px 20px;
+}
+
+.homeListHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.homeListTitle {
+  font-weight: var(--font-bold);
+  color: var(--whiteColor300);
+  white-space: nowrap;
+  font-size: var(--text-xl);
+}
+
+.carousel {
+  padding: 20px 0 50px 10px;
+}

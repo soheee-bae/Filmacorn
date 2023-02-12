@@ -1,6 +1,8 @@
 import { FullData, Genre, MovieDetail } from "@/interfaces/db_interfaces";
 import { GetServerSideProps } from "next";
 import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
+import HomeList from "@/components/HomeList/HomeList";
+import styles from "./Home.module.scss";
 
 interface APIProps {
   SpotLights: FullData;
@@ -48,22 +50,26 @@ export default function Home(props: APIProps) {
     },
     {
       title: "Thriller",
-      data: ThrillerMovies,
+      data: ThrillerMovies.results,
     },
     {
       title: "Family",
-      data: FamilyMovies,
+      data: FamilyMovies.results,
     },
     {
       title: "Western",
-      data: WesternMovies,
+      data: WesternMovies.results,
     },
     {
       title: "Animation",
-      data: AnimationMovies,
+      data: AnimationMovies.results,
     },
   ];
-  return <div>Hello</div>;
+  return (
+    <div className={styles.homeContainer}>
+      <HomeList categories={lists} />
+    </div>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
