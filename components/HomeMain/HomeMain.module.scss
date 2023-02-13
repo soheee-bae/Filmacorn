@@ -28,11 +28,11 @@
 .homeText {
   width: 100%;
   max-width: 2000px;
-  padding-left: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 4px;
+  padding-left: 20px;
   @include md {
     padding-left: 50px;
   }

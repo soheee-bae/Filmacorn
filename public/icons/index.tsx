@@ -6,3 +6,4 @@ export { default as Movie } from "./movie.svg";
 export { default as WatchList } from "./watchList.svg";
 export { default as Search } from "./search.svg";
 export { default as RightArrow } from "./rightArrow.svg";
+export { default as LeftArrow } from "./leftArrow.svg";

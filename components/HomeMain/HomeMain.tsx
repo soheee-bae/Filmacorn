@@ -25,7 +25,9 @@ export default function HomeMain(props: HomeMainProps) {
     window.open(`https://www.youtube.com/watch?v=${mainVideo?.key}`);
   };
   const handleMoreInfo = () => {
-    router.push(`/details/movie/${mainMovie.id}`, undefined, { shallow: true });
+    router.push(`/details/${mainMovie.id}/${mainMovie.title}`, undefined, {
+      shallow: true,
+    });
   };
 
   return (

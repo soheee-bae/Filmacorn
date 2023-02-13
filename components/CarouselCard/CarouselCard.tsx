@@ -5,10 +5,12 @@ import { Movie } from "@/interfaces/movie";
 
 interface CarouselCardProps {
   info: Movie;
+  width?: number;
+  height?: number;
 }
 
 export default function CarouselCard(props: CarouselCardProps) {
-  const { info } = props;
+  const { info, width, height } = props;
 
   const imgSrc = info.poster_path || info.backdrop_path;
 
@@ -22,8 +24,8 @@ export default function CarouselCard(props: CarouselCardProps) {
         key={`${info.poster_path}`}
         alt={`${info.poster_path}`}
         src={imgSrc ? `${TMDB_IMAGE_URL}/w500${imgSrc}` : ""}
-        width="190"
-        height="285"
+        width={width || 190}
+        height={height || 285}
       />
       <Play />
       <p className={styles.imgDescription}>

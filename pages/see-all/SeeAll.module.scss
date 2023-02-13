@@ -1,0 +1,58 @@
+@import "@/styles/mixin";
+
+.seeAll {
+  background-color: var(--blackColor200);
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 2000px;
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  @include md {
+    padding: 100px 50px;
+  }
+}
+
+.seeAllHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  cursor: auto;
+  svg {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    color: var(--primaryColor100);
+    stroke-width: 3;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--blackColor150);
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.seeAllTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--whiteColor300);
+  font-weight: var(--font-bold);
+  font-size: var(--text-xxl);
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 23px;
+  div {
+    margin-bottom: 23px;
+  }
+}
