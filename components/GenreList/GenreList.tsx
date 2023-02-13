@@ -1,5 +1,5 @@
 import styles from "./GenreList.module.scss";
-import { Genre } from "@/interfaces/movie";
+import { Genre } from "@/interfaces/basic";
 
 interface GenreListProps {
   genreList: Genre[];
