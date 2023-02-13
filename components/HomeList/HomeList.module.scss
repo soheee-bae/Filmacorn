@@ -6,6 +6,15 @@
   justify-content: center;
   width: 100%;
   align-items: center;
+  @include lg {
+    margin-top: -3%;
+  }
+  @include xl {
+    margin-top: -10%;
+  }
+  @include xxl {
+    margin-top: -13%;
+  }
 }
 
 .homeListContainer {
@@ -15,16 +24,22 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 5px;
-  padding: 0px 40px 20px;
+  padding: 0px 10px 20px;
+  @include md {
+    padding: 0px 40px 20px;
+  }
 }
 
 .homeListHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding-left: 10px;
-  @include xl {
+  z-index: 100;
+
+  @include xxl {
     padding-right: 30px;
   }
 }
@@ -33,5 +48,9 @@
   font-weight: var(--font-bold);
   color: var(--whiteColor300);
   white-space: nowrap;
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
+  @include md {
+    font-weight: var(--font-bold);
+    font-size: var(--text-xl);
+  }
 }

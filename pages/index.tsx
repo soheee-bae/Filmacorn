@@ -1,7 +1,9 @@
-import { FullData, Genre, MovieDetail } from "@/interfaces/db_interfaces";
 import { GetServerSideProps } from "next";
+import { FullData, MovieDetail } from "@/interfaces/movie";
 import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
+
 import HomeList from "@/components/HomeList/HomeList";
+import HomeMain from "@/components/HomeMain/HomeMain";
 import styles from "./Home.module.scss";
 
 interface APIProps {
@@ -14,7 +16,7 @@ interface APIProps {
   WesternMovies: FullData;
   AnimationMovies: FullData;
   MainMovieInfo: MovieDetail;
-  Genre: Genre[];
+  MainMovieVideos: any;
 }
 
 export default function Home(props: APIProps) {
@@ -28,7 +30,7 @@ export default function Home(props: APIProps) {
     WesternMovies,
     AnimationMovies,
     MainMovieInfo,
-    Genre,
+    MainMovieVideos,
   } = props;
 
   const lists = [
@@ -67,6 +69,7 @@ export default function Home(props: APIProps) {
   ];
   return (
     <div className={styles.homeContainer}>
+      <HomeMain mainMovie={MainMovieInfo} mainMovieVideo={MainMovieVideos} />
       <HomeList categories={lists} />
     </div>
   );
@@ -122,11 +125,17 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const AnimationMovies = await AnimationMoviesData.json();
 
   /* Main Movie */
-  const MainMovie = TopRatedMovies.results[0];
+  const MainMovie = PopularMovies.results[0];
   const MainMovieData = await fetch(
     `${TMDB_REQUEST_URL}/movie/${MainMovie.id}${API_KEY}&language=en-US`
   );
   const MainMovieInfo = await MainMovieData.json();
+
+  const MainMovieVideoData = await fetch(
+    `${TMDB_REQUEST_URL}/movie/${MainMovie.id}/videos${API_KEY}`
+  );
+  const MainMovieVideo = await MainMovieVideoData.json();
+  const MainMovieVideos = MainMovieVideo.results;
 
   /* Genre */
   const GenreData = await fetch(
@@ -134,11 +143,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
   );
   const Genres = await GenreData.json();
   const Genre = Genres.genres;
-  // const MainMovieVideoData = await fetch(
-  //   `${TMDB_REQUEST_URL}/movie/${MainMovie.id}/videos${API_KEY}`
-  // );
-  // const MainMovieVideo = await MainMovieVideoData.json();
-  // const MainMovieVideos = MainMovieVideo.results;
 
   return {
     props: {
@@ -151,6 +155,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       WesternMovies,
       AnimationMovies,
       MainMovieInfo,
+      MainMovieVideos,
       Genre,
     },
   };
