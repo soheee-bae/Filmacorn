@@ -3,6 +3,8 @@ import { Genre } from "@/interfaces/basic";
 import { Cast, MovieDetail } from "@/interfaces/movie";
 import { Video } from "@/interfaces/video";
 import Button from "../Button/Button";
+import CastList from "../CastList/CastList";
+import DateTime from "../DateTime/DateTime";
 import GenreList from "../GenreList/GenreList";
 import MainBackground from "../MainBackground/MainBackground";
 import styles from "./DetailMain.module.scss";
@@ -28,11 +30,6 @@ export default function DetailMain(props: DetailMainProps) {
   };
   const handleAddWatchList = () => {};
 
-  //   const durationHour =
-  //     getTimeWithFormat(runtime).hours + getTimeWithFormat(runtime).hourUnit;
-  //   const durationMins =
-  //     getTimeWithFormat(runtime).minutes + getTimeWithFormat(runtime).minUnit;
-
   return (
     <div className={styles.detailMainContainer}>
       <MainBackground imgSrc={imgSrc} />
@@ -40,16 +37,10 @@ export default function DetailMain(props: DetailMainProps) {
       <div className={styles.detailMainContent}>
         <div className={styles.detailText}>
           <p className={styles.detailTitle}>{movieDetail.title}</p>
-          {/* <div>
-            <li>
-              {getYearandMonth(releaseDate).month}{" "}
-              {getYearandMonth(releaseDate).year}
-            </li>
-            <li>
-              <p>{getTimeWithFormat(runtime).hours !== 0 && durationHour}</p>
-              <p>{getTimeWithFormat(runtime).minutes !== 0 && durationMins}</p>
-            </li>
-          </div> */}
+          <DateTime
+            releaseDate={movieDetail.release_date}
+            runtime={movieDetail.runtime}
+          />
           <div className={styles.detailButtonsContainer}>
             <div className={styles.detailButtons}>
               <Button
@@ -70,27 +61,10 @@ export default function DetailMain(props: DetailMainProps) {
             </div>
           </div>
           <GenreList genreList={genreList} />
-
-          {/* {director.length !== 0 && (
-            <div>
-              <p>Directed by</p>
-              <div>
-                {director.map((d) => (
-                  <p>{d.name}</p>
-                ))}
-              </div>
-            </div>
-          )}
-          {cast.length !== 0 && (
-            <div>
-              <p>Starring</p>
-              <div>
-                {cast.map((c) => (
-                  <p>{c.name}</p>
-                ))}
-              </div>
-            </div>
-          )}*/}
+          <div>
+            <CastList list={director} title="Directed by" />
+            <CastList list={cast} title="Starring" />
+          </div>
           <p className={styles.detailOverview}>{movieDetail.overview}</p>
         </div>
       </div>
