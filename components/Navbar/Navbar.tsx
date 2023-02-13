@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
 
-import { Genre } from "@/interfaces/db_interfaces";
+import { Genre } from "@/interfaces/movie";
 import { Size, Variant } from "@/components/Button/Button";
 import NavbarLeft from "@/components/NavbarLeft/NavbarLeft";
 import NavbarRight from "@/components/NavbarRight/NavbarRight";

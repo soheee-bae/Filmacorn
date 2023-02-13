@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "./Carousel.module.scss";
 
-import { Movie } from "@/interfaces/db_interfaces";
+import { Movie } from "@/interfaces/movie";
 import CarouselCard from "@/components/CarouselCard/CarouselCard";
 
 const responsive = {
@@ -50,8 +50,7 @@ export default function CarouselLists(props: CarouselListsProps) {
       {data?.map((info: Movie) => {
         return (
           <Link
-            href={`/details/${info.id}/${info.title || info.original_title}`}
-          >
+            href={`/details/${info.id}/${info.title || info.original_title}`}>
             <CarouselCard key={info.id} info={info} />
           </Link>
         );

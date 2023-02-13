@@ -1,9 +1,10 @@
-import { FullData, Genre, MovieDetail } from "@/interfaces/db_interfaces";
 import { GetServerSideProps } from "next";
+import { FullData, MovieDetail } from "@/interfaces/movie";
 import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
+
 import HomeList from "@/components/HomeList/HomeList";
-import styles from "./Home.module.scss";
 import HomeMain from "@/components/HomeMain/HomeMain";
+import styles from "./Home.module.scss";
 
 interface APIProps {
   SpotLights: FullData;
@@ -16,7 +17,6 @@ interface APIProps {
   AnimationMovies: FullData;
   MainMovieInfo: MovieDetail;
   MainMovieVideos: any;
-  Genre: Genre[];
 }
 
 export default function Home(props: APIProps) {
@@ -31,7 +31,6 @@ export default function Home(props: APIProps) {
     AnimationMovies,
     MainMovieInfo,
     MainMovieVideos,
-    Genre,
   } = props;
 
   const lists = [

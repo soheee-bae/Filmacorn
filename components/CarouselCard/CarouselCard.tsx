@@ -1,7 +1,7 @@
 import styles from "./CarouselCard.module.scss";
 import { TMDB_IMAGE_URL } from "@/config/index";
 import { Play } from "@/icons/index";
-import { Movie } from "@/interfaces/db_interfaces";
+import { Movie } from "@/interfaces/movie";
 
 interface CarouselCardProps {
   info: Movie;

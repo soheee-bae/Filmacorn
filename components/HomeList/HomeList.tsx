@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { RightArrow } from "@/icons/index";
-import { Movie } from "@/interfaces/db_interfaces";
+import { Movie } from "@/interfaces/movie";
 import Button from "@/components/Button/Button";
 import CarouselLists from "@/components/Carousel/Carousel";
 
