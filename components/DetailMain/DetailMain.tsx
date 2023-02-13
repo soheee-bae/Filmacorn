@@ -2,6 +2,7 @@ import { Play } from "@/icons/index";
 import { Genre } from "@/interfaces/basic";
 import { Cast, MovieDetail } from "@/interfaces/movie";
 import { Video } from "@/interfaces/video";
+import { useRouter } from "next/router";
 import Button from "../Button/Button";
 import CastList from "../CastList/CastList";
 import DateTime from "../DateTime/DateTime";
@@ -18,22 +19,20 @@ interface DetailMainProps {
 
 export default function DetailMain(props: DetailMainProps) {
   const { movieDetail, cast, director, video } = props;
-  //   const router = useRouter();
+  const router = useRouter();
 
   const genreList = movieDetail.genres;
   const imgSrc = movieDetail.backdrop_path || movieDetail.poster_path;
-
-  //   const videoLink = video.find((v: any) => v.site === "YouTube");
+  const detailVideo = video?.find((v: any) => v.site === "YouTube");
 
   const handleWatchNow = () => {
-    //   window.open(`https://www.youtube.com/watch?v=${videoLink?.key}`);
+    window.open(`https://www.youtube.com/watch?v=${detailVideo?.key}`);
   };
   const handleAddWatchList = () => {};
 
   return (
     <div className={styles.detailMainContainer}>
       <MainBackground imgSrc={imgSrc} />
-
       <div className={styles.detailMainContent}>
         <div className={styles.detailText}>
           <p className={styles.detailTitle}>{movieDetail.title}</p>

@@ -10,45 +10,41 @@ interface MovieDetailProps {
   MovieDetails: MovieDetail;
   Actors: Cast[];
   Director: Cast[];
-  Video: Video[];
+  DetailVideos: Video[];
 }
 
 export default function DetailPage(props: MovieDetailProps) {
-  const { MovieDetails, Actors, Director, Video } = props;
+  const { MovieDetails, Actors, Director, DetailVideos } = props;
 
-  console.log(MovieDetails);
-  console.log(Actors);
-  console.log(Director);
-  console.log(Video);
   return (
     <div>
       <DetailMain
         movieDetail={MovieDetails}
         cast={Actors}
         director={Director}
-        video={Video}
+        video={DetailVideos}
       />
     </div>
-    // <Details
-    //   data={DetailInfo}
-    //   title={DetailInfo.title}
-    //   releaseDate={DetailInfo.release_date}
-    //   runtime={DetailInfo.runtime}
-    //   cast={Actors}
-    //   director={Director}
-    //   video={Video}
-    // />
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { detailId } = context.query;
 
-  const Details = await fetch(
+  /* Movie Detail */
+  const Detail = await fetch(
     `${TMDB_REQUEST_URL}/movie/${detailId}${API_KEY}&language=en-US`
   );
-  const MovieDetails = await Details.json();
+  const MovieDetails = await Detail.json();
 
+  /* Video */
+  const DetailVideoData = await fetch(
+    `${TMDB_REQUEST_URL}/movie/${detailId}/videos${API_KEY}`
+  );
+  const DetailVideo = await DetailVideoData.json();
+  const DetailVideos = DetailVideo.results;
+
+  /* Cast */
   const Cast = await fetch(
     `${TMDB_REQUEST_URL}/movie/${detailId}/credits${API_KEY}&language=en-US`
   );
@@ -62,12 +58,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         (crew.job === "Director" || crew.job === "Executive Producer") &&
         crew.known_for_department !== "Acting"
     ) || [];
-
-  const DetailVideoData = await fetch(
-    `${TMDB_REQUEST_URL}/movie/${detailId}/videos${API_KEY}`
-  );
-  const DetailVideo = await DetailVideoData.json();
-  const DetailVideos = DetailVideo.results;
 
   /* Genre */
   const GenreData = await fetch(
