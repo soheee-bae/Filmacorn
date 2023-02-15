@@ -1,21 +1,25 @@
 import { Play } from "@/icons/index";
-import { Cast, MovieDetail } from "@/interfaces/movie";
+import { Cast, Movie, MovieDetail } from "@/interfaces/movie";
 import { Video } from "@/interfaces/video";
 import Button from "@/components/Button/Button";
 import CastList from "@/components/CastList/CastList";
 import DateTime from "@/components/DateTime/DateTime";
 import GenreList from "@/components/GenreList/GenreList";
-import styles from "./DetailHeader.module.scss";
+import styles from "./DetailContent.module.scss";
+import { useRouter } from "next/router";
+import DetailRecom from "../DetailRecom/DetailRecom";
 
-interface DetailHeaderProps {
+interface DetailContentProps {
   movieDetail: MovieDetail;
   cast: Cast[];
   director: Cast[];
   video: Video[];
+  Recommendations: Movie[];
 }
 
-export default function DetailHeader(props: DetailHeaderProps) {
-  const { movieDetail, cast, director, video } = props;
+export default function DetailContent(props: DetailContentProps) {
+  const { movieDetail, cast, director, video, Recommendations } = props;
+  const router = useRouter();
 
   const genreList = movieDetail.genres;
   const detailVideo = video?.find((v: any) => v.site === "YouTube");
@@ -23,10 +27,14 @@ export default function DetailHeader(props: DetailHeaderProps) {
   const handleWatchNow = () => {
     window.open(`https://www.youtube.com/watch?v=${detailVideo?.key}`);
   };
-  const handleAddWatchList = () => {};
+  const handleAddWatchList = () => {
+    router.push(`/watchlist`, undefined, {
+      shallow: true,
+    });
+  };
 
   return (
-    <div className={styles.detailHeaderContent}>
+    <div className={styles.detailMainContent}>
       <div className={styles.detailText}>
         <p className={styles.detailTitle}>{movieDetail.title}</p>
         <DateTime
@@ -58,6 +66,7 @@ export default function DetailHeader(props: DetailHeaderProps) {
           <CastList list={cast} title="Starring" />
         </div>
         <p className={styles.detailOverview}>{movieDetail.overview}</p>
+        <DetailRecom Recommendations={Recommendations} />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 @import "@/styles/size";
 @import "@/styles/mixin";
 
-.detailHeaderContent {
+.detailMainContent {
   position: absolute;
   top: 0;
   height: 100%;
@@ -9,7 +9,8 @@
   background: linear-gradient(rgba(0, 0, 0, 0.65), var(--blackColor200));
   display: flex;
   justify-content: center;
-  padding-top: 20%;
+  padding: 20% 20px 0 20px;
+
   @include md {
     padding-top: 10%;
   }
@@ -22,9 +23,9 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 15px;
-  padding: 60px 20px;
+  padding: 60px 0;
   @include md {
-    padding: 50px 100px;
+    padding: 50px 60px;
     gap: 20px;
   }
   @include xxxl {

@@ -1,0 +1,24 @@
+@import "@/styles/mixin";
+.detailRecomContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+
+  hr {
+    border: 0.5px solid var(--whiteColor400);
+    margin-top: 10px;
+  }
+}
+
+.detailRecomTitle {
+  color: var(--whiteColor300);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  @include md {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+  }
+}
