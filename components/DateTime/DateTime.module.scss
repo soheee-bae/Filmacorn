@@ -1,0 +1,19 @@
+.dateTimeContainer {
+  color: var(--whiteColor300);
+  font-size: var(--text-xs);
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+}
+
+.date {
+  list-style-type: none;
+}
+
+.time {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 4px;
+}

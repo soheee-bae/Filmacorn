@@ -1,10 +1,12 @@
-import { GetServerSideProps } from "next";
-import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
-import styles from "./MovieDetail.module.scss";
 import React from "react";
-import { MovieDetail, Cast } from "@/interfaces/movie";
+import { GetServerSideProps } from "next";
+
+import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 import { Video } from "@/interfaces/video";
+import { MovieDetail, Cast } from "@/interfaces/movie";
 import DetailMain from "@/components/DetailMain/DetailMain";
+
+import styles from "./MovieDetail.module.scss";
 
 interface MovieDetailProps {
   MovieDetails: MovieDetail;

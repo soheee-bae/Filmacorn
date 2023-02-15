@@ -1,13 +1,11 @@
 import { Play } from "@/icons/index";
-import { Genre } from "@/interfaces/basic";
 import { Cast, MovieDetail } from "@/interfaces/movie";
 import { Video } from "@/interfaces/video";
-import { useRouter } from "next/router";
-import Button from "../Button/Button";
-import CastList from "../CastList/CastList";
-import DateTime from "../DateTime/DateTime";
-import GenreList from "../GenreList/GenreList";
-import MainBackground from "../MainBackground/MainBackground";
+import Button from "@/components/Button/Button";
+import CastList from "@/components/CastList/CastList";
+import DateTime from "@/components/DateTime/DateTime";
+import GenreList from "@/components/GenreList/GenreList";
+import MainBackground from "@/components/MainBackground/MainBackground";
 import styles from "./DetailMain.module.scss";
 
 interface DetailMainProps {
@@ -19,7 +17,6 @@ interface DetailMainProps {
 
 export default function DetailMain(props: DetailMainProps) {
   const { movieDetail, cast, director, video } = props;
-  const router = useRouter();
 
   const genreList = movieDetail.genres;
   const imgSrc = movieDetail.backdrop_path || movieDetail.poster_path;
