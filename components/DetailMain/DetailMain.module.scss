@@ -31,10 +31,9 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 15px;
-
   padding: 60px 20px;
   @include md {
-    padding: 50px 60px;
+    padding: 50px 100px;
     gap: 20px;
   }
   @include xxxl {
@@ -81,6 +80,16 @@
 }
 .detailButton {
   position: absolute;
+}
+
+.detailCasts {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  @include md {
+    gap: 20px;
+    max-width: 680px;
+  }
 }
 
 .detailOverview {

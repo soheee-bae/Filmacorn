@@ -10,7 +10,7 @@ export default function CastList(props: CastListProps) {
   const { list, title } = props;
   if (!list || list.length === 0) return null;
 
-  const limited = list.slice(0, 5);
+  const limited = list.slice(0, 4);
 
   return (
     <div className={styles.castListContainer}>
@@ -19,10 +19,10 @@ export default function CastList(props: CastListProps) {
         {limited.map((d, index) => (
           <p className={styles.castName}>
             {d.name}
-            {index !== 4 && <span>,</span>}
+            {index !== 3 && <span>,</span>}
           </p>
         ))}
-        {list.length >= 5 && <p className={styles.dots}>...</p>}
+        {list.length >= 4 && <p className={styles.dots}>...</p>}
       </div>
     </div>
   );

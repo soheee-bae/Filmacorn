@@ -11,18 +11,18 @@ import styles from "./MovieDetail.module.scss";
 interface MovieDetailProps {
   MovieDetails: MovieDetail;
   Actors: Cast[];
-  Director: Cast[];
+  Directors: Cast[];
   DetailVideos: Video[];
 }
 
 export default function DetailPage(props: MovieDetailProps) {
-  const { MovieDetails, Actors, Director, DetailVideos } = props;
+  const { MovieDetails, Actors, Directors, DetailVideos } = props;
 
   return (
     <DetailMain
       movieDetail={MovieDetails}
       cast={Actors}
-      director={Director}
+      director={Directors}
       video={DetailVideos}
     />
   );
@@ -59,6 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         crew.known_for_department !== "Acting"
     ) || [];
 
+  const Director = Casts.crew;
   /* Genre */
   const GenreData = await fetch(
     `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`

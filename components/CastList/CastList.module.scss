@@ -4,7 +4,7 @@
   color: var(--whiteColor200);
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  justify-content: space-between;
 }
 
 .castTitle {
@@ -20,8 +20,11 @@
   flex-direction: row;
   align-items: center;
   gap: 5px;
-  max-width: 600px;
+  width: 350px;
   flex-wrap: wrap;
+  @include md {
+    width: 550px;
+  }
 }
 
 .castName {
