@@ -18,10 +18,9 @@
   background: linear-gradient(rgba(0, 0, 0, 0.65), var(--blackColor200));
   display: flex;
   justify-content: center;
-  align-items: center;
   padding-top: 20%;
   @include md {
-    padding-top: 0;
+    padding-top: 10%;
   }
 }
 
@@ -31,10 +30,15 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 4px;
-  padding-left: 20px;
+  gap: 15px;
+
+  padding: 60px 20px;
   @include md {
-    padding-left: 50px;
+    padding: 50px 60px;
+    gap: 20px;
+  }
+  @include xxxl {
+    padding: 0;
   }
 }
 
@@ -58,16 +62,8 @@
   }
 }
 
-// .homeWord {
-//   color: var(--whiteColor300);
-//   font-weight: var(--font-light);
-//   font-size: var(--text-xl);
-//   margin-bottom: 15px;
-// }
-
 .detailButtonsContainer {
   position: relative;
-  padding-top: 30px;
   min-height: 60px;
 }
 
@@ -77,6 +73,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
+
   gap: 7px;
   :last-child {
     left: 170px;
@@ -92,7 +89,7 @@
   line-height: 1.5;
   opacity: 0.8;
   font-weight: var(--font-normal);
-  max-width: 70%;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -101,5 +98,6 @@
   -webkit-box-orient: vertical;
   @include md {
     font-size: var(--text-md);
+    max-width: 600px;
   }
 }

@@ -19,14 +19,12 @@ export default function DetailPage(props: MovieDetailProps) {
   const { MovieDetails, Actors, Director, DetailVideos } = props;
 
   return (
-    <div>
-      <DetailMain
-        movieDetail={MovieDetails}
-        cast={Actors}
-        director={Director}
-        video={DetailVideos}
-      />
-    </div>
+    <DetailMain
+      movieDetail={MovieDetails}
+      cast={Actors}
+      director={Director}
+      video={DetailVideos}
+    />
   );
 }
 

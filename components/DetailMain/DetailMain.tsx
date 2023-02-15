@@ -7,6 +7,7 @@ import DateTime from "@/components/DateTime/DateTime";
 import GenreList from "@/components/GenreList/GenreList";
 import MainBackground from "@/components/MainBackground/MainBackground";
 import styles from "./DetailMain.module.scss";
+import useBreakpoint from "hooks/useBreakpoint";
 
 interface DetailMainProps {
   movieDetail: MovieDetail;
@@ -17,6 +18,9 @@ interface DetailMainProps {
 
 export default function DetailMain(props: DetailMainProps) {
   const { movieDetail, cast, director, video } = props;
+
+  const breakpoint = useBreakpoint();
+  const mediumSize = breakpoint === "sm" || breakpoint === "md";
 
   const genreList = movieDetail.genres;
   const imgSrc = movieDetail.backdrop_path || movieDetail.poster_path;
@@ -56,6 +60,7 @@ export default function DetailMain(props: DetailMainProps) {
               </Button>
             </div>
           </div>
+          {/* {mediumSize && <hr />} */}
           <GenreList genreList={genreList} />
           <div>
             <CastList list={director} title="Directed by" />
