@@ -19,10 +19,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 20%;
-  @include md {
-    padding-top: 0;
-  }
 }
 
 .homeText {
@@ -32,9 +28,9 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 4px;
-  padding-left: 20px;
+  padding: 0 20px;
   @include md {
-    padding-left: 50px;
+    padding: 0 50px;
   }
 }
 
