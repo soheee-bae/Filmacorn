@@ -5,6 +5,7 @@ import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
 import HomeList from "@/components/HomeList/HomeList";
 import HomeMain from "@/components/HomeMain/HomeMain";
 import styles from "./Home.module.scss";
+import { Video } from "@/interfaces/video";
 
 interface APIProps {
   SpotLights: FullData;
@@ -16,7 +17,7 @@ interface APIProps {
   WesternMovies: FullData;
   AnimationMovies: FullData;
   MainMovieInfo: MovieDetail;
-  MainMovieVideos: any;
+  MainMovieVideos: Video[];
 }
 
 export default function Home(props: APIProps) {

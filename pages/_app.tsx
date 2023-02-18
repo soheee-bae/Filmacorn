@@ -6,6 +6,7 @@ import "@/styles/globals.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
   const { Genre } = pageProps;
+
   return (
     <React.StrictMode>
       {/* <ContextProvider> */}

@@ -1,0 +1,12 @@
+@import "@/styles/size";
+@import "@/styles/mixin";
+
+.detailMainContainer {
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  background-color: var(--blackColor200);
+}

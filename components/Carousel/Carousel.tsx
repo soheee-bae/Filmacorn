@@ -49,8 +49,7 @@ export default function CarouselLists(props: CarouselListsProps) {
     <Carousel ssr={true} responsive={responsive} className={styles.carousel}>
       {data?.map((info: Movie) => {
         return (
-          <Link
-            href={`/details/${info.id}/${info.title || info.original_title}`}>
+          <Link href={`/details/${info.id}`}>
             <CarouselCard key={info.id} info={info} />
           </Link>
         );

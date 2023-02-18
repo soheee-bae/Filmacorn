@@ -6,14 +6,8 @@
   justify-content: center;
   width: 100%;
   align-items: center;
-  @include lg {
-    margin-top: -3%;
-  }
-  @include xl {
-    margin-top: -10%;
-  }
   @include xxl {
-    margin-top: -13%;
+    margin-top: -100px;
   }
 }
 

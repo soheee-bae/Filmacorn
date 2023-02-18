@@ -1,0 +1,45 @@
+@import "@/styles/mixin";
+
+.castListContainer {
+  color: var(--whiteColor200);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.castTitle {
+  font-weight: var(--font-bold);
+  font-size: var(--text-xs);
+  @include md {
+    font-size: var(--text-md);
+  }
+}
+
+.castNameContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  width: 380px;
+  flex-wrap: wrap;
+  @include md {
+    width: 550px;
+  }
+}
+
+.castName {
+  font-weight: var(--font-normal);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  opacity: 0.8;
+  @include md {
+    font-size: var(--text-md);
+  }
+}
+
+.dots {
+  font-size: var(--text-xs);
+  @include md {
+    font-size: var(--text-md);
+  }
+}

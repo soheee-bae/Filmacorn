@@ -76,7 +76,7 @@
   border: 2px solid var(--blackColor500);
   font-weight: var(--font-semibold);
   transition: border 0.2s;
-  background: none;
+  background: rgba(21, 21, 21, 0.87);
   &:hover {
     border: 3px solid var(--primaryColor100);
     border-width: 3px 2px;
