@@ -1,15 +1,18 @@
 @import "@/styles/mixin";
+
 .detailRecomContainer {
+  position: relative;
   height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-
+  padding: 0 20px 30px;
+  margin-top: -370px;
   hr {
     border: 0.5px solid var(--whiteColor400);
-    margin-top: 10px;
+    margin: 10px 0 20px;
+  }
+  @include md {
+    padding: 0 60px 30px;
+    margin-top: -250px;
   }
 }
 
@@ -20,5 +23,18 @@
   @include md {
     font-size: var(--text-xl);
     font-weight: var(--font-bold);
+  }
+}
+
+.detailRecomContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 23px;
+  justify-content: center;
+  div {
+    margin-bottom: 23px;
+  }
+  @include md {
+    justify-content: flex-start;
   }
 }

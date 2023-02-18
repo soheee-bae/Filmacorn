@@ -7,7 +7,7 @@ import DateTime from "@/components/DateTime/DateTime";
 import GenreList from "@/components/GenreList/GenreList";
 import styles from "./DetailContent.module.scss";
 import { useRouter } from "next/router";
-import DetailRecom from "../DetailRecom/DetailRecom";
+import MainBackground from "@/components/MainBackground/MainBackground";
 
 interface DetailContentProps {
   movieDetail: MovieDetail;
@@ -20,6 +20,8 @@ interface DetailContentProps {
 export default function DetailContent(props: DetailContentProps) {
   const { movieDetail, cast, director, video, Recommendations } = props;
   const router = useRouter();
+
+  const imgSrc = movieDetail.backdrop_path || movieDetail.poster_path;
 
   const genreList = movieDetail.genres;
   const detailVideo = video?.find((v: any) => v.site === "YouTube");
@@ -35,6 +37,7 @@ export default function DetailContent(props: DetailContentProps) {
 
   return (
     <div className={styles.detailMainContent}>
+      <MainBackground imgSrc={imgSrc} />
       <div className={styles.detailText}>
         <p className={styles.detailTitle}>{movieDetail.title}</p>
         <DateTime
@@ -66,7 +69,6 @@ export default function DetailContent(props: DetailContentProps) {
           <CastList list={cast} title="Starring" />
         </div>
         <p className={styles.detailOverview}>{movieDetail.overview}</p>
-        <DetailRecom Recommendations={Recommendations} />
       </div>
     </div>
   );

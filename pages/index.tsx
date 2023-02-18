@@ -68,7 +68,6 @@ export default function Home(props: APIProps) {
       data: AnimationMovies.results,
     },
   ];
-  console.log(PopularMovies.results);
   return (
     <div className={styles.homeContainer}>
       <HomeMain mainMovie={MainMovieInfo} mainMovieVideo={MainMovieVideos} />
