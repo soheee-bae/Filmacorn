@@ -6,8 +6,6 @@ import { Video } from "@/interfaces/video";
 import { MovieDetail, Cast, Movie } from "@/interfaces/movie";
 import DetailMain from "@/components/DetailMain/DetailMain";
 
-import styles from "./MovieDetail.module.scss";
-
 interface MovieDetailProps {
   MovieDetails: MovieDetail;
   Actors: Cast[];

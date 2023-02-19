@@ -16,7 +16,7 @@ interface ButtonProps {
   size?: Size;
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
 }
 
@@ -34,7 +34,7 @@ export default function Button(props: ButtonProps) {
 
   const handleClick = () => {
     setSelected(!selected);
-    onClick();
+    onClick?.();
   };
 
   return (
@@ -46,8 +46,7 @@ export default function Button(props: ButtonProps) {
         styles[`${size}`]
       )}
       data-selected={selected}
-      onClick={handleClick}
-    >
+      onClick={handleClick}>
       {startIcon}
       {children}
       {endIcon}

@@ -19,8 +19,6 @@ interface HomeListProps {
 export default function HomeList(props: HomeListProps) {
   const { categories } = props;
 
-  const handleSeeAll = () => {};
-
   return (
     <div className={styles.homeList}>
       {categories.map((category: HomeListItem) => {
@@ -33,7 +31,6 @@ export default function HomeList(props: HomeListProps) {
                 <Button
                   size="sm"
                   variant="text"
-                  onClick={handleSeeAll}
                   endIcon={<RightArrow />}>
                   See All
                 </Button>

@@ -39,7 +39,7 @@ export default function SeeAll(props: SeeAllProps) {
         <div className={styles.content}>
           {movieData?.map((data: Movie) => {
             return (
-              <Link href={`/details/${data.id}`}>
+              <Link href={`/details/${data.id}`} key={data.id}>
                 <CarouselCard key={data.id} info={data} />;
               </Link>
             );

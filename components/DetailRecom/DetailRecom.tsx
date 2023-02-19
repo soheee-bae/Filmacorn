@@ -18,7 +18,7 @@ export default function DetailRecom(props: DetailRecomProps) {
       <div className={styles.detailRecomContent}>
         {slicedRecomm?.map((data: Movie) => {
           return (
-            <Link href={`/details/${data.id}`}>
+            <Link href={`/details/${data.id}`} key={data.id}>
               <CarouselCard key={data.id} info={data} />
             </Link>
           );

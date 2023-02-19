@@ -1,0 +1,12 @@
+.categorySidebar {
+  border: 2px solid var(--blackColor500);
+  padding: 28px 16px;
+  width: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 8px;
+  a {
+    text-decoration: none;
+  }
+}
