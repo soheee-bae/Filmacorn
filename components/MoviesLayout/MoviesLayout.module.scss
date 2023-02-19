@@ -1,7 +1,7 @@
 .moviesLayout {
   background-color: var(--blackColor200);
-  display: flex;
-  flex: 235px 1;
-  padding-top: 500px;
+  display: grid;
+  grid-template-columns: 235px 1fr;
+  padding: 100px 20px;
   color: white;
 }

@@ -1,6 +1,6 @@
 import { Genre } from "@/interfaces/basic";
 import Link from "next/link";
-import Button from "../Button/Button";
+import Button from "@/components/Button/Button";
 import styles from "./CategorySidebar.module.scss";
 
 interface CategorySidebarProps {

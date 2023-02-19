@@ -32,7 +32,7 @@ export default function NavbarLeft(props: NavbarProps) {
   const handleOnClick = () => {};
   return (
     <div className={styles.navItems}>
-      {navFirstItems.map((item) => {
+      {navFirstItems.map((item, index) => {
         return (
           <>
             <Link
