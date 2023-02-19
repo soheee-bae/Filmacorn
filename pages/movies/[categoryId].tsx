@@ -1,7 +1,6 @@
 import React from "react";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { API_KEY, TMDB_REQUEST_URL, TMDB_EXTRA } from "@/config/index";
-import { getCategoryData } from "@/helpers/getCategoryData";
 import { FullData, Movie } from "@/interfaces/movie";
 
 import styles from "./Movies.module.scss";

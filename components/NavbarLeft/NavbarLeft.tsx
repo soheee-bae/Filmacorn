@@ -29,7 +29,6 @@ export default function NavbarLeft(props: NavbarProps) {
   const { genre } = props;
   const [dropdown, setDropdown] = useState(false);
 
-  const handleOnClick = () => {};
   return (
     <div className={styles.navItems}>
       {navFirstItems.map((item, index) => {
@@ -45,7 +44,6 @@ export default function NavbarLeft(props: NavbarProps) {
               })}
               href={`${item.href}`}>
               <Button
-                onClick={handleOnClick}
                 startIcon={item?.icon}
                 variant={item?.variant}
                 size={item?.size}>
@@ -59,12 +57,11 @@ export default function NavbarLeft(props: NavbarProps) {
                 onMouseLeave={() => setDropdown(false)}
                 data-dropdown={dropdown}>
                 {genre.map((category) => (
-                  <Button
-                    onClick={handleOnClick}
-                    key={category.id}
-                    variant="text-outlined">
-                    {category.name}
-                  </Button>
+                  <Link href={`/movies/${category.id}`}>
+                    <Button key={category.id} variant="text-outlined">
+                      {category.name}
+                    </Button>
+                  </Link>
                 ))}
               </div>
             )}
