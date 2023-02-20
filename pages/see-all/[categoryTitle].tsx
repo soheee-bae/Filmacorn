@@ -72,17 +72,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   /* Genre */
-  const GenreData = await fetch(
+  const genreData = await fetch(
     `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
   );
-  const Genres = await GenreData.json();
-  const Genre = Genres.genres;
+  const genres = await genreData.json();
+  const genre = genres.genres;
 
   return {
     props: {
       categoryData,
       movieData,
-      Genre,
+      genre,
     },
   };
 };

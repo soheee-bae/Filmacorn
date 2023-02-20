@@ -7,24 +7,24 @@ import { MovieDetail, Cast, Movie } from "@/interfaces/movie";
 import DetailMain from "@/components/DetailMain/DetailMain";
 
 interface MovieDetailProps {
-  MovieDetails: MovieDetail;
-  Actors: Cast[];
-  Directors: Cast[];
-  Recommendations: Movie[];
-  DetailVideos: Video[];
+  movieDetails: MovieDetail;
+  actors: Cast[];
+  directors: Cast[];
+  recommendations: Movie[];
+  detailVideos: Video[];
 }
 
 export default function DetailPage(props: MovieDetailProps) {
-  const { MovieDetails, Actors, Directors, Recommendations, DetailVideos } =
+  const { movieDetails, actors, directors, recommendations, detailVideos } =
     props;
 
   return (
     <DetailMain
-      movieDetail={MovieDetails}
-      cast={Actors}
-      director={Directors}
-      video={DetailVideos}
-      Recommendations={Recommendations}
+      movieDetail={movieDetails}
+      cast={actors}
+      director={directors}
+      video={detailVideos}
+      recommendations={recommendations}
     />
   );
 }
@@ -33,55 +33,55 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { detailId } = context.query;
 
   /* Movie Detail */
-  const Detail = await fetch(
+  const movieDetail = await fetch(
     `${TMDB_REQUEST_URL}/movie/${detailId}${API_KEY}&language=en-US`
   );
-  const MovieDetails = await Detail.json();
+  const movieDetails = await movieDetail.json();
 
   /* Video */
-  const DetailVideoData = await fetch(
+  const detailVideoData = await fetch(
     `${TMDB_REQUEST_URL}/movie/${detailId}/videos${API_KEY}`
   );
-  const DetailVideo = await DetailVideoData.json();
-  const DetailVideos = DetailVideo.results;
+  const detailVideo = await detailVideoData.json();
+  const detailVideos = detailVideo.results;
 
   /* Cast */
-  const Cast = await fetch(
+  const cast = await fetch(
     `${TMDB_REQUEST_URL}/movie/${detailId}/credits${API_KEY}&language=en-US`
   );
-  const Casts = await Cast.json();
-  const Actors = Casts.cast.filter(
+  const casts = await cast.json();
+  const actors = casts.cast.filter(
     (cast: Cast) => cast.known_for_department === "Acting"
   );
-  const Directors =
-    Casts.crew.filter(
+  const directors =
+    casts.crew.filter(
       (crew: Cast) =>
         (crew.job === "Director" || crew.job === "Executive Producer") &&
         crew.known_for_department !== "Acting"
     ) || [];
 
   /* Similar */
-  const Similar = await fetch(
+  const similar = await fetch(
     `${TMDB_REQUEST_URL}/movie/${detailId}/similar${API_KEY}&language=en-US&page=1`
   );
-  const SimilarData = await Similar.json();
-  const Recommendations = SimilarData.results;
+  const similarData = await similar.json();
+  const recommendations = similarData.results;
 
   /* Genre */
-  const GenreData = await fetch(
+  const genreData = await fetch(
     `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
   );
-  const Genres = await GenreData.json();
-  const Genre = Genres.genres;
+  const genres = await genreData.json();
+  const genre = genres.genres;
 
   return {
     props: {
-      MovieDetails,
-      Actors,
-      Directors,
-      Recommendations,
-      DetailVideos,
-      Genre,
+      movieDetails,
+      actors,
+      directors,
+      recommendations,
+      detailVideos,
+      genre,
     },
   };
 };

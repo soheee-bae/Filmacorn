@@ -4,16 +4,16 @@ import CategorySidebar from "@/components/CategorySidebar/CategorySidebar";
 import styles from "./MoviesLayout.module.scss";
 
 interface MoviesLayoutProps {
-  Genre: Genre[];
+  genre: Genre[];
   children: ReactNode;
 }
 
 export default function MoviesLayout(props: MoviesLayoutProps) {
-  const { Genre, children } = props;
+  const { genre, children } = props;
 
   return (
     <div className={styles.moviesLayout}>
-      <CategorySidebar Genre={Genre} />
+      <CategorySidebar genre={genre} />
       {children}
     </div>
   );

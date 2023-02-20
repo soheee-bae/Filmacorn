@@ -34,8 +34,7 @@ export default function NavbarRight() {
             onClick={handleOnClick}
             startIcon={item?.icon}
             variant={item?.variant}
-            size={item?.size}
-          >
+            size={item?.size}>
             {item.label}
           </Button>
         </Link>

@@ -1,26 +1,31 @@
 import React from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { API_KEY, TMDB_REQUEST_URL, TMDB_EXTRA } from "@/config/index";
-import { FullData, Movie } from "@/interfaces/movie";
+import Link from "next/link";
 
-import styles from "./Movies.module.scss";
+import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
+import { FullData, Movie } from "@/interfaces/movie";
 import { Genre } from "@/interfaces/basic";
 import MoviesLayout from "@/components/MoviesLayout/MoviesLayout";
-import Link from "next/link";
 import CarouselCard from "@/components/CarouselCard/CarouselCard";
 
+import styles from "./Movies.module.scss";
+
 interface MoviesProps {
-  Movies: FullData;
-  Genre: Genre[];
+  movies: FullData;
+  genre: Genre[];
+  categoryId: string;
 }
 
 export default function MoviesCategory(props: MoviesProps) {
-  const { Movies, Genre } = props;
-  const movies = Movies.results;
+  const { movies, genre, categoryId } = props;
+  const allMovies = movies.results;
+
+  const currentGenre = genre.find((genre) => genre.id === parseInt(categoryId));
 
   return (
-    <MoviesLayout Genre={Genre}>
-      {movies?.map((data: Movie) => {
+    <MoviesLayout genre={genre}>
+      <p>{currentGenre?.name}</p>
+      {allMovies?.map((data: Movie) => {
         return (
           <Link href={`/details/${data.id}`} key={data.id}>
             <CarouselCard key={data.id} info={data} />
@@ -33,13 +38,13 @@ export default function MoviesCategory(props: MoviesProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   /* Genre */
-  const GenreData = await fetch(
+  const genreData = await fetch(
     `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
   );
-  const Genres = await GenreData.json();
-  const Genre = Genres.genres;
+  const genres = await genreData.json();
+  const genre = genres.genres;
 
-  const paths = Genre.map((genre: Genre) => ({
+  const paths = genre.map((genre: Genre) => ({
     params: { categoryId: genre.id.toString() },
   }));
 
@@ -50,19 +55,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const categoryId = params?.categoryId;
   /* Genre */
-  const GenreData = await fetch(
+  const genreData = await fetch(
     `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
   );
-  const Genres = await GenreData.json();
-  const Genre = Genres.genres;
+  const genres = await genreData.json();
+  const genre = genres.genres;
 
-  const MovieData = await fetch(
+  const movieData = await fetch(
     `${TMDB_REQUEST_URL}/discover/movie${API_KEY}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${params?.categoryId}&with_watch_monetization_types=flatrate&with_original_language=en`
   );
-  const Movies = await MovieData.json();
+  const movies = await movieData.json();
 
   return {
-    props: { Genre, Movies },
+    props: { genre, movies, categoryId },
   };
 };

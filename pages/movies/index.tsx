@@ -1,26 +1,27 @@
 import React from "react";
 import { GetStaticProps } from "next";
+import Link from "next/link";
+
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 import { FullData, Movie } from "@/interfaces/movie";
-
-import styles from "./Movies.module.scss";
-import CategorySidebar from "@/components/CategorySidebar/CategorySidebar";
 import { Genre } from "@/interfaces/basic";
 import MoviesLayout from "@/components/MoviesLayout/MoviesLayout";
-import Link from "next/link";
 import CarouselCard from "@/components/CarouselCard/CarouselCard";
 
+import styles from "./Movies.module.scss";
+
 interface MoviesProps {
-  AllMovies: FullData;
-  Genre: Genre[];
+  allMovies: FullData;
+  genre: Genre[];
 }
 
 export default function Movies(props: MoviesProps) {
-  const { AllMovies, Genre } = props;
-  const movies = AllMovies.results;
+  const { allMovies, genre } = props;
+  const movies = allMovies.results;
 
   return (
-    <MoviesLayout Genre={Genre}>
+    <MoviesLayout genre={genre}>
+      <p>All Movies</p>
       {movies?.map((data: Movie) => {
         return (
           <Link href={`/details/${data.id}`} key={data.id}>
@@ -34,18 +35,18 @@ export default function Movies(props: MoviesProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   /* Genre */
-  const GenreData = await fetch(
+  const genreData = await fetch(
     `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
   );
-  const Genres = await GenreData.json();
-  const Genre = Genres.genres;
+  const genres = await genreData.json();
+  const genre = genres.genres;
 
-  const AllMoviesData = await fetch(
+  const allMoviesData = await fetch(
     `${TMDB_REQUEST_URL}/movie/popular${API_KEY}&language=en-US&language=en-US&page=1`
   );
-  const AllMovies = await AllMoviesData.json();
+  const allMovies = await allMoviesData.json();
 
   return {
-    props: { AllMovies, Genre },
+    props: { allMovies, genre },
   };
 };

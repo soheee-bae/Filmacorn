@@ -1,21 +1,22 @@
-import { Genre } from "@/interfaces/basic";
 import Link from "next/link";
+
+import { Genre } from "@/interfaces/basic";
 import Button from "@/components/Button/Button";
 import styles from "./CategorySidebar.module.scss";
 
 interface CategorySidebarProps {
-  Genre: Genre[];
+  genre: Genre[];
 }
 
 export default function CategorySidebar(props: CategorySidebarProps) {
-  const { Genre } = props;
+  const { genre } = props;
 
   return (
     <div className={styles.categorySidebar}>
       <Link href={`/movies`}>
         <Button variant="text-outlined">All Movies</Button>
       </Link>
-      {Genre.map((genre) => (
+      {genre.map((genre) => (
         <Link href={`/movies/${genre.id}`} key={genre.id}>
           <Button variant="text-outlined">{genre.name}</Button>
         </Link>
