@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import styles from "./LoadMoreContent.module.scss";
 import Link from "next/link";
-import CarouselCard from "../CarouselCard/CarouselCard";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+
 import { Movie } from "@/interfaces/movie";
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
+import CarouselCard from "@/components/CarouselCard/CarouselCard";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+
+import styles from "./LoadMoreContent.module.scss";
 
 interface LoadMoreContentProps {
-  defaultMovies: Movie[];
   categoryId?: string;
 }
 
 export default function LoadMoreContent(props: LoadMoreContentProps) {
-  const { defaultMovies, categoryId } = props;
+  const { categoryId } = props;
   const [data, setData] = useState<Movie[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);

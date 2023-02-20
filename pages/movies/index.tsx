@@ -2,21 +2,18 @@ import React from "react";
 import { GetStaticProps } from "next";
 
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
-import { FullData } from "@/interfaces/movie";
 import { Genre } from "@/interfaces/basic";
 import MoviesLayout from "@/components/MoviesLayout/MoviesLayout";
-
-import styles from "./Movies.module.scss";
 import LoadMoreContent from "@/components/LoadMoreContent/LoadMoreContent";
 
+import styles from "./Movies.module.scss";
+
 interface MoviesProps {
-  allMovies: FullData;
   genre: Genre[];
 }
 
 export default function Movies(props: MoviesProps) {
-  const { allMovies, genre } = props;
-  const movies = allMovies.results;
+  const { genre } = props;
 
   return (
     <MoviesLayout genre={genre}>
@@ -24,7 +21,7 @@ export default function Movies(props: MoviesProps) {
         <div className={styles.moviesHeader}>
           <p className={styles.moviesTitle}>All Movies</p>
         </div>
-        <LoadMoreContent defaultMovies={movies} />
+        <LoadMoreContent />
       </div>
     </MoviesLayout>
   );
@@ -38,12 +35,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const genres = await genreData.json();
   const genre = genres.genres;
 
-  const allMoviesData = await fetch(
-    `${TMDB_REQUEST_URL}/movie/popular${API_KEY}&language=en-US&page=1`
-  );
-  const allMovies = await allMoviesData.json();
-
   return {
-    props: { allMovies, genre },
+    props: { genre },
   };
 };
