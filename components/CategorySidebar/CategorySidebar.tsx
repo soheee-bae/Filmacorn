@@ -12,6 +12,9 @@ export default function CategorySidebar(props: CategorySidebarProps) {
 
   return (
     <div className={styles.categorySidebar}>
+      <Link href={`/movies`}>
+        <Button variant="text-outlined">All Movies</Button>
+      </Link>
       {Genre.map((genre) => (
         <Link href={`/movies/${genre.id}`} key={genre.id}>
           <Button variant="text-outlined">{genre.name}</Button>
