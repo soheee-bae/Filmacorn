@@ -21,14 +21,20 @@ export default function Movies(props: MoviesProps) {
 
   return (
     <MoviesLayout genre={genre}>
-      <p>All Movies</p>
-      {movies?.map((data: Movie) => {
-        return (
-          <Link href={`/details/${data.id}`} key={data.id}>
-            <CarouselCard key={data.id} info={data} />
-          </Link>
-        );
-      })}
+      <div className={styles.moviesContainer}>
+        <div className={styles.moviesHeader}>
+          <p className={styles.moviesTitle}>All Movies</p>
+        </div>
+        <div className={styles.moviesContent}>
+          {movies?.map((data: Movie) => {
+            return (
+              <Link href={`/details/${data.id}`} key={data.id}>
+                <CarouselCard key={data.id} info={data} />
+              </Link>
+            );
+          })}
+        </div>
+      </div>
     </MoviesLayout>
   );
 }

@@ -1,5 +1,43 @@
-.movies {
-  background-color: var(--blackColor200);
+@import "../../styles/mixin";
+
+.moviesContainer {
+  position: relative;
   display: flex;
-  flex: 235px 1fr;
+  flex-direction: column;
+  gap: 80px;
+  padding: 0 20px;
+  margin-left: 235px;
+  @include xxl {
+    margin-left: 277px;
+  }
+}
+
+.moviesHeader {
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.moviesTitle {
+  color: var(--whiteColor200);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-xxl);
+  @include sm {
+    font-weight: var(--font-bold);
+    font-size: var(--text-xxl);
+  }
+  @include md {
+    font-weight: var(--font-bold);
+    font-size: var(--text-xxxl);
+  }
+}
+
+.moviesContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 23px;
+  margin-top: 150px;
 }

@@ -1,7 +1,18 @@
+@import "@/styles/mixin";
+
 .moviesLayout {
   background-color: var(--blackColor200);
-  display: grid;
-  grid-template-columns: 235px 1fr;
-  padding: 100px 20px;
+  padding: 100px 50px;
   color: white;
+  display: flex;
+  justify-content: center;
+  @include xxl {
+    padding: 100px 20px;
+  }
+}
+
+.moviesContent {
+  max-width: 2000px;
+  position: relative;
+  display: grid;
 }

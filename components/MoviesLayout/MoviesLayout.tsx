@@ -13,8 +13,10 @@ export default function MoviesLayout(props: MoviesLayoutProps) {
 
   return (
     <div className={styles.moviesLayout}>
-      <CategorySidebar genre={genre} />
-      {children}
+      <div className={styles.moviesContent}>
+        <CategorySidebar genre={genre} />
+        {children}
+      </div>
     </div>
   );
 }

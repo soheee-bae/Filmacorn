@@ -24,14 +24,20 @@ export default function MoviesCategory(props: MoviesProps) {
 
   return (
     <MoviesLayout genre={genre}>
-      <p>{currentGenre?.name}</p>
-      {allMovies?.map((data: Movie) => {
-        return (
-          <Link href={`/details/${data.id}`} key={data.id}>
-            <CarouselCard key={data.id} info={data} />
-          </Link>
-        );
-      })}
+      <div className={styles.moviesContainer}>
+        <div className={styles.moviesHeader}>
+          <p className={styles.moviesTitle}>{currentGenre?.name}</p>
+        </div>
+        <div className={styles.moviesContent}>
+          {allMovies?.map((data: Movie) => {
+            return (
+              <Link href={`/details/${data.id}`} key={data.id}>
+                <CarouselCard key={data.id} info={data} />
+              </Link>
+            );
+          })}
+        </div>
+      </div>
     </MoviesLayout>
   );
 }
