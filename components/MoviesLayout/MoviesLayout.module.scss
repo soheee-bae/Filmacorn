@@ -6,12 +6,15 @@
   color: white;
   display: flex;
   justify-content: center;
+
   @include xxl {
     padding: 100px 20px;
   }
 }
 
 .moviesContent {
+  width: 100%;
+  min-height: 950px;
   max-width: 2000px;
   position: relative;
   display: grid;

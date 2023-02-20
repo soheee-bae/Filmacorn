@@ -1,14 +1,13 @@
 import React from "react";
 import { GetStaticProps } from "next";
-import Link from "next/link";
 
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
-import { FullData, Movie } from "@/interfaces/movie";
+import { FullData } from "@/interfaces/movie";
 import { Genre } from "@/interfaces/basic";
 import MoviesLayout from "@/components/MoviesLayout/MoviesLayout";
-import CarouselCard from "@/components/CarouselCard/CarouselCard";
 
 import styles from "./Movies.module.scss";
+import LoadMoreContent from "@/components/LoadMoreContent/LoadMoreContent";
 
 interface MoviesProps {
   allMovies: FullData;
@@ -25,15 +24,7 @@ export default function Movies(props: MoviesProps) {
         <div className={styles.moviesHeader}>
           <p className={styles.moviesTitle}>All Movies</p>
         </div>
-        <div className={styles.moviesContent}>
-          {movies?.map((data: Movie) => {
-            return (
-              <Link href={`/details/${data.id}`} key={data.id}>
-                <CarouselCard key={data.id} info={data} />
-              </Link>
-            );
-          })}
-        </div>
+        <LoadMoreContent defaultMovies={movies} />
       </div>
     </MoviesLayout>
   );
@@ -48,7 +39,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const genre = genres.genres;
 
   const allMoviesData = await fetch(
-    `${TMDB_REQUEST_URL}/movie/popular${API_KEY}&language=en-US&language=en-US&page=1`
+    `${TMDB_REQUEST_URL}/movie/popular${API_KEY}&language=en-US&page=1`
   );
   const allMovies = await allMoviesData.json();
 

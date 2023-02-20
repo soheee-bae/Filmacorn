@@ -1,0 +1,15 @@
+@import "../../styles/mixin";
+
+.loadMoreContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 23px;
+  margin-top: 150px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 190px;
+}

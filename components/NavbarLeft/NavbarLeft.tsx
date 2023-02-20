@@ -56,8 +56,8 @@ export default function NavbarLeft(props: NavbarProps) {
                 onMouseEnter={() => setDropdown(true)}
                 onMouseLeave={() => setDropdown(false)}
                 data-dropdown={dropdown}>
-                {genre.map((category) => (
-                  <Link href={`/movies/${category.id}`}>
+                {genre?.map((category, index) => (
+                  <Link href={`/movies/${category.id}`} key={index}>
                     <Button key={category.id} variant="text-outlined">
                       {category.name}
                     </Button>
