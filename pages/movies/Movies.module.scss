@@ -12,29 +12,6 @@
   }
 }
 
-.moviesHeader {
-  position: fixed;
-  z-index: 5;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.moviesTitle {
-  color: var(--whiteColor200);
-  font-weight: var(--font-semibold);
-  font-size: var(--text-xxl);
-  @include sm {
-    font-weight: var(--font-bold);
-    font-size: var(--text-xxl);
-  }
-  @include md {
-    font-weight: var(--font-bold);
-    font-size: var(--text-xxxl);
-  }
-}
-
 .moviesContent {
   display: flex;
   flex-wrap: wrap;

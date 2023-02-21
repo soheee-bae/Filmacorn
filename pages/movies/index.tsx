@@ -7,6 +7,7 @@ import MoviesLayout from "@/components/MoviesLayout/MoviesLayout";
 import LoadMoreContent from "@/components/LoadMoreContent/LoadMoreContent";
 
 import styles from "./Movies.module.scss";
+import MoviesHeader from "@/components/MoviesHeader/MoviesHeader";
 
 interface MoviesProps {
   genre: Genre[];
@@ -18,9 +19,7 @@ export default function Movies(props: MoviesProps) {
   return (
     <MoviesLayout genre={genre}>
       <div className={styles.moviesContainer}>
-        <div className={styles.moviesHeader}>
-          <p className={styles.moviesTitle}>All Movies</p>
-        </div>
+        <MoviesHeader title="All Movies" />
         <LoadMoreContent />
       </div>
     </MoviesLayout>

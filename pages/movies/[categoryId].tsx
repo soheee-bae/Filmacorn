@@ -7,6 +7,7 @@ import MoviesLayout from "@/components/MoviesLayout/MoviesLayout";
 import LoadMoreContent from "@/components/LoadMoreContent/LoadMoreContent";
 
 import styles from "./Movies.module.scss";
+import MoviesHeader from "@/components/MoviesHeader/MoviesHeader";
 
 interface MoviesProps {
   genre: Genre[];
@@ -21,9 +22,7 @@ export default function MoviesCategory(props: MoviesProps) {
   return (
     <MoviesLayout genre={genre}>
       <div className={styles.moviesContainer}>
-        <div className={styles.moviesHeader}>
-          <p className={styles.moviesTitle}>{currentGenre?.name}</p>
-        </div>
+        <MoviesHeader title={currentGenre?.name || ""} />
         <LoadMoreContent categoryId={categoryId} />
       </div>
     </MoviesLayout>
