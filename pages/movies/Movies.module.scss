@@ -1,6 +1,7 @@
 @import "../../styles/mixin";
 
 .moviesContainer {
+  border: 1px solid red;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,11 +11,4 @@
   @include xxl {
     margin-left: 277px;
   }
-}
-
-.moviesContent {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 23px;
-  margin-top: 150px;
 }

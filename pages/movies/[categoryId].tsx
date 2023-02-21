@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
@@ -16,13 +16,18 @@ interface MoviesProps {
 
 export default function MoviesCategory(props: MoviesProps) {
   const { genre, categoryId } = props;
+  const [sorting, setSorting] = useState("Latest");
 
   const currentGenre = genre.find((genre) => genre.id === parseInt(categoryId));
 
   return (
     <MoviesLayout genre={genre}>
       <div className={styles.moviesContainer}>
-        <MoviesHeader title={currentGenre?.name || ""} />
+        <MoviesHeader
+          title={currentGenre?.name || ""}
+          sorting={sorting}
+          setSorting={setSorting}
+        />
         <LoadMoreContent categoryId={categoryId} />
       </div>
     </MoviesLayout>
