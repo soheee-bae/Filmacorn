@@ -1,3 +1,4 @@
+import { Sorting } from "@/icons/index";
 import React, { useState, Dispatch } from "react";
 import styles from "./SortingDropdown.module.scss";
 
@@ -27,7 +28,7 @@ export default function SortingDropdown(props: SortingDropdownProps) {
   return (
     <div className={styles.sortingDropdown}>
       <div className={styles.sortingDropdownValue} onClick={handleOpen}>
-        Sort: {sorting}
+        Sort : {sorting} <Sorting />
       </div>
       {open && (
         <div className={styles.sortingDropdownContent}>
