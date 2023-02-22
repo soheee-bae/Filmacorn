@@ -28,10 +28,7 @@ export default function HomeList(props: HomeListProps) {
             <div className={styles.homeListHeader}>
               <p className={styles.homeListTitle}>{title}</p>
               <Link href={`/see-all/${title}`}>
-                <Button
-                  size="sm"
-                  variant="text"
-                  endIcon={<RightArrow />}>
+                <Button size="sm" variant="text" endIcon={<RightArrow />}>
                   See All
                 </Button>
               </Link>

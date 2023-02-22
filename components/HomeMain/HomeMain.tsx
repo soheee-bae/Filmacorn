@@ -46,14 +46,16 @@ export default function HomeMain(props: HomeMainProps) {
                 variant="contained"
                 startIcon={<Play />}
                 onClick={handleWatchNow}
-                className={styles.homeButton}>
+                className={styles.homeButton}
+              >
                 Watch Now
               </Button>
               <Button
                 size="lg"
                 variant="outlined"
                 onClick={handleMoreInfo}
-                className={styles.homeButton}>
+                className={styles.homeButton}
+              >
                 More Info
               </Button>
             </div>

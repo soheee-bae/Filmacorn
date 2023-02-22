@@ -52,14 +52,16 @@ export default function DetailContent(props: DetailContentProps) {
               variant="contained"
               startIcon={<Play />}
               onClick={handleWatchNow}
-              className={styles.detailButton}>
+              className={styles.detailButton}
+            >
               Watch Now
             </Button>
             <Button
               size="lg"
               variant="outlined"
               onClick={handleAddWatchList}
-              className={styles.detailButton}>
+              className={styles.detailButton}
+            >
               + Add to Watchlist
             </Button>
           </div>

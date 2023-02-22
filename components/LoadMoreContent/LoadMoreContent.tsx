@@ -98,7 +98,11 @@ export default function LoadMoreContent(props: LoadMoreContentProps) {
     <div className={styles.loadMoreContent}>
       {data?.map((data: any) => {
         return (
-          <Link href={`/details/${data?.id}`} key={data?.id}>
+          <Link
+            href={`/details/${data?.id}`}
+            key={data?.id}
+            className={styles.loadMoreItem}
+          >
             <CarouselCard key={data?.id} info={data} />
           </Link>
         );

@@ -2,9 +2,10 @@
 
 .loadMoreContent {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 23px;
-  margin-top: 150px;
+  margin-top: 100px;
 }
 
 .loading {
@@ -12,4 +13,8 @@
   align-items: center;
   justify-content: center;
   min-width: 190px;
+}
+
+.loadMoreItem {
+  margin-bottom: 30px;
 }
