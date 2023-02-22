@@ -5,9 +5,9 @@ import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 import { Genre } from "@/interfaces/basic";
 import MoviesLayout from "@/components/MoviesLayout/MoviesLayout";
 import LoadMoreContent from "@/components/LoadMoreContent/LoadMoreContent";
+import MoviesHeader from "@/components/MoviesHeader/MoviesHeader";
 
 import styles from "./Movies.module.scss";
-import MoviesHeader from "@/components/MoviesHeader/MoviesHeader";
 
 interface MoviesProps {
   genre: Genre[];
@@ -16,7 +16,7 @@ interface MoviesProps {
 
 export default function MoviesCategory(props: MoviesProps) {
   const { genre, categoryId } = props;
-  const [sorting, setSorting] = useState("Latest");
+  const [sorting, setSorting] = useState("Sort By");
 
   const currentGenre = genre.find((genre) => genre.id === parseInt(categoryId));
 
@@ -28,7 +28,11 @@ export default function MoviesCategory(props: MoviesProps) {
           sorting={sorting}
           setSorting={setSorting}
         />
-        <LoadMoreContent categoryId={categoryId} />
+        <LoadMoreContent
+          categoryId={categoryId}
+          sorting={sorting}
+          setSorting={setSorting}
+        />
       </div>
     </MoviesLayout>
   );

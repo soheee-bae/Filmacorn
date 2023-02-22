@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import styles from "./MoviesHeader.module.scss";
-import SortingDropdown from "../SortingDropdown/SortingDropdown";
+import SortingDropdown from "@/components/SortingDropdown/SortingDropdown";
 
 interface MoviesHeaderProps {
   title: string;

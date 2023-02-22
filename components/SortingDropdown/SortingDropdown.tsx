@@ -28,7 +28,15 @@ export default function SortingDropdown(props: SortingDropdownProps) {
   return (
     <div className={styles.sortingDropdown}>
       <div className={styles.sortingDropdownValue} onClick={handleOpen}>
-        Sort : {sorting} <Sorting />
+        {sorting === "Sort By" ? (
+          <>
+            Sort By <Sorting />
+          </>
+        ) : (
+          <>
+            Sort : {sorting} <Sorting />
+          </>
+        )}
       </div>
       {open && (
         <div className={styles.sortingDropdownContent}>

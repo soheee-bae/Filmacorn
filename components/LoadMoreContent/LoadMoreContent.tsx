@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Dispatch } from "react";
 import Link from "next/link";
 
 import { Movie } from "@/interfaces/movie";
@@ -10,10 +10,12 @@ import styles from "./LoadMoreContent.module.scss";
 
 interface LoadMoreContentProps {
   categoryId?: string;
+  sorting: string;
+  setSorting: Dispatch<string>;
 }
 
 export default function LoadMoreContent(props: LoadMoreContentProps) {
-  const { categoryId } = props;
+  const { categoryId, sorting = "Latest", setSorting } = props;
   const [data, setData] = useState<Movie[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
@@ -59,6 +61,20 @@ export default function LoadMoreContent(props: LoadMoreContentProps) {
     setHasMore(true);
   }, [categoryId]);
 
+  useEffect(() => {
+    const tempData = [...data];
+    if (sorting === "Alphabetical") {
+      tempData.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sorting === "Reverse Alpha") {
+      tempData.sort((a, b) => b.title.localeCompare(a.title));
+    } else {
+      tempData.sort(
+        (a, b) => new Date(b.release_date) - new Date(a.release_date)
+      );
+    }
+    setData(tempData);
+  }, [sorting]);
+
   const onScroll = () => {
     const scrollTop = document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight;
@@ -69,7 +85,10 @@ export default function LoadMoreContent(props: LoadMoreContentProps) {
   };
 
   useEffect(() => {
-    if (data.length === 0) fetchData();
+    if (data.length === 0) {
+      setSorting("Sort By");
+      fetchData();
+    }
 
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
