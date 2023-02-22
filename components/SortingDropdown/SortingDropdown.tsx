@@ -44,9 +44,9 @@ export default function SortingDropdown(props: SortingDropdownProps) {
           <div onChange={onChange} className={styles.sortingDropdownLists}>
             {sortingLists.map((list) => (
               <label
+                key={list.value}
                 className={styles.sortingDropdownList}
-                data-checked={sorting === list.value}
-              >
+                data-checked={sorting === list.value}>
                 <input
                   type="radio"
                   name="sorting"

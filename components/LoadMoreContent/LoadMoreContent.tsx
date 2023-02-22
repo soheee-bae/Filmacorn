@@ -69,7 +69,7 @@ export default function LoadMoreContent(props: LoadMoreContentProps) {
       tempData.sort((a, b) => b.title.localeCompare(a.title));
     } else {
       tempData.sort(
-        (a, b) => new Date(b.release_date) - new Date(a.release_date)
+        (a, b) => +new Date(a.release_date) - +new Date(b.release_date)
       );
     }
     setData(tempData);
@@ -101,8 +101,7 @@ export default function LoadMoreContent(props: LoadMoreContentProps) {
           <Link
             href={`/details/${data?.id}`}
             key={data?.id}
-            className={styles.loadMoreItem}
-          >
+            className={styles.loadMoreItem}>
             <CarouselCard key={data?.id} info={data} />
           </Link>
         );
