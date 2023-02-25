@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { GetStaticProps } from "next";
+import { useRouter } from "next/router";
+import useBreakpoint from "hooks/useBreakpoint";
 
 import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
-import styles from "./Search.module.scss";
-import { useRouter } from "next/router";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { LeftArrow } from "@/icons/index";
 import SearchResult from "@/components/SearchResult/SearchResult";
 import { Movie } from "@/interfaces/movie";
+import styles from "./Search.module.scss";
 
 interface SearchProps {
   moviesList: Movie[];
@@ -17,7 +18,10 @@ export default function Search(props: SearchProps) {
   const { moviesList } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
+
   const router = useRouter();
+  const brkpnt = useBreakpoint();
+  const maxBrkpnt = brkpnt === "sm" || brkpnt === "md";
 
   const handleClick = (e: MouseEvent) => {
     e.preventDefault();
@@ -25,18 +29,34 @@ export default function Search(props: SearchProps) {
     router.push("/", undefined, { shallow: true });
   };
 
+  const getIcon = () => {
+    if (maxBrkpnt) {
+      return null;
+    } else {
+      if (isLoading) {
+        return <LoadingSpinner />;
+      } else {
+        return <LeftArrow onClick={handleClick} />;
+      }
+    }
+  };
+
   return (
     <div className={styles.search}>
       <div className={styles.searchContainer}>
         <div className={styles.searchHeader}>
-          {isLoading ? <LoadingSpinner /> : <LeftArrow onClick={handleClick} />}
+          {getIcon()}
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <SearchResult search={search} moviesList={moviesList} />
+        <SearchResult
+          search={search}
+          moviesList={moviesList}
+          setSearch={setSearch}
+        />
       </div>
     </div>
   );
@@ -52,7 +72,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   let moviesList: Movie[] = [];
 
-  for (let i = 1; i < 6; i++) {
+  for (let i = 1; i < 10; i++) {
     const movieData = await fetch(
       `${TMDB_REQUEST_URL}/movie/popular${API_KEY}${TMDB_EXTRA}&include_adult=false&with_original_language=en&page=${i}`
     );

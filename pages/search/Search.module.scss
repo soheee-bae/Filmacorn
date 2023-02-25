@@ -4,6 +4,7 @@
   background: var(--blackColor200);
   display: flex;
   justify-content: center;
+  min-height: 100vh;
 }
 
 .searchContainer {
@@ -25,14 +26,20 @@
 
   input {
     width: 100%;
-    height: 70px;
+    height: 50px;
     padding-bottom: 10px;
     background: transparent;
     border: none;
     border-bottom: 2px solid var(--whiteColor400);
-    font-size: var(--text-xxxl);
+    font-size: var(--text-xl);
+    font-weight: var(--font-light);
     color: var(--whiteColor200);
     outline: none;
+    @include sm {
+      height: 70px;
+      font-size: var(--text-xxxl);
+      font-weight: var(--font-normal);
+    }
   }
 
   svg {
