@@ -1,10 +1,10 @@
 @import "../../styles/mixin";
 
 .sortingDropdown {
-  position: relative;
+  position: absolute;
   margin-top: 15px;
   max-width: 270px;
-  float: right;
+  right: 0;
 }
 
 .sortingDropdownValue {

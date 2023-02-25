@@ -32,7 +32,9 @@
   width: 100%;
   padding-left: 10px;
   z-index: 100;
-
+  a {
+    text-decoration: none;
+  }
   @include xxl {
     padding-right: 30px;
   }

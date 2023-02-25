@@ -17,12 +17,11 @@ const getDeviceConfig = (width: number) => {
 };
 
 const useBreakpoint = () => {
-  const [brkPnt, setBrkPnt] = useState(() =>
-    getDeviceConfig(typeof window !== undefined ? window?.innerWidth : 0)
-  );
+  const defaultBrkPnt = typeof window !== "undefined" ? window?.innerWidth : 0;
+  const [brkPnt, setBrkPnt] = useState(() => getDeviceConfig(defaultBrkPnt));
 
   useEffect(() => {
-    if (typeof window !== undefined) {
+    if (typeof window !== "undefined") {
       const calcInnerWidth = () => {
         setBrkPnt(getDeviceConfig(window?.innerWidth));
       };

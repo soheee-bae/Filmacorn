@@ -1,8 +1,14 @@
+@import "../../styles/mixin";
+
 .categoryDropdown {
-  position: relative;
-  margin-top: 15px;
-  width: 200px;
-  float: right;
+  position: absolute;
+  margin-top: 80px;
+  width: 100%;
+  right: 0;
+  @include md {
+    width: 200px;
+    margin-top: 15px;
+  }
 }
 
 .categoryDropdownButton {
