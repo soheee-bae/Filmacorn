@@ -31,12 +31,12 @@ export default function SeeAll(props: SeeAllProps) {
 
   return (
     <div className={styles.seeAll}>
-      <div className={styles.container}>
+      <div className={styles.seeAllContainer}>
         <div className={styles.seeAllHeader}>
           {isLoading ? <LoadingSpinner /> : <LeftArrow onClick={handleClick} />}
           <p className={styles.seeAllTitle}>{categoryData.title}</p>
         </div>
-        <div className={styles.content}>
+        <div className={styles.seeAllContent}>
           {movieData?.map((data: Movie) => {
             return (
               <Link href={`/details/${data.id}`} key={data.id}>

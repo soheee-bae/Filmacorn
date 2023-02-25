@@ -1,0 +1,53 @@
+@import "@/styles/mixin";
+
+.searchResultContent {
+  display: grid;
+  grid-template-rows: 1fr 9fr;
+  grid-template-columns: 100%;
+  row-gap: 40px;
+  column-gap: 0;
+
+  @include xl {
+    grid-template-columns: 3fr 7fr;
+    grid-template-rows: 100%;
+    column-gap: 20px;
+  }
+}
+
+.searchResultNames {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  button {
+    height: 30px;
+    display: block;
+    font-size: var(--text-sm);
+  }
+
+  @include xl {
+    flex-direction: column;
+    gap: 10px;
+
+    button {
+      height: auto;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      font-size: var(--text-lg);
+    }
+  }
+}
+
+.searchResultCards {
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: flex-start;
+  a {
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,69 @@
+@import "@/styles/mixin";
+
+.search {
+  background: var(--blackColor200);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.searchContainer {
+  width: 100%;
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  max-width: 1500px;
+  @include xxxl {
+    max-width: 2000px;
+  }
+}
+
+.searchHeader {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  position: relative;
+  input {
+    width: 100%;
+    height: 50px;
+    padding-bottom: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--whiteColor400);
+    font-size: var(--text-xl);
+    font-weight: var(--font-light);
+    color: var(--whiteColor200);
+    outline: none;
+    @include sm {
+      height: 70px;
+      font-size: var(--text-xxxl);
+      font-weight: var(--font-normal);
+    }
+  }
+
+  svg {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    color: var(--primaryColor100);
+    stroke-width: 3;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--blackColor150);
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.clear {
+  position: absolute;
+  font-size: var(--text-sm);
+  right: 30px;
+  top: 5px;
+  @include sm {
+    top: 15px;
+  }
+}

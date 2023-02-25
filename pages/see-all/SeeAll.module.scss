@@ -6,7 +6,7 @@
   justify-content: center;
 }
 
-.container {
+.seeAllContainer {
   width: 100%;
   max-width: 2000px;
   padding: 100px 20px;
@@ -48,7 +48,7 @@
   font-size: var(--text-xxl);
 }
 
-.content {
+.seeAllContent {
   display: flex;
   flex-wrap: wrap;
   gap: 23px;

@@ -1,0 +1,39 @@
+@import "@/styles/mixin";
+
+.searchResult {
+  margin-left: 0;
+  @include md {
+    margin-left: 55px;
+  }
+  @include xxxl {
+    margin-left: 0;
+  }
+}
+
+.lessThan2 {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  color: var(--whiteColor300);
+  font-weight: var(--font-light);
+  padding-left: 60px;
+  svg {
+    color: var(--whiteColor300);
+    width: 17px;
+    height: 17px;
+    stroke-width: 3;
+  }
+}
+
+.searchResultContent {
+  color: var(--whiteColor200);
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  hr {
+    border: 0.5px solid var(--blackColor500);
+    margin-bottom: 10px;
+  }
+}

@@ -71,6 +71,18 @@
   }
 }
 
+.contained-outlined {
+  color: var(--whiteColor200);
+  background-color: rgba(21, 21, 21, 0.9);
+  border: 1px solid var(--blackColor500);
+  &:hover {
+    border: 1px solid var(--whiteColor200);
+  }
+  &:active {
+    border: 1px solid var(--whiteColor200);
+  }
+}
+
 .outlined {
   color: var(--primaryColor100);
   border: 2px solid var(--blackColor500);

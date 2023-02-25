@@ -9,3 +9,4 @@ export { default as RightArrow } from "./rightArrow.svg";
 export { default as LeftArrow } from "./leftArrow.svg";
 export { default as Sorting } from "./sorting.svg";
 export { default as ChevronDown } from "./chevronDown.svg";
+export { default as InfoCircle } from "./infoCircle.svg";
