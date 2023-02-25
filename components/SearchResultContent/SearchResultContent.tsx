@@ -23,7 +23,7 @@ export default function SearchResultContent(props: SearchResultContentProps) {
       <div className={styles.searchResultNames}>
         {results?.map((data: Movie) => {
           return (
-            <Button variant="text-outlined">
+            <Button variant="contained-outlined">
               {data.title || data.original_title}
             </Button>
           );

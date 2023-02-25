@@ -5,6 +5,7 @@ import styles from "./Button.module.scss";
 export type Size = "sm" | "md" | "lg" | "xl";
 export type Variant =
   | "contained"
+  | "contained-outlined"
   | "outlined"
   | "text-outlined"
   | "text-color"
@@ -46,8 +47,7 @@ export default function Button(props: ButtonProps) {
         styles[`${size}`]
       )}
       data-selected={selected}
-      onClick={handleClick}
-    >
+      onClick={handleClick}>
       {startIcon}
       {children}
       {endIcon}
