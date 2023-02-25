@@ -4,15 +4,27 @@
   position: relative;
   height: 100%;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detailRecomContentContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 2000px;
   padding: 0 20px 30px;
-  margin-top: -370px;
+  margin-top: -600px;
+
   hr {
     border: 0.5px solid var(--whiteColor400);
     margin: 10px 0 20px;
   }
   @include md {
-    padding: 0 60px 30px;
-    margin-top: -250px;
+    padding: 0 50px 30px;
+    margin-top: -550px;
   }
 }
 
