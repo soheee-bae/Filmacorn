@@ -8,3 +8,4 @@ export { default as Search } from "./search.svg";
 export { default as RightArrow } from "./rightArrow.svg";
 export { default as LeftArrow } from "./leftArrow.svg";
 export { default as Sorting } from "./sorting.svg";
+export { default as ChevronDown } from "./chevronDown.svg";

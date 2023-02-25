@@ -24,6 +24,7 @@ export default function MoviesCategory(props: MoviesProps) {
     <MoviesLayout genre={genre}>
       <div className={styles.moviesContainer}>
         <MoviesHeader
+          genre={genre}
           title={currentGenre?.name || ""}
           sorting={sorting}
           setSorting={setSorting}

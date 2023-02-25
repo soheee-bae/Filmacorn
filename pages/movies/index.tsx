@@ -21,6 +21,7 @@ export default function Movies(props: MoviesProps) {
     <MoviesLayout genre={genre}>
       <div className={styles.moviesContainer}>
         <MoviesHeader
+          genre={genre}
           title="All Movies"
           sorting={sorting}
           setSorting={setSorting}
