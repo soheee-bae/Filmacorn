@@ -1,0 +1,25 @@
+.search {
+  background-color: rgb(20, 20, 20, 0.8);
+  display: flex;
+  justify-content: center;
+}
+
+.searchContainer {
+}
+
+.searchHeader {
+  svg {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    color: var(--primaryColor100);
+    stroke-width: 3;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--blackColor150);
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

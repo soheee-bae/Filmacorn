@@ -10,6 +10,7 @@ const navSecondItems: NavItemProps[] = [
     label: "Search",
     icon: <Search />,
     variant: "text-outlined",
+    href: "/search",
   },
   {
     label: "Create Account",
@@ -29,13 +30,12 @@ export default function NavbarRight() {
   return (
     <div className={styles.navItems}>
       {navSecondItems.map((item) => (
-        <Link key={item.label} className={styles.navItem} href="">
+        <Link key={item.label} className={styles.navItem} href={`${item.href}`}>
           <Button
             onClick={handleOnClick}
             startIcon={item?.icon}
             variant={item?.variant}
-            size={item?.size}
-          >
+            size={item?.size}>
             {item.label}
           </Button>
         </Link>
