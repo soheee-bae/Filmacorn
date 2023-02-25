@@ -1,0 +1,42 @@
+@import "../../styles/mixin";
+
+.categoryDropdown {
+  position: absolute;
+  margin-top: 80px;
+  width: 100%;
+  right: 0;
+  @include md {
+    width: 200px;
+    margin-top: 15px;
+  }
+}
+
+.categoryDropdownButton {
+  width: 100%;
+}
+
+.categoryDropdownList {
+  display: none;
+
+  &[data-open="true"] {
+    border: 1px solid var(--blackColor500);
+    background-color: rgb(20, 20, 20, 0.96);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+    margin-top: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    a {
+      text-decoration: none;
+    }
+    button {
+      padding: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
+}

@@ -6,10 +6,9 @@
   padding: 28px 16px;
   position: fixed;
   z-index: 5;
-  width: 235px;
   max-height: 950px;
   border-radius: 8px;
-
+  width: 235px;
   a {
     text-decoration: none;
   }
@@ -18,8 +17,5 @@
     width: 100%;
     display: flex;
     justify-content: flex-start;
-  }
-  @include xxl {
-    width: 277px;
   }
 }
