@@ -18,5 +18,8 @@
 }
 
 .searchResultContent {
+  color: var(--whiteColor200);
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
   border: 1px solid red;
 }

@@ -1,12 +1,15 @@
 import { InfoCircle } from "@/icons/index";
+import { Movie } from "@/interfaces/movie";
+import SearchResultContent from "../SearchResultContent/SearchResultContent";
 import styles from "./SearchResult.module.scss";
 
 export interface SearchResultProps {
   search: string;
+  moviesList: Movie[];
 }
 
 export default function SearchResult(props: SearchResultProps) {
-  const { search = "" } = props;
+  const { search = "", moviesList } = props;
   const lessThan2 = search.length === 1;
 
   return (
@@ -20,6 +23,7 @@ export default function SearchResult(props: SearchResultProps) {
         <div className={styles.searchResultContent}>
           <p> Results</p>
           <hr />
+          <SearchResultContent search={search} moviesList={moviesList} />
         </div>
       )}
     </div>
