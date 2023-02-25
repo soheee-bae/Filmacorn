@@ -8,11 +8,14 @@
 
 .searchContainer {
   width: 100%;
-  max-width: 2000px;
   padding: 100px 20px;
   display: flex;
   flex-direction: column;
   gap: 70px;
+  max-width: 1500px;
+  @include xxxl {
+    max-width: 2000px;
+  }
 }
 
 .searchHeader {

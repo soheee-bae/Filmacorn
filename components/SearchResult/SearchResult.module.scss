@@ -1,5 +1,13 @@
+@import "@/styles/mixin";
+
 .searchResult {
-  padding: 0px 20px;
+  margin-left: 0;
+  @include md {
+    margin-left: 55px;
+  }
+  @include xxxl {
+    margin-left: 0;
+  }
 }
 
 .lessThan2 {
@@ -21,5 +29,11 @@
   color: var(--whiteColor200);
   font-size: var(--text-xl);
   font-weight: var(--font-semibold);
-  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  hr {
+    border: 0.5px solid var(--whiteColor400);
+    margin-bottom: 10px;
+  }
 }
