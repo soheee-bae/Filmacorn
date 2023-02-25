@@ -2,13 +2,10 @@
 
 .moviesLayout {
   background-color: var(--blackColor200);
-  padding: 100px 50px;
+  padding: 100px 20px;
   color: white;
   display: flex;
   justify-content: center;
-  @include xxl {
-    padding: 100px 20px;
-  }
 }
 
 .moviesContent {
