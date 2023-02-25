@@ -10,19 +10,29 @@
   min-height: 100vh;
 }
 
-.detailText {
+.detailContent {
   position: absolute;
   top: 0;
   height: 100%;
   width: 100%;
-  max-width: 2000px;
   background: linear-gradient(rgba(0, 0, 0, 0.65), var(--blackColor200));
+  display: flex;
+  justify-content: center;
+}
+
+.detailText {
+  width: 100%;
+  max-width: 2000px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 15px;
-  padding: 40% 20px 0 20px;
+  padding: 250px 20px 0 20px;
+
   @include md {
+    padding: 250px 50px;
+  }
+  @include xl {
     padding: 300px 50px;
   }
 }

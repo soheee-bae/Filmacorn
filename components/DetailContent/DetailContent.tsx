@@ -39,39 +39,39 @@ export default function DetailContent(props: DetailContentProps) {
   return (
     <div className={styles.detailMainContent}>
       <MainBackground imgSrc={imgSrc} />
-      <div className={styles.detailText}>
-        <p className={styles.detailTitle}>{movieDetail.title}</p>
-        <DateTime
-          releaseDate={movieDetail.release_date}
-          runtime={movieDetail.runtime}
-        />
-        <div className={styles.detailButtonsContainer}>
-          <div className={styles.detailButtons}>
-            <Button
-              size="lg"
-              variant="contained"
-              startIcon={<Play />}
-              onClick={handleWatchNow}
-              className={styles.detailButton}
-            >
-              Watch Now
-            </Button>
-            <Button
-              size="lg"
-              variant="outlined"
-              onClick={handleAddWatchList}
-              className={styles.detailButton}
-            >
-              + Add to Watchlist
-            </Button>
+      <div className={styles.detailContent}>
+        <div className={styles.detailText}>
+          <p className={styles.detailTitle}>{movieDetail.title}</p>
+          <DateTime
+            releaseDate={movieDetail.release_date}
+            runtime={movieDetail.runtime}
+          />
+          <div className={styles.detailButtonsContainer}>
+            <div className={styles.detailButtons}>
+              <Button
+                size="lg"
+                variant="contained"
+                startIcon={<Play />}
+                onClick={handleWatchNow}
+                className={styles.detailButton}>
+                Watch Now
+              </Button>
+              <Button
+                size="lg"
+                variant="outlined"
+                onClick={handleAddWatchList}
+                className={styles.detailButton}>
+                + Add to Watchlist
+              </Button>
+            </div>
           </div>
+          <GenreList genreList={genreList} />
+          <div className={styles.detailCasts}>
+            <CastList list={director} title="Directed by" />
+            <CastList list={cast} title="Starring" />
+          </div>
+          <p className={styles.detailOverview}>{movieDetail.overview}</p>
         </div>
-        <GenreList genreList={genreList} />
-        <div className={styles.detailCasts}>
-          <CastList list={director} title="Directed by" />
-          <CastList list={cast} title="Starring" />
-        </div>
-        <p className={styles.detailOverview}>{movieDetail.overview}</p>
       </div>
     </div>
   );
