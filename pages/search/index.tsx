@@ -9,6 +9,7 @@ import { LeftArrow } from "@/icons/index";
 import SearchResult from "@/components/SearchResult/SearchResult";
 import { Movie } from "@/interfaces/movie";
 import styles from "./Search.module.scss";
+import Button from "@/components/Button/Button";
 
 interface SearchProps {
   moviesList: Movie[];
@@ -51,6 +52,13 @@ export default function Search(props: SearchProps) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
+          <Button
+            variant="outlined"
+            size="sm"
+            className={styles.clear}
+            onClick={() => setSearch("")}>
+            clear
+          </Button>
         </div>
         <SearchResult
           search={search}

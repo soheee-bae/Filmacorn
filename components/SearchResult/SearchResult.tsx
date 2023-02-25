@@ -27,7 +27,7 @@ export default function SearchResult(props: SearchResultProps) {
         <div>
           {!noSearch && (
             <div className={styles.searchResultContent}>
-              <p> Results</p>
+              <p>Results</p>
               <hr />
               <SearchResultContent
                 search={search}
