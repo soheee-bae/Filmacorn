@@ -25,8 +25,9 @@ export default function Search(props: SearchProps) {
       <div className={styles.searchContainer}>
         <div className={styles.searchHeader}>
           {isLoading ? <LoadingSpinner /> : <LeftArrow onClick={handleClick} />}
+          <input></input>
         </div>
-        <div className={styles.searchContent}></div>
+        <div className={styles.searchContent}>Result</div>
       </div>
     </div>
   );
