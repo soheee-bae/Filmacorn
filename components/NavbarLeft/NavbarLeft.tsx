@@ -13,12 +13,14 @@ const navFirstItems: NavItemProps[] = [
     label: "Movies",
     icon: <Movie />,
     variant: "text-color",
+    href: "/movies",
   },
 
   {
     label: "Watchlist",
     icon: <WatchList />,
     variant: "text-outlined",
+    href: "/watchlist",
   },
 ];
 Object.freeze(navFirstItems);
@@ -27,50 +29,48 @@ export default function NavbarLeft(props: NavbarProps) {
   const { genre } = props;
   const [dropdown, setDropdown] = useState(false);
 
-  const handleOnClick = () => {};
   return (
     <div className={styles.navItems}>
-      {navFirstItems.map((item) => (
-        <>
-          <Link
-            key={item.label}
-            onMouseEnter={() => item.label === "Movies" && setDropdown(true)}
-            onMouseLeave={() => setDropdown(false)}
-            data-dropdown={dropdown}
-            className={clsx(styles.navItem, {
-              [styles.movieButton]: item.label === "Movies",
-            })}
-            href=""
-          >
-            <Button
-              onClick={handleOnClick}
-              startIcon={item?.icon}
-              variant={item?.variant}
-              size={item?.size}
-            >
-              {item.label}
-            </Button>
-          </Link>
-          {item.label === "Movies" && (
-            <div
-              className={styles.navMovie}
-              onMouseEnter={() => setDropdown(true)}
+      {navFirstItems.map((item, index) => {
+        return (
+          <>
+            <Link
+              key={item.label}
+              onMouseEnter={() => item.label === "Movies" && setDropdown(true)}
               onMouseLeave={() => setDropdown(false)}
               data-dropdown={dropdown}
+              className={clsx(styles.navItem, {
+                [styles.movieButton]: item.label === "Movies",
+              })}
+              href={`${item.href}`}
             >
-              {genre.map((category) => (
-                <Button
-                  onClick={handleOnClick}
-                  key={category.id}
-                  variant="text-outlined"
-                >
-                  {category.name}
-                </Button>
-              ))}
-            </div>
-          )}
-        </>
-      ))}
+              <Button
+                startIcon={item?.icon}
+                variant={item?.variant}
+                size={item?.size}
+              >
+                {item.label}
+              </Button>
+            </Link>
+            {item.label === "Movies" && (
+              <div
+                className={styles.navMovie}
+                onMouseEnter={() => setDropdown(true)}
+                onMouseLeave={() => setDropdown(false)}
+                data-dropdown={dropdown}
+              >
+                {genre?.map((category, index) => (
+                  <Link href={`/movies/${category.id}`} key={index}>
+                    <Button key={category.id} variant="text-outlined">
+                      {category.name}
+                    </Button>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </>
+        );
+      })}
     </div>
   );
 }

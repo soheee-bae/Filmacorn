@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { Email, Github, Linkedin } from "@/icons/index";
 import styles from "./Footer.module.scss";
-import Link from "next/link";
 
 export default function Footer() {
   return (

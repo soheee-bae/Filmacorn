@@ -12,7 +12,7 @@ interface CarouselCardProps {
 export default function CarouselCard(props: CarouselCardProps) {
   const { info, width, height } = props;
 
-  const imgSrc = info.poster_path || info.backdrop_path;
+  const imgSrc = info?.poster_path || info?.backdrop_path;
 
   if (!imgSrc) {
     return null;

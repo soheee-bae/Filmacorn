@@ -26,6 +26,8 @@
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-pagination": "^1.0.3",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-multi-carousel": "^2.8.2",
     "sass": "^1.58.0",
     "typescript": "4.9.5"

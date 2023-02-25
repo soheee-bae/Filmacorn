@@ -1,0 +1,30 @@
+@import "../../styles/mixin";
+
+.moviesHeader {
+  z-index: 5;
+  width: 100%;
+  max-width: 2000px;
+  position: relative;
+}
+
+.moviesInnerHeader {
+  position: absolute;
+  width: 100%;
+  max-width: 2000px;
+}
+
+.moviesTitle {
+  position: fixed;
+  float: left;
+  color: var(--whiteColor200);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-xxl);
+  @include sm {
+    font-weight: var(--font-bold);
+    font-size: var(--text-xxl);
+  }
+  @include md {
+    font-weight: var(--font-bold);
+    font-size: var(--text-xxxl);
+  }
+}

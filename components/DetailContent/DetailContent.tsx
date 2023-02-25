@@ -1,24 +1,25 @@
+import { useRouter } from "next/router";
+
 import { Play } from "@/icons/index";
-import { Cast, Movie, MovieDetail } from "@/interfaces/movie";
+import { Cast, MovieDetail } from "@/interfaces/movie";
 import { Video } from "@/interfaces/video";
 import Button from "@/components/Button/Button";
 import CastList from "@/components/CastList/CastList";
 import DateTime from "@/components/DateTime/DateTime";
 import GenreList from "@/components/GenreList/GenreList";
-import styles from "./DetailContent.module.scss";
-import { useRouter } from "next/router";
 import MainBackground from "@/components/MainBackground/MainBackground";
+
+import styles from "./DetailContent.module.scss";
 
 interface DetailContentProps {
   movieDetail: MovieDetail;
   cast: Cast[];
   director: Cast[];
   video: Video[];
-  Recommendations: Movie[];
 }
 
 export default function DetailContent(props: DetailContentProps) {
-  const { movieDetail, cast, director, video, Recommendations } = props;
+  const { movieDetail, cast, director, video } = props;
   const router = useRouter();
 
   const imgSrc = movieDetail.backdrop_path || movieDetail.poster_path;
@@ -51,14 +52,16 @@ export default function DetailContent(props: DetailContentProps) {
               variant="contained"
               startIcon={<Play />}
               onClick={handleWatchNow}
-              className={styles.detailButton}>
+              className={styles.detailButton}
+            >
               Watch Now
             </Button>
             <Button
               size="lg"
               variant="outlined"
               onClick={handleAddWatchList}
-              className={styles.detailButton}>
+              className={styles.detailButton}
+            >
               + Add to Watchlist
             </Button>
           </div>

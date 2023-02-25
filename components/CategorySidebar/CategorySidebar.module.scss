@@ -1,0 +1,25 @@
+@import "../../styles/mixin";
+
+.categorySidebar {
+  border: 2px solid var(--blackColor500);
+  background-color: rgb(20, 20, 20, 0.8);
+  padding: 28px 16px;
+  position: fixed;
+  z-index: 5;
+  width: 235px;
+  max-height: 950px;
+  border-radius: 8px;
+
+  a {
+    text-decoration: none;
+  }
+  button {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  @include xxl {
+    width: 277px;
+  }
+}

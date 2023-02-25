@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
 
-import { Genre } from "@/interfaces/movie";
+import { Genre } from "@/interfaces/basic";
 import { Size, Variant } from "@/components/Button/Button";
 import NavbarLeft from "@/components/NavbarLeft/NavbarLeft";
 import NavbarRight from "@/components/NavbarRight/NavbarRight";
@@ -15,6 +15,7 @@ export interface NavItemProps {
   icon?: JSX.Element | undefined;
   variant: Variant;
   size?: Size;
+  href?: string;
 }
 
 export default function Navbar(props: NavbarProps) {

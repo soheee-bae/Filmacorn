@@ -1,0 +1,13 @@
+@import "../../styles/mixin";
+
+.moviesContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 0 20px;
+  margin-left: 235px;
+  @include xxl {
+    margin-left: 277px;
+  }
+}

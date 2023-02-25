@@ -5,12 +5,12 @@ import Navbar from "@/components/Navbar/Navbar";
 import "@/styles/globals.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { Genre } = pageProps;
+  const { genre } = pageProps;
 
   return (
     <React.StrictMode>
       {/* <ContextProvider> */}
-      <Navbar genre={Genre} />
+      <Navbar genre={genre} />
       <Component {...pageProps} />
       <Footer />
       {/* </ContextProvider> */}

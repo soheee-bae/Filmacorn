@@ -1,76 +1,76 @@
 import { GetServerSideProps } from "next";
 import { FullData, MovieDetail } from "@/interfaces/movie";
+import { Video } from "@/interfaces/video";
 import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
 
 import HomeList from "@/components/HomeList/HomeList";
 import HomeMain from "@/components/HomeMain/HomeMain";
 import styles from "./Home.module.scss";
-import { Video } from "@/interfaces/video";
 
 interface APIProps {
-  SpotLights: FullData;
-  PopularMovies: FullData;
-  UpcomingMovies: FullData;
-  TopRatedMovies: FullData;
-  ThrillerMovies: FullData;
-  FamilyMovies: FullData;
-  WesternMovies: FullData;
-  AnimationMovies: FullData;
-  MainMovieInfo: MovieDetail;
-  MainMovieVideos: Video[];
+  spotLights: FullData;
+  popularMovies: FullData;
+  upcomingMovies: FullData;
+  topRatedMovies: FullData;
+  thrillerMovies: FullData;
+  familyMovies: FullData;
+  westernMovies: FullData;
+  animationMovies: FullData;
+  mainMovieInfo: MovieDetail;
+  mainMovieVideos: Video[];
 }
 
 export default function Home(props: APIProps) {
   const {
-    SpotLights,
-    PopularMovies,
-    UpcomingMovies,
-    TopRatedMovies,
-    ThrillerMovies,
-    FamilyMovies,
-    WesternMovies,
-    AnimationMovies,
-    MainMovieInfo,
-    MainMovieVideos,
+    spotLights,
+    popularMovies,
+    upcomingMovies,
+    topRatedMovies,
+    thrillerMovies,
+    familyMovies,
+    westernMovies,
+    animationMovies,
+    mainMovieInfo,
+    mainMovieVideos,
   } = props;
 
   const lists = [
     {
       title: "Spotlight",
-      data: SpotLights.results,
+      data: spotLights.results,
     },
     {
       title: "Popular Movies",
-      data: PopularMovies.results,
+      data: popularMovies.results,
     },
     {
       title: "Upcoming Movies",
-      data: UpcomingMovies.results,
+      data: upcomingMovies.results,
     },
     {
       title: "Top rated Movies",
-      data: TopRatedMovies.results,
+      data: topRatedMovies.results,
     },
     {
       title: "Thriller",
-      data: ThrillerMovies.results,
+      data: thrillerMovies.results,
     },
     {
       title: "Family",
-      data: FamilyMovies.results,
+      data: familyMovies.results,
     },
     {
       title: "Western",
-      data: WesternMovies.results,
+      data: westernMovies.results,
     },
     {
       title: "Animation",
-      data: AnimationMovies.results,
+      data: animationMovies.results,
     },
   ];
   return (
     <div className={styles.homeContainer}>
-      <HomeMain mainMovie={MainMovieInfo} mainMovieVideo={MainMovieVideos} />
+      <HomeMain mainMovie={mainMovieInfo} mainMovieVideo={mainMovieVideos} />
       <HomeList categories={lists} />
     </div>
   );
@@ -78,86 +78,86 @@ export default function Home(props: APIProps) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   /* SpotLight */
-  const SpotLightsData = await fetch(
+  const spotLightsData = await fetch(
     `${TMDB_REQUEST_URL}/trending/all/day${API_KEY}&include_adult=false&with_original_language=en`
   );
-  const SpotLights = await SpotLightsData.json();
+  const spotLights = await spotLightsData.json();
 
   /* Popular */
-  const PopularMoviesData = await fetch(
+  const popularMoviesData = await fetch(
     `${TMDB_REQUEST_URL}/movie/popular${API_KEY}${TMDB_EXTRA}&include_adult=false&with_original_language=en`
   );
-  const PopularMovies = await PopularMoviesData.json();
+  const popularMovies = await popularMoviesData.json();
 
   /* Upcoming */
-  const UpcomingMoviesData = await fetch(
+  const upcomingMoviesData = await fetch(
     `${TMDB_REQUEST_URL}/movie/upcoming${API_KEY}${TMDB_EXTRA}&include_adult=false&with_original_language=en`
   );
-  const UpcomingMovies = await UpcomingMoviesData.json();
+  const upcomingMovies = await upcomingMoviesData.json();
 
   /* TopRated */
-  const TopRatedMoviesData = await fetch(
+  const topRatedMoviesData = await fetch(
     `${TMDB_REQUEST_URL}/movie/top_rated${API_KEY}${TMDB_EXTRA}&include_adult=false&with_original_language=en`
   );
-  const TopRatedMovies = await TopRatedMoviesData.json();
+  const topRatedMovies = await topRatedMoviesData.json();
 
   /* Thriller */
-  const ThrillerMoviesData = await fetch(
+  const thrillerMoviesData = await fetch(
     `${TMDB_REQUEST_URL}/discover/movie${API_KEY}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=53&with_watch_monetization_types=flatrate&with_original_language=en`
   );
-  const ThrillerMovies = await ThrillerMoviesData.json();
+  const thrillerMovies = await thrillerMoviesData.json();
 
   /* Family */
-  const FamilyMoviesData = await fetch(
+  const familyMoviesData = await fetch(
     `${TMDB_REQUEST_URL}/discover/movie${API_KEY}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10751&with_watch_monetization_types=flatrate&with_original_language=en`
   );
-  const FamilyMovies = await FamilyMoviesData.json();
+  const familyMovies = await familyMoviesData.json();
 
   /* Western */
-  const WesternMoviesData = await fetch(
+  const westernMoviesData = await fetch(
     `${TMDB_REQUEST_URL}/discover/movie${API_KEY}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=37&with_watch_monetization_types=flatrate&with_original_language=en`
   );
-  const WesternMovies = await WesternMoviesData.json();
+  const westernMovies = await westernMoviesData.json();
 
   /* Animation */
-  const AnimationMoviesData = await fetch(
+  const animationMoviesData = await fetch(
     `${TMDB_REQUEST_URL}/discover/movie${API_KEY}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=16&with_watch_monetization_types=flatrate&with_original_language=en`
   );
-  const AnimationMovies = await AnimationMoviesData.json();
+  const animationMovies = await animationMoviesData.json();
 
   /* Main Movie */
-  const MainMovie = PopularMovies.results[0];
-  const MainMovieData = await fetch(
-    `${TMDB_REQUEST_URL}/movie/${MainMovie.id}${API_KEY}&language=en-US`
+  const mainMovie = popularMovies.results[0];
+  const mainMovieData = await fetch(
+    `${TMDB_REQUEST_URL}/movie/${mainMovie.id}${API_KEY}&language=en-US`
   );
-  const MainMovieInfo = await MainMovieData.json();
+  const mainMovieInfo = await mainMovieData.json();
 
-  const MainMovieVideoData = await fetch(
-    `${TMDB_REQUEST_URL}/movie/${MainMovie.id}/videos${API_KEY}`
+  const mainMovieVideoData = await fetch(
+    `${TMDB_REQUEST_URL}/movie/${mainMovie.id}/videos${API_KEY}`
   );
-  const MainMovieVideo = await MainMovieVideoData.json();
-  const MainMovieVideos = MainMovieVideo.results;
+  const mainMovieVideo = await mainMovieVideoData.json();
+  const mainMovieVideos = mainMovieVideo.results;
 
   /* Genre */
-  const GenreData = await fetch(
+  const genreData = await fetch(
     `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
   );
-  const Genres = await GenreData.json();
-  const Genre = Genres.genres;
+  const genres = await genreData.json();
+  const genre = genres.genres;
 
   return {
     props: {
-      SpotLights,
-      PopularMovies,
-      UpcomingMovies,
-      TopRatedMovies,
-      ThrillerMovies,
-      FamilyMovies,
-      WesternMovies,
-      AnimationMovies,
-      MainMovieInfo,
-      MainMovieVideos,
-      Genre,
+      spotLights,
+      popularMovies,
+      upcomingMovies,
+      topRatedMovies,
+      thrillerMovies,
+      familyMovies,
+      westernMovies,
+      animationMovies,
+      mainMovieInfo,
+      mainMovieVideos,
+      genre,
     },
   };
 };

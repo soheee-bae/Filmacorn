@@ -17,7 +17,7 @@ export default function CastList(props: CastListProps) {
       <p className={styles.castTitle}>{title}</p>
       <div className={styles.castNameContainer}>
         {limited.map((d, index) => (
-          <p className={styles.castName}>
+          <p key={index} className={styles.castName}>
             {d.name}
             {index !== 3 && <span>,</span>}
           </p>
