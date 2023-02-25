@@ -1,0 +1,22 @@
+.searchResult {
+  padding: 0px 20px;
+}
+
+.lessThan2 {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  color: var(--whiteColor300);
+  font-weight: var(--font-light);
+  padding-left: 60px;
+  svg {
+    color: var(--whiteColor300);
+    width: 17px;
+    height: 17px;
+    stroke-width: 3;
+  }
+}
+
+.searchResultContent {
+  border: 1px solid red;
+}
