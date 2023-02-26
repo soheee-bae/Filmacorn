@@ -79,7 +79,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   );
 
   const session = await loginSession.json();
-  const sessionId = session?.session_id;
+  const sessionId = session?.session_id || 0;
 
   const accountData = await fetch(
     `${TMDB_REQUEST_URL}/account${API_KEY}&session_id=${sessionId}`

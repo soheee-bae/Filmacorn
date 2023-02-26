@@ -5,7 +5,7 @@ import styles from "./NavbarRight.module.scss";
 import { Search } from "@/icons/index";
 import Button from "@/components/Button/Button";
 import { NavItemProps } from "@/components/Navbar/Navbar";
-import { getSessionId } from "@/utils/index";
+import { getSessionId, removeSessionId } from "@/utils/index";
 
 const navSecondItems: NavItemProps[] = [
   {
@@ -45,6 +45,10 @@ export default function NavbarRight() {
 
   const [dropdown, setDropdown] = useState(false);
 
+  const handleSignout = () => {
+    removeSessionId();
+  };
+
   return (
     <div className={styles.navItems}>
       {navList.map((item) => {
@@ -78,11 +82,17 @@ export default function NavbarRight() {
                   <p className={styles.navAccountName}>{session.username}</p>
                 </div>
                 <div className={styles.navAccountButtons}>
-                  <Button variant="text-outlined">Setting</Button>
-                  <Button variant="text-outlined">Watchlist</Button>
+                  <Link href="/settings">
+                    <Button variant="text-outlined">Setting</Button>
+                  </Link>
+                  <Link href="/watchlist">
+                    <Button variant="text-outlined">Watchlist</Button>
+                  </Link>
                 </div>
                 <div className={styles.signoutButton}>
-                  <Button variant="contained-outlined">Sign Out</Button>
+                  <Button onClick={handleSignout} variant="contained-outlined">
+                    Sign Out
+                  </Button>
                 </div>
               </div>
             )}

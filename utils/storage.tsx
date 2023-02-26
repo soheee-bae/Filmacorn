@@ -38,3 +38,14 @@ export const setToLocal = (key: string, data: SessionData) => {
     return setValueTo(localStorage, key, data);
   }
 };
+
+export const removeLocal = (key: string) => {
+  if (isBrowser) {
+    const localStorage = window.localStorage;
+
+    if (isEmpty(localStorage)) {
+      return;
+    }
+    return localStorage.removeItem(key);
+  }
+};
