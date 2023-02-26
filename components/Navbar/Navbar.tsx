@@ -26,7 +26,7 @@ export default function Navbar(props: NavbarProps) {
       <div className={styles.navContainer}>
         <div className={styles.navList}>
           <Link href="/" className={styles.logoItem}>
-            <p className={styles.logo}>NEXTFLICKS</p>
+            <p className={styles.logo}>FILMACORN</p>
           </Link>
           <NavbarLeft genre={genre} />
         </div>

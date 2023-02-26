@@ -8,6 +8,10 @@
   cursor: pointer;
   white-space: nowrap;
   box-shadow: none;
+  &[data-disabled="true"] {
+    pointer-events: none;
+    background-color: var(--whiteColor400);
+  }
 }
 
 /* Size */

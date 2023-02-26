@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Russo+One&display=swap");
+
+.signinContainer {
+  min-height: 90vh;
+  background-color: var(--blackColor200);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  hr {
+    border: 0.5px solid var(--blackColor500);
+    margin: 10px 0 20px;
+  }
+}
+
+.signin {
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.signinLogo {
+  font-family: "Inter", sans-serif;
+  font-family: "Russo One", sans-serif;
+  font-size: var(--text-xl);
+  color: var(--primaryColor100);
+  background-color: transparent;
+  align-self: center;
+}
+
+.signinHeader {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0 50px;
+}
+
+.signinTitle {
+  font-size: var(--text-xxl);
+  font-weight: var(--font-semibold);
+  color: var(--whiteColor300);
+}
+
+.signinSubtitle {
+  font-size: var(--text-md);
+  font-weight: var(--font-light);
+  color: var(--whiteColor300);
+}
+
+.signinFields {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 10px;
+  input {
+    width: 100%;
+    padding: 12px 13px;
+    background: transparent;
+    border: 1px solid var(--whiteColor300);
+    border-radius: 8px;
+    font-size: var(--text-lg);
+    font-weight: var(--font-light);
+    color: var(--whiteColor200);
+    outline: none;
+  }
+}
+
+.signInOptions {
+  font-size: var(--text-xs);
+  font-weight: var(--font-light);
+  color: var(--whiteColor200);
+  margin-top: 10px;
+  a {
+    cursor: pointer;
+    color: var(--primaryColor100);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.signinActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  min-height: 50px;
+  button {
+    position: absolute;
+  }
+  :last-child {
+    right: 0;
+  }
+}
