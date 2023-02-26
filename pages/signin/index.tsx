@@ -5,10 +5,27 @@ import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 import styles from "./Signin.module.scss";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
+import { setSessionId } from "@/utils/index";
+import { useRouter } from "next/router";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const handleGuest = async () => {
+    const guestSession = await fetch(
+      `${TMDB_REQUEST_URL}/authentication/guest_session/new${API_KEY}`
+    );
+    const guest = await guestSession.json();
+    if (guest.success) {
+      setSessionId({
+        sessionId: guest.guest_session_id,
+        isGuest: true,
+      });
+    }
+    router.push("/");
+  };
 
   return (
     <div className={styles.signinContainer}>
@@ -41,7 +58,9 @@ export default function SignIn() {
         </div>
         <hr />
         <div className={styles.signinActions}>
-          <Button variant="outlined">Continue as Guest</Button>
+          <Button variant="outlined" onClick={handleGuest}>
+            Continue as Guest
+          </Button>
           <Button variant="contained">Login</Button>
         </div>
       </div>
