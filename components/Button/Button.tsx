@@ -19,6 +19,7 @@ interface ButtonProps {
   endIcon?: JSX.Element;
   onClick?: () => void;
   className?: string;
+  disabled?: boolean;
 }
 
 export default function Button(props: ButtonProps) {
@@ -30,6 +31,7 @@ export default function Button(props: ButtonProps) {
     endIcon,
     onClick,
     className,
+    disabled,
   } = props;
   const [selected, setSelected] = useState(false);
 
@@ -46,6 +48,7 @@ export default function Button(props: ButtonProps) {
         styles[`${variant}`],
         styles[`${size}`]
       )}
+      data-disabled={disabled}
       data-selected={selected}
       onClick={handleClick}>
       {startIcon}

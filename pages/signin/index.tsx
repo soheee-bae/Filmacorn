@@ -1,19 +1,16 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { useState } from "react";
 import { GetStaticProps } from "next";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { API_KEY, AUTH, TMDB_REQUEST_URL } from "@/config/index";
-import styles from "./Signin.module.scss";
 import Button from "@/components/Button/Button";
-import Link from "next/link";
 import { setSessionId } from "@/utils/index";
-import { useRouter } from "next/router";
+import styles from "./Signin.module.scss";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errMessage, setErrMessage] = useState("");
-  const [loginSuccess, setLoginSuccess] = useState(false);
-
   const router = useRouter();
 
   const handleGuest = async () => {
@@ -43,6 +40,8 @@ export default function SignIn() {
       "_blank"
     );
   };
+
+  const disabled = username === "" || password === "";
 
   return (
     <div className={styles.signinContainer}>
@@ -80,7 +79,7 @@ export default function SignIn() {
           <Button variant="outlined" onClick={handleGuest}>
             Continue as Guest
           </Button>
-          <Button variant="contained" onClick={handleLogin}>
+          <Button disabled={disabled} variant="contained" onClick={handleLogin}>
             Login
           </Button>
         </div>

@@ -1,23 +1,59 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
+import Link from "next/link";
+
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
-import { GetServerSideProps, GetStaticProps } from "next";
-import { Account } from "@/interfaces/account";
+import { setSessionId } from "@/utils/index";
+import { CheckCircle } from "@/icons/index";
+import styles from "./Approve.module.scss";
 
 interface ApproveProps {
   sessionId: string;
-  accountInfo: Account;
   approved: boolean;
 }
 
 export default function Approve(props: ApproveProps) {
-  const { sessionId, accountInfo, approved } = props;
-  console.log(sessionId);
-  console.log(accountInfo);
-  console.log(approved);
-  return <div>Approved!!</div>;
+  const { sessionId, approved } = props;
+  const router = useRouter();
+
+  useEffect(() => {
+    if (approved) {
+      setSessionId({
+        sessionId: sessionId,
+        isGuest: false,
+      });
+    }
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
+  }, []);
+
+  return (
+    <div className={styles.approve}>
+      {approved ? (
+        <div className={styles.approveContainer}>
+          <CheckCircle />
+          <p className={styles.approveTitle}>Login was successful!</p>
+          <p className={styles.approveSubtitle}>
+            You will be redirected to the homepage...
+          </p>
+        </div>
+      ) : (
+        <div className={styles.approveContainer}>
+          <p className={styles.approveTitle}>Login Failed </p>
+          <p className={styles.approveSubtitle}>Please try again </p>
+          <p className={styles.approveHelper}>
+            Go back to <Link href="/signin">SignIn page</Link>
+          </p>
+        </div>
+      )}
+    </div>
+  );
 }
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query;
+  const approved = query.approved;
 
   /* Genre */
   const genreData = await fetch(
@@ -40,27 +76,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   );
 
   const session = await loginSession.json();
-  const sessionId = session.session_id;
+  const sessionId = session?.session_id;
 
-  const account = await fetch(
-    `${TMDB_REQUEST_URL}/account${API_KEY}&session_id=${sessionId}`
-  );
-
-  const accountInfo = await account.json();
-  const approved = query.approved;
   return {
-    props: { sessionId, accountInfo, approved, genre },
+    props: { sessionId, approved, genre },
   };
 };
-
-// if (login.success) {
-//   setErrMessage("");
-//   setLoginSuccess(true);
-//   setSessionId({
-//     sessionId: login.guest_session_id,
-//     isGuest: false,
-//   });
-//   router.push("/");
-// } else {
-//   setErrMessage("Failed to login");
-// }
