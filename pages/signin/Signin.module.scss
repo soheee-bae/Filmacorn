@@ -13,8 +13,6 @@
 }
 
 .signin {
-  background-color: var(--blackColor300);
-  padding: 30px 50px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -75,9 +73,11 @@
   font-weight: var(--font-light);
   color: var(--whiteColor200);
   margin-top: 10px;
-  span {
+  a {
     cursor: pointer;
     color: var(--primaryColor100);
+    text-decoration: none;
+
     &:hover {
       text-decoration: underline;
     }

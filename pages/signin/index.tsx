@@ -33,7 +33,10 @@ export default function SignIn() {
             placeholder="Password"
           />
           <p className={styles.signInOptions}>
-            Don't have an account? <span>Register in TMDb</span>
+            Don't have an account?{" "}
+            <Link href="https://www.themoviedb.org/signup" target="_blank">
+              Register in TMDb
+            </Link>
           </p>
         </div>
         <hr />
