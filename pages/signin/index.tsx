@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { MouseEventHandler, useState } from "react";
 import { GetStaticProps } from "next";
 
-import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
+import { API_KEY, AUTH, TMDB_REQUEST_URL } from "@/config/index";
 import styles from "./Signin.module.scss";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
@@ -9,8 +9,11 @@ import { setSessionId } from "@/utils/index";
 import { useRouter } from "next/router";
 
 export default function SignIn() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errMessage, setErrMessage] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
+
   const router = useRouter();
 
   const handleGuest = async () => {
@@ -18,13 +21,27 @@ export default function SignIn() {
       `${TMDB_REQUEST_URL}/authentication/guest_session/new${API_KEY}`
     );
     const guest = await guestSession.json();
+
     if (guest.success) {
       setSessionId({
         sessionId: guest.guest_session_id,
         isGuest: true,
       });
+      router.push("/");
     }
-    router.push("/");
+  };
+
+  const handleLogin = async () => {
+    const res = await fetch(
+      `${TMDB_REQUEST_URL}/authentication/token/new${API_KEY}`
+    );
+    const requestToken = await res.json();
+    const token = requestToken.request_token;
+
+    window.open(
+      `${AUTH}${token}?redirect_to=http://localhost:3000/approve`,
+      "_blank"
+    );
   };
 
   return (
@@ -38,14 +55,16 @@ export default function SignIn() {
         </div>
         <div className={styles.signinFields}>
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email Address"
+            type="text"
+            value={username}
+            required
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
           />
           <input
             type="password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
@@ -61,7 +80,9 @@ export default function SignIn() {
           <Button variant="outlined" onClick={handleGuest}>
             Continue as Guest
           </Button>
-          <Button variant="contained">Login</Button>
+          <Button variant="contained" onClick={handleLogin}>
+            Login
+          </Button>
         </div>
       </div>
     </div>
