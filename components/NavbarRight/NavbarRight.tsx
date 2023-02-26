@@ -12,27 +12,22 @@ const navSecondItems: NavItemProps[] = [
     variant: "text-outlined",
     href: "/search",
   },
-  {
-    label: "Create Account",
-    variant: "contained",
-    size: "sm",
-  },
+
   {
     label: "Sign In",
     variant: "outlined",
     size: "sm",
+    href: "/signin",
   },
 ];
 Object.freeze(navSecondItems);
 
 export default function NavbarRight() {
-  const handleOnClick = (): void => {};
   return (
     <div className={styles.navItems}>
       {navSecondItems.map((item) => (
         <Link key={item.label} className={styles.navItem} href={`${item.href}`}>
           <Button
-            onClick={handleOnClick}
             startIcon={item?.icon}
             variant={item?.variant}
             size={item?.size}>
