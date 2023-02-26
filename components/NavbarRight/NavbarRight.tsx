@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./NavbarRight.module.scss";
 
@@ -39,11 +39,17 @@ const navLoggedInItems: NavItemProps[] = [
 Object.freeze(navLoggedInItems);
 
 export default function NavbarRight() {
-  const session = getSessionId();
-  const noSessionId = !session;
-  const navList = noSessionId ? navSecondItems : navLoggedInItems;
-
   const [dropdown, setDropdown] = useState(false);
+  const [session, setSession] = useState(null);
+  const navList = !session ? navSecondItems : navLoggedInItems;
+
+  useEffect(() => {
+    const session = getSessionId();
+    const noSessionId = !session;
+    if (!noSessionId) {
+      setSession(session);
+    }
+  }, []);
 
   const handleSignout = () => {
     removeSessionId();
