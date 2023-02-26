@@ -23,6 +23,7 @@ export default function SignIn() {
       setSessionId({
         sessionId: guest.guest_session_id,
         isGuest: true,
+        username: "guest",
       });
       router.push("/");
     }

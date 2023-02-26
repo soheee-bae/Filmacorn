@@ -1,3 +1,5 @@
+@import "@/styles/size";
+
 .navItems {
   display: flex;
   flex-direction: row;
@@ -9,4 +11,74 @@
 .navItem {
   text-decoration: none;
   background-color: transparent;
+}
+
+.accountItem {
+  color: var(--whiteColor200);
+  opacity: 1;
+  &:hover {
+    background-color: var(--blackColor200);
+  }
+}
+
+.navAccount {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  height: 250px;
+  top: $navbar-height + 14px;
+  background-color: var(--blackColor150);
+  opacity: 0.9;
+  padding: 0 15px;
+  border-left: 2px solid var(--primaryColor100);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  a {
+    text-decoration: none;
+  }
+  button {
+    min-width: 180px;
+    &:hover {
+      background-color: var(--blackColor400);
+    }
+  }
+  &[data-dropdown="true"] {
+    display: block;
+  }
+}
+.navAccountUsername {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--blackColor500);
+}
+
+.navAccountTitle {
+  color: var(--whiteColor300);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-xs);
+}
+.navAccountName {
+  font-size: var(--text-md);
+  color: var(--whiteColor200);
+}
+
+.navAccountButtons {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-bottom: 1px solid var(--blackColor500);
+  button {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    color: var(--whiteColor200);
+    opacity: 1;
+    &:hover {
+      background-color: var(--blackColor100);
+    }
+  }
+}
+
+.signoutButton {
+  margin-top: 20px;
 }

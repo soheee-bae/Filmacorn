@@ -7,14 +7,16 @@ import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 import { setSessionId } from "@/utils/index";
 import { CheckCircle } from "@/icons/index";
 import styles from "./Approve.module.scss";
+import { Account } from "@/interfaces/account";
 
 interface ApproveProps {
   sessionId: string;
+  account: Account;
   approved: boolean;
 }
 
 export default function Approve(props: ApproveProps) {
-  const { sessionId, approved } = props;
+  const { sessionId, account, approved } = props;
   const router = useRouter();
 
   useEffect(() => {
@@ -22,6 +24,7 @@ export default function Approve(props: ApproveProps) {
       setSessionId({
         sessionId: sessionId,
         isGuest: false,
+        username: account.username,
       });
     }
     setTimeout(() => {
@@ -78,7 +81,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await loginSession.json();
   const sessionId = session?.session_id;
 
+  const accountData = await fetch(
+    `${TMDB_REQUEST_URL}/account${API_KEY}&session_id=${sessionId}`
+  );
+  const account = await accountData.json();
+
   return {
-    props: { sessionId, approved, genre },
+    props: { sessionId, account, approved, genre },
   };
 };
