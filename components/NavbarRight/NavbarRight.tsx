@@ -85,7 +85,7 @@ export default function NavbarRight() {
                 data-dropdown={dropdown}>
                 <div className={styles.navAccountUsername}>
                   <p className={styles.navAccountTitle}>ACCOUNT</p>
-                  <p className={styles.navAccountName}>{session.username}</p>
+                  <p className={styles.navAccountName}>{session?.username}</p>
                 </div>
                 <div className={styles.navAccountButtons}>
                   <Link href="/settings">

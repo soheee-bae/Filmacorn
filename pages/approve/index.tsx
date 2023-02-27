@@ -25,6 +25,7 @@ export default function Approve(props: ApproveProps) {
         sessionId: sessionId,
         isGuest: false,
         username: account.username,
+        accountId: account.id,
       });
     }
     setTimeout(() => {
