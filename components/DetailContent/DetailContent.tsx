@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-import { Cross, Error, Play, Plus, Transhbin } from "@/icons/index";
+import { Check, Error, Play, Plus, Transhbin } from "@/icons/index";
 import { Cast, MovieDetail } from "@/interfaces/movie";
 import { Video } from "@/interfaces/video";
 import Button from "@/components/Button/Button";
@@ -14,7 +14,7 @@ import styles from "./DetailContent.module.scss";
 import { getSessionId } from "@/utils/index";
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Toast, ToastSnackbar } from "../Toast/Toast";
 
@@ -32,7 +32,6 @@ export default function DetailContent(props: DetailContentProps) {
 
   const imgSrc = movieDetail.backdrop_path || movieDetail.poster_path;
 
-  console.log(movieDetail);
   const genreList = movieDetail.genres;
   const detailVideo = video?.find((v: any) => v.site === "YouTube");
 
@@ -61,7 +60,7 @@ export default function DetailContent(props: DetailContentProps) {
         }
       );
       const watchlist = await res.json();
-      if (!watchlist.success) {
+      if (watchlist.success) {
         setAddWatchlist(true);
         toast(
           <Toast
@@ -80,6 +79,45 @@ export default function DetailContent(props: DetailContentProps) {
           />
         );
       }
+    }
+  };
+
+  const handleRemoveWatchList = async () => {
+    const session = await getSessionId();
+
+    const res = await fetch(
+      `${TMDB_REQUEST_URL}/account/${session?.accountId}/watchlist${API_KEY}&session_id=${session.sessionId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+          media_type: "movie",
+          media_id: movieDetail.id,
+          watchlist: false,
+        }),
+      }
+    );
+    const watchlist = await res.json();
+    if (watchlist.success) {
+      setAddWatchlist(false);
+      toast(
+        <Toast
+          icon={<Transhbin />}
+          title="Removed from watchlist"
+          subtitle={movieDetail.title || movieDetail.original_title}
+        />
+      );
+    } else {
+      setAddWatchlist(true);
+      toast(
+        <Toast
+          icon={<Error />}
+          title="Failed to remove watchlist"
+          subtitle={movieDetail.title || movieDetail.original_title}
+        />
+      );
     }
   };
 
@@ -103,14 +141,25 @@ export default function DetailContent(props: DetailContentProps) {
                 className={styles.detailButton}>
                 Watch Now
               </Button>
-              <Button
-                size="lg"
-                variant="outlined"
-                onClick={handleAddWatchList}
-                className={styles.detailButton}
-                startIcon={<Plus />}>
-                Add to Watchlist
-              </Button>
+              {addWatchlist ? (
+                <Button
+                  size="lg"
+                  variant="outlined"
+                  onClick={handleRemoveWatchList}
+                  className={styles.detailButton}
+                  startIcon={<Check />}>
+                  In Watchlist
+                </Button>
+              ) : (
+                <Button
+                  size="lg"
+                  variant="outlined"
+                  onClick={handleAddWatchList}
+                  className={styles.detailButton}
+                  startIcon={<Plus />}>
+                  Add to Watchlist
+                </Button>
+              )}
             </div>
           </div>
           <GenreList genreList={genreList} />

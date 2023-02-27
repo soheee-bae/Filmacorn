@@ -76,6 +76,9 @@
 }
 .detailButton {
   position: absolute;
+  svg {
+    stroke-width: 3;
+  }
 }
 
 .detailCasts {
