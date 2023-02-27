@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-import { Play } from "@/icons/index";
+import { Cross, Error, Play, Plus, Transhbin } from "@/icons/index";
 import { Cast, MovieDetail } from "@/interfaces/movie";
 import { Video } from "@/interfaces/video";
 import Button from "@/components/Button/Button";
@@ -13,6 +13,10 @@ import MainBackground from "@/components/MainBackground/MainBackground";
 import styles from "./DetailContent.module.scss";
 import { getSessionId } from "@/utils/index";
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Toast, ToastSnackbar } from "../Toast/Toast";
 
 interface DetailContentProps {
   movieDetail: MovieDetail;
@@ -43,9 +47,7 @@ export default function DetailContent(props: DetailContentProps) {
       });
     } else {
       const res = await fetch(
-        `${TMDB_REQUEST_URL}/account/${
-          session?.accountId
-        }/watchlist${API_KEY}&session_id=${0}`,
+        `${TMDB_REQUEST_URL}/account/${session?.accountId}/watchlist${API_KEY}&session_id=${session.sessionId}`,
         {
           method: "POST",
           headers: {
@@ -59,13 +61,25 @@ export default function DetailContent(props: DetailContentProps) {
         }
       );
       const watchlist = await res.json();
-      if (watchlist.success) {
+      if (!watchlist.success) {
         setAddWatchlist(true);
+        toast(
+          <Toast
+            icon={<Plus />}
+            title="Added to watchlist"
+            subtitle={movieDetail.title || movieDetail.original_title}
+          />
+        );
       } else {
         setAddWatchlist(false);
-        alert("Failed to add movie to watchlist");
+        toast(
+          <Toast
+            icon={<Error />}
+            title="Failed to add to watchlist"
+            subtitle={movieDetail.title || movieDetail.original_title}
+          />
+        );
       }
-      console.log(watchlist);
     }
   };
 
@@ -93,8 +107,9 @@ export default function DetailContent(props: DetailContentProps) {
                 size="lg"
                 variant="outlined"
                 onClick={handleAddWatchList}
-                className={styles.detailButton}>
-                + Add to Watchlist
+                className={styles.detailButton}
+                startIcon={<Plus />}>
+                Add to Watchlist
               </Button>
             </div>
           </div>
@@ -106,6 +121,7 @@ export default function DetailContent(props: DetailContentProps) {
           <p className={styles.detailOverview}>{movieDetail.overview}</p>
         </div>
       </div>
+      <ToastSnackbar />
     </div>
   );
 }
