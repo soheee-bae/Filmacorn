@@ -16,3 +16,4 @@ export { default as Plus } from "./plus.svg";
 export { default as Cross } from "./cross.svg";
 export { default as Error } from "./error.svg";
 export { default as Check } from "./check.svg";
+export { default as Circle } from "./circle.svg";

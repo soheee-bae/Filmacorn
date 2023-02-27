@@ -21,6 +21,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   button {
     max-height: 50px;
     font-weight: var(--font-semibold);
@@ -29,8 +30,12 @@
 
 .watchlistTitle {
   color: var(--whiteColor200);
-  font-size: var(--text-xxxl);
+  font-size: var(--text-xxl);
   font-weight: var(--font-semibold);
+  @include md {
+    font-size: var(--text-xxxl);
+    font-weight: var(--font-semibold);
+  }
 }
 
 .watchlistContent {
@@ -69,5 +74,36 @@
   }
   @include md {
     justify-content: flex-start;
+  }
+}
+
+.watchListCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.watchListEditMode {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(20, 20, 20, 0.5);
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+  &:hover {
+    background: rgba(20, 20, 20, 0.3);
+  }
+  svg {
+    color: var(--whiteColor100);
+    stroke-width: 3;
+    height: 23px;
+    width: 23px;
+    opacity: 1;
+  }
+
+  &[data-edit="true"] {
+    background: rgba(20, 20, 20, 0.3);
   }
 }
