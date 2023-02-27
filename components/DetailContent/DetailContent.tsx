@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 
 import { Play } from "@/icons/index";
@@ -10,6 +11,8 @@ import GenreList from "@/components/GenreList/GenreList";
 import MainBackground from "@/components/MainBackground/MainBackground";
 
 import styles from "./DetailContent.module.scss";
+import { getSessionId } from "@/utils/index";
+import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 
 interface DetailContentProps {
   movieDetail: MovieDetail;
@@ -20,20 +23,50 @@ interface DetailContentProps {
 
 export default function DetailContent(props: DetailContentProps) {
   const { movieDetail, cast, director, video } = props;
+  const [addWatchlist, setAddWatchlist] = useState(false);
   const router = useRouter();
 
   const imgSrc = movieDetail.backdrop_path || movieDetail.poster_path;
 
+  console.log(movieDetail);
   const genreList = movieDetail.genres;
   const detailVideo = video?.find((v: any) => v.site === "YouTube");
 
   const handleWatchNow = () => {
     window.open(`https://www.youtube.com/watch?v=${detailVideo?.key}`);
   };
-  const handleAddWatchList = () => {
-    router.push(`/watchlist`, undefined, {
-      shallow: true,
-    });
+  const handleAddWatchList = async () => {
+    const session = await getSessionId();
+    if (!session || session.isGuest) {
+      router.push(`/watchlist`, undefined, {
+        shallow: true,
+      });
+    } else {
+      const res = await fetch(
+        `${TMDB_REQUEST_URL}/account/${
+          session?.accountId
+        }/watchlist${API_KEY}&session_id=${0}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          body: JSON.stringify({
+            media_type: "movie",
+            media_id: movieDetail.id,
+            watchlist: true,
+          }),
+        }
+      );
+      const watchlist = await res.json();
+      if (watchlist.success) {
+        setAddWatchlist(true);
+      } else {
+        setAddWatchlist(false);
+        alert("Failed to add movie to watchlist");
+      }
+      console.log(watchlist);
+    }
   };
 
   return (

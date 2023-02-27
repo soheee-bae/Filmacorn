@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
+import Link from "next/link";
+
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
-import styles from "./WatchList.module.scss";
 import Button from "@/components/Button/Button";
 import { getSessionId } from "@/utils/index";
 import { Movie } from "@/interfaces/movie";
-import Link from "next/link";
-import { watch } from "fs";
 
-// interface WatchlistProps {
-//   //   account: Account;
-// }
+import styles from "./WatchList.module.scss";
 
 export default function WatchList() {
   const [watchList, setWatchList] = useState([]);
@@ -30,12 +27,6 @@ export default function WatchList() {
       setWatchList(watchList);
     }
   };
-
-  console.log(allow);
-  console.log(watchList);
-  //   useEffect(() => {
-  //     setAllow(allow);
-  //   }, [allow]);
 
   useEffect(() => {
     fetchWatchList();
