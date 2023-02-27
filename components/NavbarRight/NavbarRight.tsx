@@ -87,14 +87,6 @@ export default function NavbarRight() {
                   <p className={styles.navAccountTitle}>ACCOUNT</p>
                   <p className={styles.navAccountName}>{session?.username}</p>
                 </div>
-                <div className={styles.navAccountButtons}>
-                  <Link href="/settings">
-                    <Button variant="text-outlined">Setting</Button>
-                  </Link>
-                  <Link href="/watchlist">
-                    <Button variant="text-outlined">Watchlist</Button>
-                  </Link>
-                </div>
                 <div className={styles.signoutButton}>
                   <Button onClick={handleSignout} variant="contained-outlined">
                     Sign Out

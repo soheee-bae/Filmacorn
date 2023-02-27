@@ -73,6 +73,9 @@
   :last-child {
     left: 170px;
   }
+  :last-child div {
+    left: 40px;
+  }
 }
 .detailButton {
   position: absolute;

@@ -8,10 +8,13 @@ import { getSessionId } from "@/utils/index";
 import { Movie } from "@/interfaces/movie";
 
 import styles from "./WatchList.module.scss";
+import CarouselCard from "@/components/CarouselCard/CarouselCard";
+import EditWatchlist from "@/components/EditWatchlist/EditWatchlist";
 
 export default function WatchList() {
   const [watchList, setWatchList] = useState([]);
   const [allow, setAllow] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   const fetchWatchList = async () => {
     const session = getSessionId();
@@ -38,7 +41,7 @@ export default function WatchList() {
         <div className={styles.watchlistHeader}>
           <p className={styles.watchlistTitle}>Watchlist</p>
           {allow && (
-            <Button variant="contained-outlined">Edit Watchlist</Button>
+            <EditWatchlist setEditMode={setEditMode} editMode={editMode} />
           )}
         </div>
         <div className={styles.watchlistContent}>
@@ -85,8 +88,14 @@ export function watchListContent(props: watchListContentProps) {
       );
     } else {
       return (
-        <div>
-          <p>display watchlist items</p>
+        <div className={styles.watchListCards}>
+          {watchList?.map((watchItem: Movie) => {
+            return (
+              <Link href={`/details/${watchItem.id}`} key={watchItem.id}>
+                <CarouselCard key={watchItem.id} info={watchItem} />
+              </Link>
+            );
+          })}
         </div>
       );
     }

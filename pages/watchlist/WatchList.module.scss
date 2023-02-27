@@ -57,3 +57,17 @@
   max-width: 500px;
   line-height: 1.3;
 }
+
+.watchListCards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 23px;
+  a {
+    margin-bottom: 25px;
+  }
+  @include md {
+    justify-content: flex-start;
+  }
+}
