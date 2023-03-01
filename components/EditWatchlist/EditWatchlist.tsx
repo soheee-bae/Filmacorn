@@ -1,6 +1,6 @@
-import { Movie } from "@/interfaces/movie";
 import { Dispatch } from "react";
-import Button from "../Button/Button";
+import { Movie } from "@/interfaces/movie";
+import Button from "@/components/Button/Button";
 import styles from "./EditWatchlist.module.scss";
 
 interface EditWatchlistProps {

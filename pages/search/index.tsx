@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import useBreakpoint from "hooks/useBreakpoint";
 
+import useBreakpoint from "@/hooks/useBreakpoint";
 import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import { LeftArrow } from "@/icons/index";
-import SearchResult from "@/components/SearchResult/SearchResult";
 import { Movie } from "@/interfaces/movie";
-import styles from "./Search.module.scss";
+import { LeftArrow } from "@/icons/index";
+
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import SearchResult from "@/components/SearchResult/SearchResult";
 import Button from "@/components/Button/Button";
+
+import styles from "./Search.module.scss";
 
 interface SearchProps {
   moviesList: Movie[];
