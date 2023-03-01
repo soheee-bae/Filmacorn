@@ -47,7 +47,7 @@ const titleLists = [
 
 Object.freeze(titleLists);
 
-export const getCategoryData = async (title: string | string[] | null) => {
+export const getCategoryData = async (title: string) => {
   const titleData = titleLists.find((item) => {
     return item.title === title;
   });

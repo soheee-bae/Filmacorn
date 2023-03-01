@@ -1,15 +1,18 @@
 import React, { useState, useEffect, Dispatch } from "react";
 import Link from "next/link";
 
+import {
+  fetchMovieByCategory,
+  fetchMovieByTypeUsingEnv,
+} from "@/helpers/handleMovie";
 import { Movie } from "@/interfaces/movie";
-import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 import CarouselCard from "@/components/CarouselCard/CarouselCard";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 import styles from "./LoadMoreContent.module.scss";
 
 interface LoadMoreContentProps {
-  categoryId?: string;
+  categoryId?: number;
   sorting: string;
   setSorting: Dispatch<string>;
 }
@@ -25,17 +28,9 @@ export default function LoadMoreContent(props: LoadMoreContentProps) {
     try {
       let results = [];
       if (!categoryId) {
-        const allMoviesData = await fetch(
-          `${TMDB_REQUEST_URL}/movie/popular?api_key=${process.env.REACT_APP_TMDB_APIKEY}&language=en-US&page=${page}`
-        );
-        const allMovies = await allMoviesData.json();
-        results = allMovies.results;
+        results = await fetchMovieByTypeUsingEnv("/movie/popular", page);
       } else {
-        const movieData = await fetch(
-          `${TMDB_REQUEST_URL}/discover/movie${API_KEY}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${categoryId}&with_watch_monetization_types=flatrate&with_original_language=en&page=${page}`
-        );
-        const movies = await movieData.json();
-        results = movies.results;
+        results = await fetchMovieByCategory(categoryId, page);
       }
 
       const newDatas = [...data, ...results];
@@ -101,8 +96,7 @@ export default function LoadMoreContent(props: LoadMoreContentProps) {
           <Link
             href={`/details/${data?.id}`}
             key={data?.id}
-            className={styles.loadMoreItem}
-          >
+            className={styles.loadMoreItem}>
             <CarouselCard key={data?.id} info={data} />
           </Link>
         );

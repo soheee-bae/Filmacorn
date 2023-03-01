@@ -52,8 +52,13 @@
     border-radius: 50%;
     background-color: var(--blackColor150);
     transition: all 0.2s ease-in-out;
+    display: none;
+
     &:hover {
       transform: scale(1.1);
+    }
+    @include md {
+      display: block;
     }
   }
 }
