@@ -1,0 +1,24 @@
+.watchListPlaceholder {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.watchListPlaceholderTitle {
+  font-size: var(--text-xxl);
+  font-weight: var(--font-semibold);
+  color: var(--whiteColor200);
+}
+
+.watchListPlaceholderSubtitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-light);
+  color: var(--whiteColor300);
+  max-width: 500px;
+  line-height: 1.3;
+}
+
+.watchListPlaceholderButton {
+  text-decoration: none;
+  background-color: transparent;
+}

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
-import Link from "next/link";
+import { toast } from "react-toastify";
 
+import { Toast, ToastSnackbar } from "@/components/Toast/Toast";
+import EditWatchlist from "@/components/EditWatchlist/EditWatchlist";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { WatchListContent } from "@/components/WatchListContent/WatchListContent";
+
+import { Error, Transhbin } from "@/icons/index";
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
-import Button from "@/components/Button/Button";
 import { getSessionId } from "@/utils/index";
 import { Movie } from "@/interfaces/movie";
 
 import styles from "./WatchList.module.scss";
-import CarouselCard from "@/components/CarouselCard/CarouselCard";
-import EditWatchlist from "@/components/EditWatchlist/EditWatchlist";
-import { CheckCircle, Circle, Error, Transhbin } from "@/icons/index";
-import { Toast, ToastSnackbar } from "@/components/Toast/Toast";
-import { toast } from "react-toastify";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 export default function WatchList() {
   const [watchList, setWatchList] = useState([]);
@@ -21,6 +20,7 @@ export default function WatchList() {
   const [editMode, setEditMode] = useState(false);
   const [editWatchList, setEditWatchList] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
   const checkEdit = (id: number) => {
     return editWatchList.some((watchlist) => watchlist.id === id);
   };
@@ -54,6 +54,7 @@ export default function WatchList() {
     }
     setIsLoading(false);
   };
+
   const handleRemove = async () => {
     const session = await getSessionId();
     editWatchList.forEach(async (watchItem, index) => {
@@ -126,7 +127,6 @@ export default function WatchList() {
               watchList={watchList}
               editMode={editMode}
               handleEdit={handleEdit}
-              editWatchList={editWatchList}
               checkEdit={checkEdit}
             />
           )}
@@ -135,74 +135,6 @@ export default function WatchList() {
       <ToastSnackbar />
     </div>
   );
-}
-
-interface watchListContentProps {
-  allow: boolean;
-  watchList: Movie[];
-  editMode: boolean;
-  handleEdit: (data: Movie) => void;
-  editWatchList: Movie[];
-  checkEdit: (id: number) => boolean;
-}
-
-export function WatchListContent(props: watchListContentProps) {
-  const { allow, watchList, editMode, handleEdit, editWatchList, checkEdit } =
-    props;
-
-  if (allow) {
-    if (watchList.length === 0) {
-      return (
-        <div className={styles.watchListContentDetail}>
-          <p className={styles.watchListSubtitle}>
-            Add Stuff To Your Watchlist
-          </p>
-          <p className={styles.watchListText}>
-            Your Watchlist is empty. Any Movie can be added to your Watchlist
-            with a Free Filmacorn account.
-          </p>
-        </div>
-      );
-    } else {
-      return (
-        <div className={styles.watchListCards}>
-          {watchList?.map((watchItem: Movie) => {
-            return (
-              <Link
-                className={editMode ? styles.watchListCard : ""}
-                href={editMode ? "" : `/details/${watchItem.id}`}
-                key={watchItem.id}>
-                <CarouselCard key={watchItem.id} info={watchItem} />
-                {editMode && (
-                  <div
-                    className={styles.watchListEditMode}
-                    data-edit={checkEdit(watchItem.id)}
-                    onClick={() => handleEdit(watchItem)}>
-                    {checkEdit(watchItem.id) ? <CheckCircle /> : <Circle />}
-                  </div>
-                )}
-              </Link>
-            );
-          })}
-        </div>
-      );
-    }
-  } else {
-    return (
-      <div className={styles.watchListContentDetail}>
-        <p className={styles.watchListSubtitle}>Start Your Watchlist</p>
-        <p className={styles.watchListText}>
-          Any Movie can be added to your Watchlist with a Free Filmacorn
-          account.
-        </p>
-        <Link className={styles.navItem} href={"/signin"}>
-          <Button variant="outlined" size="lg">
-            Sign In
-          </Button>
-        </Link>
-      </div>
-    );
-  }
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
