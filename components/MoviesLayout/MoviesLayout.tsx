@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Genre } from "@/interfaces/basic";
 import CategorySidebar from "@/components/CategorySidebar/CategorySidebar";
 import styles from "./MoviesLayout.module.scss";
-import useBreakpoint from "hooks/useBreakpoint";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
 interface MoviesLayoutProps {
   genre: Genre[];

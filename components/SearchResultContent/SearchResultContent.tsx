@@ -29,7 +29,8 @@ export default function SearchResultContent(props: SearchResultContentProps) {
           return (
             <Button
               variant="contained-outlined"
-              onClick={() => setSearch(data.title || data.original_title)}>
+              onClick={() => setSearch(data.title || data.original_title)}
+            >
               {data.title || data.original_title}
             </Button>
           );

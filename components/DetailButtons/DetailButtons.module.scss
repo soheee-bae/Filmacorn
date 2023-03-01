@@ -1,0 +1,19 @@
+.detailButtonsContainer {
+  position: relative;
+  min-height: 60px;
+}
+
+.detailButtons {
+  :last-child {
+    left: 170px;
+  }
+  :last-child div {
+    left: 40px;
+  }
+}
+.detailButton {
+  position: absolute;
+  svg {
+    stroke-width: 3;
+  }
+}

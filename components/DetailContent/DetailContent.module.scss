@@ -57,27 +57,6 @@
   }
 }
 
-.detailButtonsContainer {
-  position: relative;
-  min-height: 60px;
-}
-
-.detailButtons {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-
-  gap: 7px;
-  :last-child {
-    left: 170px;
-  }
-}
-.detailButton {
-  position: absolute;
-}
-
 .detailCasts {
   display: flex;
   flex-direction: column;

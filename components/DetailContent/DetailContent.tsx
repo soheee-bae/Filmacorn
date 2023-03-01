@@ -1,13 +1,14 @@
-import { useRouter } from "next/router";
+import "react-toastify/dist/ReactToastify.css";
 
-import { Play } from "@/icons/index";
 import { Cast, MovieDetail } from "@/interfaces/movie";
 import { Video } from "@/interfaces/video";
-import Button from "@/components/Button/Button";
+
 import CastList from "@/components/CastList/CastList";
 import DateTime from "@/components/DateTime/DateTime";
 import GenreList from "@/components/GenreList/GenreList";
 import MainBackground from "@/components/MainBackground/MainBackground";
+import DetailButtons from "@/components/DetailButtons/DetailButtons";
+import { ToastSnackbar } from "@/components/Toast/Toast";
 
 import styles from "./DetailContent.module.scss";
 
@@ -20,21 +21,9 @@ interface DetailContentProps {
 
 export default function DetailContent(props: DetailContentProps) {
   const { movieDetail, cast, director, video } = props;
-  const router = useRouter();
 
   const imgSrc = movieDetail.backdrop_path || movieDetail.poster_path;
-
   const genreList = movieDetail.genres;
-  const detailVideo = video?.find((v: any) => v.site === "YouTube");
-
-  const handleWatchNow = () => {
-    window.open(`https://www.youtube.com/watch?v=${detailVideo?.key}`);
-  };
-  const handleAddWatchList = () => {
-    router.push(`/watchlist`, undefined, {
-      shallow: true,
-    });
-  };
 
   return (
     <div className={styles.detailMainContent}>
@@ -46,25 +35,7 @@ export default function DetailContent(props: DetailContentProps) {
             releaseDate={movieDetail.release_date}
             runtime={movieDetail.runtime}
           />
-          <div className={styles.detailButtonsContainer}>
-            <div className={styles.detailButtons}>
-              <Button
-                size="lg"
-                variant="contained"
-                startIcon={<Play />}
-                onClick={handleWatchNow}
-                className={styles.detailButton}>
-                Watch Now
-              </Button>
-              <Button
-                size="lg"
-                variant="outlined"
-                onClick={handleAddWatchList}
-                className={styles.detailButton}>
-                + Add to Watchlist
-              </Button>
-            </div>
-          </div>
+          <DetailButtons video={video} movieDetail={movieDetail} />
           <GenreList genreList={genreList} />
           <div className={styles.detailCasts}>
             <CastList list={director} title="Directed by" />
@@ -73,6 +44,7 @@ export default function DetailContent(props: DetailContentProps) {
           <p className={styles.detailOverview}>{movieDetail.overview}</p>
         </div>
       </div>
+      <ToastSnackbar />
     </div>
   );
 }

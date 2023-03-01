@@ -4,7 +4,7 @@ import { Genre } from "@/interfaces/basic";
 import styles from "./MoviesHeader.module.scss";
 import CategoryDropdown from "@/components/CategoryDropdown/CategoryDropdown";
 import SortingDropdown from "@/components/SortingDropdown/SortingDropdown";
-import useBreakpoint from "hooks/useBreakpoint";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
 interface MoviesHeaderProps {
   genre: Genre[];

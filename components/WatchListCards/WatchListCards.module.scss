@@ -1,0 +1,46 @@
+@import "@/styles/mixin";
+
+.watchListCards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 23px;
+  a {
+    margin-bottom: 25px;
+  }
+  @include md {
+    justify-content: flex-start;
+  }
+}
+
+.watchListCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.watchListEditMode {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(20, 20, 20, 0.5);
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+  &:hover {
+    background: rgba(20, 20, 20, 0.3);
+  }
+  svg {
+    color: var(--whiteColor100);
+    stroke-width: 3;
+    height: 23px;
+    width: 23px;
+    opacity: 1;
+  }
+
+  &[data-edit="true"] {
+    background: rgba(20, 20, 20, 0.3);
+  }
+}

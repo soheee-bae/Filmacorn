@@ -1,0 +1,58 @@
+@import "@/styles/mixin";
+
+.watchlist {
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  background-color: var(--blackColor200);
+  display: flex;
+  justify-content: center;
+}
+.watchlistContainer {
+  width: 100%;
+  max-width: 2000px;
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  @include md {
+    padding: 100px 50px;
+  }
+}
+.watchlistHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    max-height: 50px;
+    font-weight: var(--font-semibold);
+  }
+}
+
+.watchlistTitle {
+  color: var(--whiteColor200);
+  font-size: var(--text-xxl);
+  font-weight: var(--font-semibold);
+  @include md {
+    font-size: var(--text-xxxl);
+    font-weight: var(--font-semibold);
+  }
+}
+
+.watchlistContent {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.watchlistLoading {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10vw;
+  height: 10vh;
+}

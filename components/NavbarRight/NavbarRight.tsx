@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./NavbarRight.module.scss";
 
@@ -39,11 +39,17 @@ const navLoggedInItems: NavItemProps[] = [
 Object.freeze(navLoggedInItems);
 
 export default function NavbarRight() {
-  const session = getSessionId();
-  const noSessionId = !session;
-  const navList = noSessionId ? navSecondItems : navLoggedInItems;
-
   const [dropdown, setDropdown] = useState(false);
+  const [session, setSession] = useState(null);
+  const navList = !session ? navSecondItems : navLoggedInItems;
+
+  useEffect(() => {
+    const session = getSessionId();
+    const noSessionId = !session;
+    if (!noSessionId) {
+      setSession(session);
+    }
+  }, []);
 
   const handleSignout = () => {
     removeSessionId();
@@ -60,14 +66,16 @@ export default function NavbarRight() {
               onMouseLeave={() => setDropdown(false)}
               data-dropdown={dropdown}
               className={styles.navItem}
-              href={item.href ? `${item.href}` : ""}>
+              href={item.href ? `${item.href}` : ""}
+            >
               <Button
                 startIcon={item?.icon}
                 variant={item?.variant}
                 size={item?.size}
                 className={
                   item.label === "Account" ? styles.accountItem : undefined
-                }>
+                }
+              >
                 {item.label}
               </Button>
             </Link>
@@ -76,18 +84,11 @@ export default function NavbarRight() {
                 className={styles.navAccount}
                 onMouseEnter={() => setDropdown(true)}
                 onMouseLeave={() => setDropdown(false)}
-                data-dropdown={dropdown}>
+                data-dropdown={dropdown}
+              >
                 <div className={styles.navAccountUsername}>
                   <p className={styles.navAccountTitle}>ACCOUNT</p>
-                  <p className={styles.navAccountName}>{session.username}</p>
-                </div>
-                <div className={styles.navAccountButtons}>
-                  <Link href="/settings">
-                    <Button variant="text-outlined">Setting</Button>
-                  </Link>
-                  <Link href="/watchlist">
-                    <Button variant="text-outlined">Watchlist</Button>
-                  </Link>
+                  <p className={styles.navAccountName}>{session?.username}</p>
                 </div>
                 <div className={styles.signoutButton}>
                   <Button onClick={handleSignout} variant="contained-outlined">

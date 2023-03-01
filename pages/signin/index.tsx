@@ -24,6 +24,7 @@ export default function SignIn() {
         sessionId: guest.guest_session_id,
         isGuest: true,
         username: "guest",
+        accountId: 0,
       });
       router.push("/");
     }
