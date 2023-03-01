@@ -13,9 +13,11 @@ import { getSessionId } from "@/utils/index";
 import { Movie } from "@/interfaces/movie";
 
 import styles from "./WatchList.module.scss";
+import { SessionData } from "@/interfaces/storage";
+import { fetchWatchList } from "@/helpers/handleWatchList";
 
 export default function WatchList() {
-  const [watchList, setWatchList] = useState([]);
+  const [watchList, setWatchList] = useState<Movie[]>([]);
   const [allow, setAllow] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [editWatchList, setEditWatchList] = useState<Movie[]>([]);
@@ -39,17 +41,13 @@ export default function WatchList() {
     }
   };
 
-  const fetchWatchList = async () => {
+  const getWatchList = async () => {
     const session = getSessionId();
     if (!session || session.isGuest) {
       setAllow(false);
     } else {
       setAllow(true);
-      const watchListDatas = await fetch(
-        `${TMDB_REQUEST_URL}/account/${session?.accountId}/watchlist/movies${API_KEY}&language=en-US&session_id=${session?.sessionId}&sort_by=created_at.asc&page=1`
-      );
-      const watchListData = await watchListDatas.json();
-      const watchList = watchListData.results;
+      const watchList = await fetchWatchList(session);
       setWatchList(watchList);
     }
     setIsLoading(false);
@@ -84,7 +82,7 @@ export default function WatchList() {
             />
           );
         }
-        fetchWatchList();
+        getWatchList();
       } else {
         <Toast
           icon={<Error />}
@@ -98,7 +96,7 @@ export default function WatchList() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchWatchList();
+    getWatchList();
   }, []);
 
   return (

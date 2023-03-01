@@ -3,10 +3,14 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
 import { Toast } from "@/components/Toast/Toast";
-import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 import { getSessionId } from "@/utils/index";
 import { Error, Plus, Transhbin } from "@/icons/index";
 import { Movie, MovieDetail } from "@/interfaces/movie";
+import {
+  fetchWatchList,
+  removeWatchList,
+  addWatchList,
+} from "@/helpers/handleWatchList";
 
 type Status = "add" | "remove";
 
@@ -22,14 +26,10 @@ const useWatchlist = (props: useWatchListProps) => {
   const [inWatchlist, setInWatchlist] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchWatchList = async () => {
+  const handleFetchWatchList = async () => {
     const session = await getSessionId();
     if (session && !session.isGuest) {
-      const watchListDatas = await fetch(
-        `${TMDB_REQUEST_URL}/account/${session?.accountId}/watchlist/movies${API_KEY}&language=en-US&session_id=${session?.sessionId}&sort_by=created_at.asc&page=1`
-      );
-      const watchListData = await watchListDatas.json();
-      const watchList = watchListData.results;
+      const watchList = await fetchWatchList(session);
       const inWatchlist = watchList.find(
         (watch: Movie) => watch.id === movieDetail.id
       );
@@ -42,7 +42,7 @@ const useWatchlist = (props: useWatchListProps) => {
     setIsLoading(true);
     setAddWatchlist(false);
     setInWatchlist(false);
-    fetchWatchList();
+    handleFetchWatchList();
   }, [movieDetail]);
 
   const handleWatchList = async (status: Status) => {
@@ -54,28 +54,17 @@ const useWatchlist = (props: useWatchListProps) => {
         shallow: true,
       });
     } else {
-      const res = await fetch(
-        `${TMDB_REQUEST_URL}/account/${session?.accountId}/watchlist${API_KEY}&session_id=${session.sessionId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-          },
-          body: JSON.stringify({
-            media_type: "movie",
-            media_id: movieDetail.id,
-            watchlist: isAdd ? true : false,
-          }),
-        }
-      );
-      const watchlist = await res.json();
-      if (watchlist.success) {
+      const watchlist = isAdd
+        ? await addWatchList(session, movieDetail)
+        : await removeWatchList(session, movieDetail);
+
+      if (watchlist?.success) {
         setAddWatchlist(isAdd);
         setInWatchlist(isAdd);
         toast(
           <Toast
             icon={isAdd ? <Plus /> : <Transhbin />}
-            title="Added to watchlist"
+            title={isAdd ? "Added to watchlist" : "Removed from watchlist"}
             subtitle={movieDetail.title || movieDetail.original_title}
           />
         );
@@ -93,6 +82,11 @@ const useWatchlist = (props: useWatchListProps) => {
     }
   };
 
-  return { isLoading, addWatchlist, inWatchlist, handleWatchList };
+  return {
+    isLoading,
+    addWatchlist,
+    inWatchlist,
+    handleWatchList,
+  };
 };
 export default useWatchlist;
