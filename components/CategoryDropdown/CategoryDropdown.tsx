@@ -19,7 +19,8 @@ export default function CategoryDropdown(props: CategoryDropdownProps) {
         className={styles.categoryDropdownButton}
         variant="outlined"
         size="lg"
-        onClick={() => setOpen(!open)}>
+        onClick={() => setOpen(!open)}
+      >
         Select Category <ChevronDown />
       </Button>
       <div className={styles.categoryDropdownList} data-open={open}>

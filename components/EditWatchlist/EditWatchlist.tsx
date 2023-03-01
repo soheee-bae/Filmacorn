@@ -27,7 +27,8 @@ export default function EditWatchlist(props: EditWatchlistProps) {
           <Button
             variant="contained"
             onClick={handleRemove}
-            disabled={editWatchList.length === 0}>
+            disabled={editWatchList.length === 0}
+          >
             Remove
           </Button>
         </div>

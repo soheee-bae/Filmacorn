@@ -46,7 +46,8 @@ export default function SortingDropdown(props: SortingDropdownProps) {
               <label
                 key={list.value}
                 className={styles.sortingDropdownList}
-                data-checked={sorting === list.value}>
+                data-checked={sorting === list.value}
+              >
                 <input
                   type="radio"
                   name="sorting"

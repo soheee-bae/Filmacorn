@@ -21,13 +21,15 @@ export default function WatchListCards(props: WatchListCardsProps) {
           <Link
             className={editMode ? styles.watchListCard : ""}
             href={editMode ? "" : `/details/${watchItem.id}`}
-            key={watchItem.id}>
+            key={watchItem.id}
+          >
             <CarouselCard key={watchItem.id} info={watchItem} />
             {editMode && (
               <div
                 className={styles.watchListEditMode}
                 data-edit={checkEdit(watchItem.id)}
-                onClick={() => handleEdit(watchItem)}>
+                onClick={() => handleEdit(watchItem)}
+              >
                 {checkEdit(watchItem.id) ? <CheckCircle /> : <Circle />}
               </div>
             )}

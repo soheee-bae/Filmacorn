@@ -58,7 +58,8 @@ export default function Search(props: SearchProps) {
             variant="outlined"
             size="sm"
             className={styles.clear}
-            onClick={() => setSearch("")}>
+            onClick={() => setSearch("")}
+          >
             clear
           </Button>
         </div>
