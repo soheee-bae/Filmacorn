@@ -2,6 +2,7 @@ import styles from "./CarouselCard.module.scss";
 import { TMDB_IMAGE_URL } from "@/config/index";
 import { Play } from "@/icons/index";
 import { Movie } from "@/interfaces/movie";
+import { fetchMovieVideo } from "@/helpers/handleMovie";
 
 interface CarouselCardProps {
   info: Movie;
@@ -18,6 +19,12 @@ export default function CarouselCard(props: CarouselCardProps) {
     return null;
   }
 
+  const handlePlay = async () => {
+    const detailVideos = await fetchMovieVideo(info.id.toString());
+    const detailVideo = detailVideos?.find((v: any) => v.site === "YouTube");
+    window.open(`https://www.youtube.com/watch?v=${detailVideo?.key}`);
+  };
+
   return (
     <div className={styles.carouselItem}>
       <img
@@ -27,7 +34,9 @@ export default function CarouselCard(props: CarouselCardProps) {
         width={width || 190}
         height={height || 285}
       />
-      <Play />
+      <div onClick={handlePlay}>
+        <Play />
+      </div>
       <p className={styles.imgDescription}>
         {info.title || info.original_title}
       </p>

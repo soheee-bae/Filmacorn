@@ -6,9 +6,9 @@ import { useRouter } from "next/router";
 import { AUTH } from "@/config/index";
 import Button from "@/components/Button/Button";
 import { setSessionId } from "@/utils/index";
-import { createSession, createToken } from "@/helpers/handleAuth";
+import { createGuestSession, createToken } from "@/helpers/handleAuth";
 import { fetchGenre } from "@/helpers/handleGenre";
-import { Session, Token } from "@/interfaces/auth";
+import { GuestSession, Token } from "@/interfaces/auth";
 
 import styles from "./Signin.module.scss";
 
@@ -18,7 +18,7 @@ export default function SignIn() {
   const router = useRouter();
 
   const handleGuest = async () => {
-    const guest: Session = await createSession();
+    const guest: GuestSession = await createGuestSession();
 
     if (guest.success) {
       setSessionId({

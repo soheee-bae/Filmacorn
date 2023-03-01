@@ -12,6 +12,9 @@ export default function DetailRecom(props: DetailRecomProps) {
   const { recommendations } = props;
   const slicedRecomm = recommendations.slice(0, 10);
 
+  const hide = recommendations.length === 0;
+  if (hide) return null;
+
   return (
     <div className={styles.detailRecomContainer}>
       <div className={styles.detailRecomContentContainer}>

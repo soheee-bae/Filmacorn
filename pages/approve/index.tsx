@@ -9,6 +9,7 @@ import { CheckCircle } from "@/icons/index";
 import styles from "./Approve.module.scss";
 import { Account } from "@/interfaces/account";
 import { fetchGenre } from "@/helpers/handleGenre";
+import { createSession, fetchAccount } from "@/helpers/handleAuth";
 
 interface ApproveProps {
   sessionId: string;
@@ -60,28 +61,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query;
   const approved = query.approved;
 
+  const session = await createSession(query?.request_token as string);
+  const sessionId = session?.session_id;
+
   const genre = await fetchGenre();
-
-  const loginSession = await fetch(
-    `${TMDB_REQUEST_URL}/authentication/session/new${API_KEY}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        request_token: query.request_token,
-      }),
-    }
-  );
-
-  const session = await loginSession.json();
-  const sessionId = session?.session_id || 0;
-
-  const accountData = await fetch(
-    `${TMDB_REQUEST_URL}/account${API_KEY}&session_id=${sessionId}`
-  );
-  const account = await accountData.json();
+  const account = await fetchAccount(sessionId);
 
   return {
     props: { sessionId, account, approved, genre },

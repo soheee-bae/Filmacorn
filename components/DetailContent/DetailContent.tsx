@@ -1,8 +1,6 @@
 import "react-toastify/dist/ReactToastify.css";
 
 import { Cast, MovieDetail } from "@/interfaces/movie";
-import { Video } from "@/interfaces/video";
-
 import CastList from "@/components/CastList/CastList";
 import DateTime from "@/components/DateTime/DateTime";
 import GenreList from "@/components/GenreList/GenreList";
@@ -16,11 +14,10 @@ interface DetailContentProps {
   movieDetail: MovieDetail;
   cast: Cast[];
   director: Cast[];
-  video: Video[];
 }
 
 export default function DetailContent(props: DetailContentProps) {
-  const { movieDetail, cast, director, video } = props;
+  const { movieDetail, cast, director } = props;
 
   const imgSrc = movieDetail.backdrop_path || movieDetail.poster_path;
   const genreList = movieDetail.genres;
@@ -35,7 +32,7 @@ export default function DetailContent(props: DetailContentProps) {
             releaseDate={movieDetail.release_date}
             runtime={movieDetail.runtime}
           />
-          <DetailButtons video={video} movieDetail={movieDetail} />
+          <DetailButtons movieDetail={movieDetail} />
           <GenreList genreList={genreList} />
           <div className={styles.detailCasts}>
             <CastList list={director} title="Directed by" />

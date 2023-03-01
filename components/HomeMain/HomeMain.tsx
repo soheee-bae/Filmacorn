@@ -7,23 +7,25 @@ import GenreList from "@/components/GenreList/GenreList";
 import MainBackground from "@/components/MainBackground/MainBackground";
 
 import styles from "./HomeMain.module.scss";
+import { fetchMovieVideo } from "@/helpers/handleMovie";
 
 interface HomeMainProps {
   mainMovie: MovieDetail;
-  mainMovieVideo: any;
 }
 
 export default function HomeMain(props: HomeMainProps) {
-  const { mainMovie, mainMovieVideo } = props;
+  const { mainMovie } = props;
   const router = useRouter();
 
   const imgSrc = mainMovie.backdrop_path || mainMovie.poster_path;
   const genreList = mainMovie.genres;
-  const mainVideo = mainMovieVideo.find((v: any) => v.site === "YouTube");
 
-  const handleWatchNow = () => {
+  const handleWatchNow = async () => {
+    const mainMovieVideo = await fetchMovieVideo(mainMovie.id.toString());
+    const mainVideo = mainMovieVideo.find((v: any) => v.site === "YouTube");
     window.open(`https://www.youtube.com/watch?v=${mainVideo?.key}`);
   };
+
   const handleMoreInfo = () => {
     router.push(`/details/${mainMovie.id}`, undefined, {
       shallow: true,
@@ -46,16 +48,14 @@ export default function HomeMain(props: HomeMainProps) {
                 variant="contained"
                 startIcon={<Play />}
                 onClick={handleWatchNow}
-                className={styles.homeButton}
-              >
+                className={styles.homeButton}>
                 Watch Now
               </Button>
               <Button
                 size="lg"
                 variant="outlined"
                 onClick={handleMoreInfo}
-                className={styles.homeButton}
-              >
+                className={styles.homeButton}>
                 More Info
               </Button>
             </div>

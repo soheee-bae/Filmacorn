@@ -1,22 +1,23 @@
 import { Check, Play, Plus } from "@/icons/index";
 import { MovieDetail } from "@/interfaces/movie";
-import { Video } from "@/interfaces/video";
 import useWatchlist from "@/hooks/useWatchlist";
 import Button from "@/components/Button/Button";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import styles from "./DetailButtons.module.scss";
+import { fetchMovieVideo } from "@/helpers/handleMovie";
 
 interface DetailButtonProps {
-  video: Video[];
   movieDetail: MovieDetail;
 }
 export default function DetailButtons(props: DetailButtonProps) {
-  const { video, movieDetail } = props;
+  const { movieDetail } = props;
 
   const { isLoading, addWatchlist, inWatchlist, handleWatchList } =
     useWatchlist({ movieDetail });
-  const detailVideo = video?.find((v: any) => v.site === "YouTube");
-  const handleWatchNow = () => {
+
+  const handleWatchNow = async () => {
+    const detailVideos = await fetchMovieVideo(movieDetail.id.toString());
+    const detailVideo = detailVideos?.find((v: any) => v.site === "YouTube");
     window.open(`https://www.youtube.com/watch?v=${detailVideo?.key}`);
   };
 
@@ -29,8 +30,7 @@ export default function DetailButtons(props: DetailButtonProps) {
             variant="contained"
             startIcon={<Play />}
             onClick={handleWatchNow}
-            className={styles.detailButton}
-          >
+            className={styles.detailButton}>
             Watch Now
           </Button>
           {isLoading ? (
@@ -45,8 +45,7 @@ export default function DetailButtons(props: DetailButtonProps) {
                   variant="outlined"
                   onClick={() => handleWatchList("remove")}
                   className={styles.detailButton}
-                  startIcon={<Check />}
-                >
+                  startIcon={<Check />}>
                   In Watchlist
                 </Button>
               ) : (
@@ -55,8 +54,7 @@ export default function DetailButtons(props: DetailButtonProps) {
                   variant="outlined"
                   onClick={() => handleWatchList("add")}
                   className={styles.detailButton}
-                  startIcon={<Plus />}
-                >
+                  startIcon={<Plus />}>
                   Add to Watchlist
                 </Button>
               ),
