@@ -1,7 +1,11 @@
 @import "@/styles/mixin";
 
 .watchlist {
-  min-height: 90vh;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 0;
   background-color: var(--blackColor200);
   display: flex;
   justify-content: center;
@@ -106,4 +110,13 @@
   &[data-edit="true"] {
     background: rgba(20, 20, 20, 0.3);
   }
+}
+
+.watchlistLoading {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10vw;
+  height: 10vh;
 }

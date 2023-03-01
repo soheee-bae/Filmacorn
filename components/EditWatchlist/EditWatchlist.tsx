@@ -8,9 +8,11 @@ interface EditWatchlistProps {
   setEditMode: Dispatch<boolean>;
   editWatchList: Movie[];
   handleRemove: () => void;
+  handleCancel: () => void;
 }
 export default function EditWatchlist(props: EditWatchlistProps) {
-  const { editMode, setEditMode, editWatchList, handleRemove } = props;
+  const { editMode, setEditMode, editWatchList, handleRemove, handleCancel } =
+    props;
 
   return (
     <div className={styles.editWatchlist}>
@@ -19,12 +21,13 @@ export default function EditWatchlist(props: EditWatchlistProps) {
           <p className={styles.editWatchlistCount}>
             {editWatchList.length} Selected
           </p>
-          <Button
-            onClick={() => setEditMode(false)}
-            variant="contained-outlined">
+          <Button onClick={handleCancel} variant="contained-outlined">
             Cancel
           </Button>
-          <Button variant="contained" onClick={handleRemove}>
+          <Button
+            variant="contained"
+            onClick={handleRemove}
+            disabled={editWatchList.length === 0}>
             Remove
           </Button>
         </div>

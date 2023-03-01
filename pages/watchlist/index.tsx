@@ -13,15 +13,21 @@ import EditWatchlist from "@/components/EditWatchlist/EditWatchlist";
 import { CheckCircle, Circle, Error, Transhbin } from "@/icons/index";
 import { Toast, ToastSnackbar } from "@/components/Toast/Toast";
 import { toast } from "react-toastify";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 export default function WatchList() {
   const [watchList, setWatchList] = useState([]);
   const [allow, setAllow] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [editWatchList, setEditWatchList] = useState<Movie[]>([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const checkEdit = (id: number) => {
     return editWatchList.some((watchlist) => watchlist.id === id);
+  };
+
+  const handleCancel = () => {
+    setEditMode(false);
+    setEditWatchList([]);
   };
 
   const handleEdit = (data: Movie) => {
@@ -46,6 +52,7 @@ export default function WatchList() {
       const watchList = watchListData.results;
       setWatchList(watchList);
     }
+    setIsLoading(false);
   };
   const handleRemove = async () => {
     const session = await getSessionId();
@@ -84,10 +91,12 @@ export default function WatchList() {
           subtitle={watchItem.title || watchItem.original_title}
         />;
       }
+      setEditMode(false);
     });
   };
 
   useEffect(() => {
+    setIsLoading(true);
     fetchWatchList();
   }, []);
 
@@ -102,21 +111,28 @@ export default function WatchList() {
               editMode={editMode}
               editWatchList={editWatchList}
               handleRemove={handleRemove}
+              handleCancel={handleCancel}
             />
           )}
         </div>
         <div className={styles.watchlistContent}>
-          <WatchListContent
-            allow={allow}
-            watchList={watchList}
-            editMode={editMode}
-            handleEdit={handleEdit}
-            editWatchList={editWatchList}
-            checkEdit={checkEdit}
-          />
+          {isLoading ? (
+            <div className={styles.watchlistLoading}>
+              <LoadingSpinner />
+            </div>
+          ) : (
+            <WatchListContent
+              allow={allow}
+              watchList={watchList}
+              editMode={editMode}
+              handleEdit={handleEdit}
+              editWatchList={editWatchList}
+              checkEdit={checkEdit}
+            />
+          )}
         </div>
-        <ToastSnackbar />
       </div>
+      <ToastSnackbar />
     </div>
   );
 }
@@ -142,8 +158,8 @@ export function WatchListContent(props: watchListContentProps) {
             Add Stuff To Your Watchlist
           </p>
           <p className={styles.watchListText}>
-            Your Watchlist is empty. Any Movie. Show can be added to your
-            Watchlist with a Free Filmacorn account.
+            Your Watchlist is empty. Any Movie can be added to your Watchlist
+            with a Free Filmacorn account.
           </p>
         </div>
       );
