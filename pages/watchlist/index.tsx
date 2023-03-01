@@ -7,14 +7,13 @@ import EditWatchlist from "@/components/EditWatchlist/EditWatchlist";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { WatchListContent } from "@/components/WatchListContent/WatchListContent";
 
+import { Movie } from "@/interfaces/movie";
+import { getSessionId } from "@/utils/index";
 import { Error, Transhbin } from "@/icons/index";
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
-import { getSessionId } from "@/utils/index";
-import { Movie } from "@/interfaces/movie";
+import { fetchWatchList, removeWatchList } from "@/helpers/handleWatchList";
 
 import styles from "./WatchList.module.scss";
-import { SessionData } from "@/interfaces/storage";
-import { fetchWatchList } from "@/helpers/handleWatchList";
 
 export default function WatchList() {
   const [watchList, setWatchList] = useState<Movie[]>([]);
@@ -56,21 +55,7 @@ export default function WatchList() {
   const handleRemove = async () => {
     const session = await getSessionId();
     editWatchList.forEach(async (watchItem, index) => {
-      const res = await fetch(
-        `${TMDB_REQUEST_URL}/account/${session?.accountId}/watchlist${API_KEY}&session_id=${session.sessionId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-          },
-          body: JSON.stringify({
-            media_type: "movie",
-            media_id: watchItem.id,
-            watchlist: false,
-          }),
-        }
-      );
-      const watchlist = await res.json();
+      const watchlist = await removeWatchList(session, watchItem);
       if (watchlist.success) {
         setEditWatchList([]);
         if (editWatchList.length === index + 1) {

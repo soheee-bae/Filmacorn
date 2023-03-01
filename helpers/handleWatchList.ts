@@ -1,5 +1,5 @@
 import { SessionData } from "@/interfaces/storage";
-import { MovieDetail } from "@/interfaces/movie";
+import { Movie, MovieDetail } from "@/interfaces/movie";
 import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 
 export const fetchWatchList = async (session: SessionData) => {
@@ -13,7 +13,7 @@ export const fetchWatchList = async (session: SessionData) => {
 
 export const removeWatchList = async (
   session: SessionData,
-  movieDetail: MovieDetail
+  movieDetail: MovieDetail | Movie
 ) => {
   const res = await fetch(
     `${TMDB_REQUEST_URL}/account/${session?.accountId}/watchlist${API_KEY}&session_id=${session.sessionId}`,
