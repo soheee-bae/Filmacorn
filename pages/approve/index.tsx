@@ -8,6 +8,7 @@ import { setSessionId } from "@/utils/index";
 import { CheckCircle } from "@/icons/index";
 import styles from "./Approve.module.scss";
 import { Account } from "@/interfaces/account";
+import { fetchGenre } from "@/helpers/handleGenre";
 
 interface ApproveProps {
   sessionId: string;
@@ -59,12 +60,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query;
   const approved = query.approved;
 
-  /* Genre */
-  const genreData = await fetch(
-    `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
-  );
-  const genres = await genreData.json();
-  const genre = genres.genres;
+  const genre = await fetchGenre();
 
   const loginSession = await fetch(
     `${TMDB_REQUEST_URL}/authentication/session/new${API_KEY}`,

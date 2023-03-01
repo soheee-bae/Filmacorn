@@ -6,6 +6,7 @@ import Link from "next/link";
 import { LeftArrow } from "@/icons/index";
 import { API_KEY, TMDB_REQUEST_URL, TMDB_EXTRA } from "@/config/index";
 import { getCategoryData } from "@/helpers/getCategoryData";
+import { fetchGenre } from "@/helpers/handleGenre";
 import { CategoryData } from "@/interfaces/category";
 import { Movie } from "@/interfaces/movie";
 import CarouselCard from "@/components/CarouselCard/CarouselCard";
@@ -71,12 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     movieData = Movies.results;
   }
 
-  /* Genre */
-  const genreData = await fetch(
-    `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
-  );
-  const genres = await genreData.json();
-  const genre = genres.genres;
+  const genre = await fetchGenre();
 
   return {
     props: {

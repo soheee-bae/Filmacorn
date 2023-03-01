@@ -3,6 +3,7 @@ import { FullData, MovieDetail } from "@/interfaces/movie";
 import { Video } from "@/interfaces/video";
 import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
 
+import { fetchGenre } from "@/helpers/handleGenre";
 import HomeList from "@/components/HomeList/HomeList";
 import HomeMain from "@/components/HomeMain/HomeMain";
 import styles from "./Home.module.scss";
@@ -138,12 +139,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const mainMovieVideo = await mainMovieVideoData.json();
   const mainMovieVideos = mainMovieVideo.results;
 
-  /* Genre */
-  const genreData = await fetch(
-    `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
-  );
-  const genres = await genreData.json();
-  const genre = genres.genres;
+  const genre = await fetchGenre();
 
   return {
     props: {

@@ -6,6 +6,7 @@ import useBreakpoint from "@/hooks/useBreakpoint";
 import { API_KEY, TMDB_EXTRA, TMDB_REQUEST_URL } from "@/config/index";
 import { Movie } from "@/interfaces/movie";
 import { LeftArrow } from "@/icons/index";
+import { fetchGenre } from "@/helpers/handleGenre";
 
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import SearchResult from "@/components/SearchResult/SearchResult";
@@ -58,8 +59,7 @@ export default function Search(props: SearchProps) {
             variant="outlined"
             size="sm"
             className={styles.clear}
-            onClick={() => setSearch("")}
-          >
+            onClick={() => setSearch("")}>
             clear
           </Button>
         </div>
@@ -74,12 +74,7 @@ export default function Search(props: SearchProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  /* Genre */
-  const genreData = await fetch(
-    `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
-  );
-  const genres = await genreData.json();
-  const genre = genres.genres;
+  const genre = await fetchGenre();
 
   let moviesList: Movie[] = [];
 

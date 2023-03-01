@@ -5,6 +5,7 @@ import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 import { Video } from "@/interfaces/video";
 import { MovieDetail, Cast, Movie } from "@/interfaces/movie";
 import DetailMain from "@/components/DetailMain/DetailMain";
+import { fetchGenre } from "@/helpers/handleGenre";
 
 interface MovieDetailProps {
   movieDetails: MovieDetail;
@@ -67,12 +68,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const similarData = await similar.json();
   const recommendations = similarData.results;
 
-  /* Genre */
-  const genreData = await fetch(
-    `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
-  );
-  const genres = await genreData.json();
-  const genre = genres.genres;
+  const genre = await fetchGenre();
 
   return {
     props: {

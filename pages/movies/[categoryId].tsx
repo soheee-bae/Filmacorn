@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 
-import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 import { Genre } from "@/interfaces/basic";
+import { fetchGenre } from "@/helpers/handleGenre";
 import MoviesLayout from "@/components/MoviesLayout/MoviesLayout";
 import LoadMoreContent from "@/components/LoadMoreContent/LoadMoreContent";
 import MoviesHeader from "@/components/MoviesHeader/MoviesHeader";
@@ -40,12 +40,7 @@ export default function MoviesCategory(props: MoviesProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  /* Genre */
-  const genreData = await fetch(
-    `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
-  );
-  const genres = await genreData.json();
-  const genre = genres.genres;
+  const genre = await fetchGenre();
 
   const paths = genre.map((genre: Genre) => ({
     params: { categoryId: genre.id.toString() },
@@ -59,12 +54,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const categoryId = params?.categoryId;
-  /* Genre */
-  const genreData = await fetch(
-    `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
-  );
-  const genres = await genreData.json();
-  const genre = genres.genres;
+  const genre = await fetchGenre();
 
   return {
     props: { genre, categoryId },

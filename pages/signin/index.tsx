@@ -3,9 +3,13 @@ import { GetStaticProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { API_KEY, AUTH, TMDB_REQUEST_URL } from "@/config/index";
+import { AUTH } from "@/config/index";
 import Button from "@/components/Button/Button";
 import { setSessionId } from "@/utils/index";
+import { createSession, createToken } from "@/helpers/handleAuth";
+import { fetchGenre } from "@/helpers/handleGenre";
+import { Session, Token } from "@/interfaces/auth";
+
 import styles from "./Signin.module.scss";
 
 export default function SignIn() {
@@ -14,10 +18,7 @@ export default function SignIn() {
   const router = useRouter();
 
   const handleGuest = async () => {
-    const guestSession = await fetch(
-      `${TMDB_REQUEST_URL}/authentication/guest_session/new${API_KEY}`
-    );
-    const guest = await guestSession.json();
+    const guest: Session = await createSession();
 
     if (guest.success) {
       setSessionId({
@@ -31,16 +32,12 @@ export default function SignIn() {
   };
 
   const handleLogin = async () => {
-    const res = await fetch(
-      `${TMDB_REQUEST_URL}/authentication/token/new${API_KEY}`
-    );
-    const requestToken = await res.json();
-    const token = requestToken.request_token;
-
-    window.open(
-      `${AUTH}${token}?redirect_to=http://localhost:3000/approve`,
-      "_blank"
-    );
+    const token: Token = await createToken();
+    if (token)
+      window.open(
+        `${AUTH}${token}?redirect_to=http://localhost:3000/approve`,
+        "_blank"
+      );
   };
 
   const disabled = username === "" || password === "";
@@ -91,13 +88,7 @@ export default function SignIn() {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  /* Genre */
-  const genreData = await fetch(
-    `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
-  );
-  const genres = await genreData.json();
-  const genre = genres.genres;
-
+  const genre = await fetchGenre();
   return {
     props: { genre },
   };

@@ -10,7 +10,7 @@ import { WatchListContent } from "@/components/WatchListContent/WatchListContent
 import { Movie } from "@/interfaces/movie";
 import { getSessionId } from "@/utils/index";
 import { Error, Transhbin } from "@/icons/index";
-import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
+import { fetchGenre } from "@/helpers/handleGenre";
 import { fetchWatchList, removeWatchList } from "@/helpers/handleWatchList";
 
 import styles from "./WatchList.module.scss";
@@ -121,13 +121,7 @@ export default function WatchList() {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  /* Genre */
-  const genreData = await fetch(
-    `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
-  );
-  const genres = await genreData.json();
-  const genre = genres.genres;
-
+  const genre = await fetchGenre();
   return {
     props: { genre },
   };

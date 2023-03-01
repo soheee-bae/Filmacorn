@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GetStaticProps } from "next";
 
-import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
+import { fetchGenre } from "@/helpers/handleGenre";
 import { Genre } from "@/interfaces/basic";
 import MoviesLayout from "@/components/MoviesLayout/MoviesLayout";
 import LoadMoreContent from "@/components/LoadMoreContent/LoadMoreContent";
@@ -33,12 +33,7 @@ export default function Movies(props: MoviesProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  /* Genre */
-  const genreData = await fetch(
-    `${TMDB_REQUEST_URL}/genre/movie/list${API_KEY}&include_adult=false`
-  );
-  const genres = await genreData.json();
-  const genre = genres.genres;
+  const genre = await fetchGenre();
 
   return {
     props: { genre },
