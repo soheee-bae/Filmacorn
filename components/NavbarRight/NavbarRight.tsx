@@ -6,6 +6,8 @@ import { Search } from "@/icons/index";
 import Button from "@/components/Button/Button";
 import { NavItemProps } from "@/components/Navbar/Navbar";
 import { getSessionId, removeSessionId } from "@/utils/index";
+import { useRouter } from "next/router";
+import { SessionData } from "@/interfaces/storage";
 
 const navSecondItems: NavItemProps[] = [
   {
@@ -40,8 +42,9 @@ Object.freeze(navLoggedInItems);
 
 export default function NavbarRight() {
   const [dropdown, setDropdown] = useState(false);
-  const [session, setSession] = useState(null);
+  const [session, setSession] = useState<SessionData>();
   const navList = !session ? navSecondItems : navLoggedInItems;
+  const router = useRouter();
 
   useEffect(() => {
     const session = getSessionId();
@@ -66,8 +69,7 @@ export default function NavbarRight() {
               onMouseLeave={() => setDropdown(false)}
               data-dropdown={dropdown}
               className={styles.navItem}
-              href={item.href ? `${item.href}` : ""}
-            >
+              href={item.href ? `${item.href}` : ""}>
               <Button
                 startIcon={item?.icon}
                 variant={item?.variant}
@@ -75,7 +77,7 @@ export default function NavbarRight() {
                 className={
                   item.label === "Account" ? styles.accountItem : undefined
                 }
-              >
+                selected={router.pathname.includes(item?.href || "")}>
                 {item.label}
               </Button>
             </Link>
@@ -84,8 +86,7 @@ export default function NavbarRight() {
                 className={styles.navAccount}
                 onMouseEnter={() => setDropdown(true)}
                 onMouseLeave={() => setDropdown(false)}
-                data-dropdown={dropdown}
-              >
+                data-dropdown={dropdown}>
                 <div className={styles.navAccountUsername}>
                   <p className={styles.navAccountTitle}>ACCOUNT</p>
                   <p className={styles.navAccountName}>{session?.username}</p>

@@ -20,6 +20,7 @@ interface ButtonProps {
   onClick?: () => void;
   className?: string;
   disabled?: boolean;
+  selected?: boolean;
 }
 
 export default function Button(props: ButtonProps) {
@@ -32,11 +33,10 @@ export default function Button(props: ButtonProps) {
     onClick,
     className,
     disabled,
+    selected,
   } = props;
-  const [selected, setSelected] = useState(false);
 
   const handleClick = () => {
-    setSelected(!selected);
     onClick?.();
   };
 
@@ -50,8 +50,7 @@ export default function Button(props: ButtonProps) {
       )}
       data-disabled={disabled}
       data-selected={selected}
-      onClick={handleClick}
-    >
+      onClick={handleClick}>
       {startIcon}
       {children}
       {endIcon}

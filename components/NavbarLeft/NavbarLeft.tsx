@@ -7,6 +7,7 @@ import styles from "./NavbarLeft.module.scss";
 import Button from "@/components/Button/Button";
 import { Movie, WatchList } from "@/icons/index";
 import { NavbarProps, NavItemProps } from "@/components/Navbar/Navbar";
+import { useRouter } from "next/router";
 
 const navFirstItems: NavItemProps[] = [
   {
@@ -28,6 +29,7 @@ Object.freeze(navFirstItems);
 export default function NavbarLeft(props: NavbarProps) {
   const { genre } = props;
   const [dropdown, setDropdown] = useState(false);
+  const router = useRouter();
 
   return (
     <div className={styles.navItems}>
@@ -42,13 +44,12 @@ export default function NavbarLeft(props: NavbarProps) {
               className={clsx(styles.navItem, {
                 [styles.movieButton]: item.label === "Movies",
               })}
-              href={`${item.href}`}
-            >
+              href={`${item.href}`}>
               <Button
                 startIcon={item?.icon}
                 variant={item?.variant}
                 size={item?.size}
-              >
+                selected={router.pathname.includes(item?.href || "")}>
                 {item.label}
               </Button>
             </Link>
@@ -57,8 +58,7 @@ export default function NavbarLeft(props: NavbarProps) {
                 className={styles.navMovie}
                 onMouseEnter={() => setDropdown(true)}
                 onMouseLeave={() => setDropdown(false)}
-                data-dropdown={dropdown}
-              >
+                data-dropdown={dropdown}>
                 {genre?.map((category, index) => (
                   <Link href={`/movies/${category.id}`} key={index}>
                     <Button key={category.id} variant="text-outlined">
