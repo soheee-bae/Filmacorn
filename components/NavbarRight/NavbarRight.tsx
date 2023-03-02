@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styles from "./NavbarRight.module.scss";
 
 import { Search, User } from "@/icons/index";
 import Button from "@/components/Button/Button";
 import { NavItemProps } from "@/components/Navbar/Navbar";
 import { getSessionId, removeSessionId } from "@/utils/index";
-import { useRouter } from "next/router";
 import { SessionData } from "@/interfaces/storage";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
@@ -37,6 +37,7 @@ const navLoggedInItems: NavItemProps[] = [
     label: "Account",
     variant: "text-outlined",
     size: "md",
+    href: "",
     icon: <User />,
   },
 ];
@@ -45,22 +46,30 @@ Object.freeze(navLoggedInItems);
 export default function NavbarRight() {
   const [dropdown, setDropdown] = useState(false);
   const [session, setSession] = useState<SessionData>();
-  const navList = !session ? navSecondItems : navLoggedInItems;
+  const [navList, setNavList] = useState(navSecondItems);
   const router = useRouter();
+  const storageSession = getSessionId();
 
   const brkpnt = useBreakpoint();
   const belowMd = brkpnt === "sm" || brkpnt === "md";
 
   useEffect(() => {
-    const session = getSessionId();
-    const noSessionId = !session;
-    if (!noSessionId) {
-      setSession(session);
+    console.log("useEffeect");
+    if (!storageSession) {
+      setNavList(navSecondItems);
+    } else {
+      setNavList(navLoggedInItems);
     }
-  }, []);
+  }, [storageSession]);
+
+  useEffect(() => {
+    console.log("useEffeec2t");
+    setSession(storageSession);
+  }, [navList]);
 
   const handleSignout = () => {
     removeSessionId();
+    setNavList(navSecondItems);
   };
 
   return (

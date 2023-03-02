@@ -33,11 +33,13 @@ export default function SignIn() {
 
   const handleLogin = async () => {
     const token: Token = await createToken();
-    if (token)
+    if (token) {
+      router.push("/");
       window.open(
         `${AUTH}${token}?redirect_to=http://localhost:3000/approve`,
         "_blank"
       );
+    }
   };
 
   const disabled = username === "" || password === "";
