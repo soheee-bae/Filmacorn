@@ -3,7 +3,6 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { API_KEY, TMDB_REQUEST_URL } from "@/config/index";
 import { setSessionId } from "@/utils/index";
 import { CheckCircle } from "@/icons/index";
 import styles from "./Approve.module.scss";

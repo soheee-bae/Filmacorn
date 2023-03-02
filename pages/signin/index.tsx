@@ -11,15 +11,19 @@ import { fetchGenre } from "@/helpers/handleGenre";
 import { GuestSession, Token } from "@/interfaces/auth";
 
 import styles from "./Signin.module.scss";
+interface SigninProps {
+  guest: GuestSession;
+  token: Token;
+}
 
-export default function SignIn() {
+export default function SignIn(props: SigninProps) {
+  const { guest, token } = props;
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleGuest = async () => {
-    const guest: GuestSession = await createGuestSession();
-
     if (guest.success) {
       setSessionId({
         sessionId: guest.guest_session_id,
@@ -32,7 +36,6 @@ export default function SignIn() {
   };
 
   const handleLogin = async () => {
-    const token: Token = await createToken();
     if (token) {
       router.push("/");
       window.open(
@@ -91,7 +94,9 @@ export default function SignIn() {
 
 export const getStaticProps: GetStaticProps = async () => {
   const genre = await fetchGenre();
+  const guest = await createGuestSession();
+  const token = await createToken();
   return {
-    props: { genre },
+    props: { genre, guest, token },
   };
 };

@@ -30,12 +30,11 @@ export default function DetailButtons(props: DetailButtonProps) {
             variant="contained"
             startIcon={<Play />}
             onClick={handleWatchNow}
-            className={styles.detailButton}
-          >
+            className={styles.detailButton}>
             Watch Now
           </Button>
           {isLoading ? (
-            <div className={styles.detailButton}>
+            <div className={styles.detailLoadingButton}>
               <LoadingSpinner />
             </div>
           ) : (
@@ -46,8 +45,7 @@ export default function DetailButtons(props: DetailButtonProps) {
                   variant="outlined"
                   onClick={() => handleWatchList("remove")}
                   className={styles.detailButton}
-                  startIcon={<Check />}
-                >
+                  startIcon={<Check />}>
                   In Watchlist
                 </Button>
               ) : (
@@ -56,8 +54,7 @@ export default function DetailButtons(props: DetailButtonProps) {
                   variant="outlined"
                   onClick={() => handleWatchList("add")}
                   className={styles.detailButton}
-                  startIcon={<Plus />}
-                >
+                  startIcon={<Plus />}>
                   Add to Watchlist
                 </Button>
               ),
