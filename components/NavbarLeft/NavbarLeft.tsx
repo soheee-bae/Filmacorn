@@ -35,12 +35,11 @@ export default function NavbarLeft(props: NavbarProps) {
     <div className={styles.navItems}>
       {navFirstItems.map((item, index) => {
         return (
-          <>
+          <div key={index}>
             <Link
               key={item.label}
               onMouseEnter={() => item.label === "Movies" && setDropdown(true)}
               onMouseLeave={() => setDropdown(false)}
-              data-dropdown={dropdown}
               className={clsx(styles.navItem, {
                 [styles.movieButton]: item.label === "Movies",
               })}
@@ -68,7 +67,7 @@ export default function NavbarLeft(props: NavbarProps) {
                 ))}
               </div>
             )}
-          </>
+          </div>
         );
       })}
     </div>

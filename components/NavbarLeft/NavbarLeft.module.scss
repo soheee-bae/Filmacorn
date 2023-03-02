@@ -13,23 +13,6 @@
   background-color: transparent;
 }
 
-.movieButton {
-  &[data-dropdown="true"] {
-    background-color: var(--blackColor150);
-    opacity: 0.9;
-    border-left: 2px solid var(--primaryColor100);
-    border-top-right-radius: 8px;
-    margin-right: -2px;
-    button {
-      color: var(--primaryColor100);
-      opacity: 1;
-      svg {
-        opacity: 1;
-      }
-    }
-  }
-}
-
 .navMovie {
   display: none;
   position: absolute;

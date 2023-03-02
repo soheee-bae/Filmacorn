@@ -15,16 +15,16 @@
   height: 100%;
   width: 100%;
   max-width: 2000px;
-  padding: 0 20px 30px;
-  margin-top: -600px;
+  padding: 0 20px 50px;
+  margin-top: -5%;
 
   hr {
     border: 0.5px solid var(--whiteColor400);
     margin: 10px 0 20px;
   }
   @include md {
+    margin-top: 0;
     padding: 0 50px 30px;
-    margin-top: -550px;
   }
 }
 
@@ -43,8 +43,9 @@
   flex-wrap: wrap;
   gap: 23px;
   justify-content: center;
-  div {
-    margin-bottom: 23px;
+
+  a {
+    margin-bottom: 40px;
   }
   @include md {
     justify-content: flex-start;
