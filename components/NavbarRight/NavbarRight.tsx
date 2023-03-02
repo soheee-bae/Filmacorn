@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./NavbarRight.module.scss";
 
-import { Search } from "@/icons/index";
+import { Search, User } from "@/icons/index";
 import Button from "@/components/Button/Button";
 import { NavItemProps } from "@/components/Navbar/Navbar";
 import { getSessionId, removeSessionId } from "@/utils/index";
 import { useRouter } from "next/router";
 import { SessionData } from "@/interfaces/storage";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
 const navSecondItems: NavItemProps[] = [
   {
@@ -36,6 +37,7 @@ const navLoggedInItems: NavItemProps[] = [
     label: "Account",
     variant: "text-outlined",
     size: "md",
+    icon: <User />,
   },
 ];
 Object.freeze(navLoggedInItems);
@@ -45,6 +47,9 @@ export default function NavbarRight() {
   const [session, setSession] = useState<SessionData>();
   const navList = !session ? navSecondItems : navLoggedInItems;
   const router = useRouter();
+
+  const brkpnt = useBreakpoint();
+  const belowMd = brkpnt === "sm" || brkpnt === "md";
 
   useEffect(() => {
     const session = getSessionId();
@@ -60,9 +65,9 @@ export default function NavbarRight() {
 
   return (
     <div className={styles.navItems}>
-      {navList.map((item) => {
+      {navList.map((item, index) => {
         return (
-          <>
+          <div key={index}>
             <Link
               key={item.label}
               onMouseEnter={() => item.label === "Account" && setDropdown(true)}
@@ -78,7 +83,7 @@ export default function NavbarRight() {
                   item.label === "Account" ? styles.accountItem : undefined
                 }
                 selected={router.pathname.includes(item?.href || "")}>
-                {item.label}
+                {!belowMd ? item.label : ""}
               </Button>
             </Link>
             {item.label === "Account" && (
@@ -98,7 +103,7 @@ export default function NavbarRight() {
                 </div>
               </div>
             )}
-          </>
+          </div>
         );
       })}
     </div>

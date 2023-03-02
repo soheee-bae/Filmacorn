@@ -8,6 +8,7 @@ import Button from "@/components/Button/Button";
 import { Movie, WatchList } from "@/icons/index";
 import { NavbarProps, NavItemProps } from "@/components/Navbar/Navbar";
 import { useRouter } from "next/router";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
 const navFirstItems: NavItemProps[] = [
   {
@@ -31,6 +32,9 @@ export default function NavbarLeft(props: NavbarProps) {
   const [dropdown, setDropdown] = useState(false);
   const router = useRouter();
 
+  const brkpnt = useBreakpoint();
+  const belowMd = brkpnt === "sm" || brkpnt === "md";
+
   return (
     <div className={styles.navItems}>
       {navFirstItems.map((item, index) => {
@@ -49,10 +53,10 @@ export default function NavbarLeft(props: NavbarProps) {
                 variant={item?.variant}
                 size={item?.size}
                 selected={router.pathname.includes(item?.href || "")}>
-                {item.label}
+                {!belowMd ? item.label : ""}
               </Button>
             </Link>
-            {item.label === "Movies" && (
+            {!belowMd && item.label === "Movies" && (
               <div
                 className={styles.navMovie}
                 onMouseEnter={() => setDropdown(true)}
