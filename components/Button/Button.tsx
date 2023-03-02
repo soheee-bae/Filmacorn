@@ -50,7 +50,8 @@ export default function Button(props: ButtonProps) {
       )}
       data-disabled={disabled}
       data-selected={selected}
-      onClick={handleClick}>
+      onClick={handleClick}
+    >
       {startIcon}
       {children}
       {endIcon}

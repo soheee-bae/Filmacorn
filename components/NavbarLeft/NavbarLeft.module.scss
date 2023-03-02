@@ -1,4 +1,5 @@
 @import "@/styles/size";
+@import "@/styles/mixin";
 
 .navItems {
   display: flex;
@@ -11,6 +12,14 @@
 .navItem {
   text-decoration: none;
   background-color: transparent;
+  p {
+    display: none;
+  }
+  @include md {
+    p {
+      display: block;
+    }
+  }
 }
 
 .navMovie {
@@ -35,6 +44,7 @@
       background-color: var(--blackColor400);
     }
   }
+
   &[data-dropdown="true"] {
     display: flex;
     flex-direction: column;

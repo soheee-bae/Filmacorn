@@ -51,7 +51,7 @@ export default function SignIn() {
 
         <div className={styles.signinHeader}>
           <p className={styles.signinTitle}>Welcome back to Filmacorn</p>
-          <p className={styles.signinSubtitle}>Let's get you signed in</p>
+          <p className={styles.signinSubtitle}>Let&apos;s get you signed in</p>
         </div>
         <div className={styles.signinFields}>
           <input
@@ -69,7 +69,7 @@ export default function SignIn() {
             placeholder="Password"
           />
           <p className={styles.signInOptions}>
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="https://www.themoviedb.org/signup" target="_blank">
               Register in TMDb
             </Link>

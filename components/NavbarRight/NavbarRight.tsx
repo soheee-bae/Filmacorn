@@ -47,6 +47,7 @@ export default function NavbarRight() {
   const [dropdown, setDropdown] = useState(false);
   const [session, setSession] = useState<SessionData>();
   const [navList, setNavList] = useState(navSecondItems);
+
   const router = useRouter();
   const storageSession = getSessionId();
 
@@ -54,7 +55,6 @@ export default function NavbarRight() {
   const belowMd = brkpnt === "sm" || brkpnt === "md";
 
   useEffect(() => {
-    console.log("useEffeect");
     if (!storageSession) {
       setNavList(navSecondItems);
     } else {
@@ -63,7 +63,6 @@ export default function NavbarRight() {
   }, [storageSession]);
 
   useEffect(() => {
-    console.log("useEffeec2t");
     setSession(storageSession);
   }, [navList]);
 
@@ -83,7 +82,8 @@ export default function NavbarRight() {
               onMouseLeave={() => setDropdown(false)}
               data-dropdown={dropdown}
               className={styles.navItem}
-              href={item.href ? `${item.href}` : ""}>
+              href={item.href ? `${item.href}` : ""}
+            >
               <Button
                 startIcon={item?.icon}
                 variant={item?.variant}
@@ -91,8 +91,9 @@ export default function NavbarRight() {
                 className={
                   item.label === "Account" ? styles.accountItem : undefined
                 }
-                selected={router.pathname.includes(item?.href || "")}>
-                {!belowMd ? item.label : ""}
+                selected={router.pathname.includes(item?.href || "")}
+              >
+                <p>{item.label}</p>
               </Button>
             </Link>
             {item.label === "Account" && (
@@ -100,7 +101,8 @@ export default function NavbarRight() {
                 className={styles.navAccount}
                 onMouseEnter={() => setDropdown(true)}
                 onMouseLeave={() => setDropdown(false)}
-                data-dropdown={dropdown}>
+                data-dropdown={dropdown}
+              >
                 <div className={styles.navAccountUsername}>
                   <p className={styles.navAccountTitle}>ACCOUNT</p>
                   <p className={styles.navAccountName}>{session?.username}</p>

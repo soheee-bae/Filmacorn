@@ -12,6 +12,14 @@
 .navItem {
   text-decoration: none;
   background-color: transparent;
+  p {
+    display: none;
+  }
+  @include md {
+    p {
+      display: block;
+    }
+  }
 }
 
 .accountItem {

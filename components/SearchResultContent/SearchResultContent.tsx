@@ -28,6 +28,7 @@ export default function SearchResultContent(props: SearchResultContentProps) {
         {results?.map((data: Movie) => {
           return (
             <Button
+              key={data.title}
               variant="contained-outlined"
               onClick={() => setSearch(data.title || data.original_title)}
             >

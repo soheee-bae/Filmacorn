@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import clsx from "clsx";
 
@@ -7,7 +8,6 @@ import styles from "./NavbarLeft.module.scss";
 import Button from "@/components/Button/Button";
 import { Movie, WatchList } from "@/icons/index";
 import { NavbarProps, NavItemProps } from "@/components/Navbar/Navbar";
-import { useRouter } from "next/router";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const navFirstItems: NavItemProps[] = [
@@ -42,26 +42,29 @@ export default function NavbarLeft(props: NavbarProps) {
           <div key={index}>
             <Link
               key={item.label}
-              onMouseEnter={() => item.label === "Movies" && setDropdown(true)}
+              onMouseEnter={() => setDropdown(item.label === "Movies")}
               onMouseLeave={() => setDropdown(false)}
               className={clsx(styles.navItem, {
                 [styles.movieButton]: item.label === "Movies",
               })}
-              href={`${item.href}`}>
+              href={`${item.href}`}
+            >
               <Button
                 startIcon={item?.icon}
                 variant={item?.variant}
                 size={item?.size}
-                selected={router.pathname.includes(item?.href || "")}>
-                {!belowMd ? item.label : ""}
+                selected={router.pathname.includes(item?.href || "")}
+              >
+                <p>{item.label}</p>
               </Button>
             </Link>
-            {!belowMd && item.label === "Movies" && (
+            {!belowMd && item.label === "Movies" ? (
               <div
                 className={styles.navMovie}
                 onMouseEnter={() => setDropdown(true)}
                 onMouseLeave={() => setDropdown(false)}
-                data-dropdown={dropdown}>
+                data-dropdown={dropdown}
+              >
                 {genre?.map((category, index) => (
                   <Link href={`/movies/${category.id}`} key={index}>
                     <Button key={category.id} variant="text-outlined">
@@ -70,6 +73,8 @@ export default function NavbarLeft(props: NavbarProps) {
                   </Link>
                 ))}
               </div>
+            ) : (
+              <div></div>
             )}
           </div>
         );

@@ -11,14 +11,14 @@ import styles from "./Movies.module.scss";
 
 interface MoviesProps {
   genre: Genre[];
-  categoryId: string;
+  categoryId: number;
 }
 
 export default function MoviesCategory(props: MoviesProps) {
   const { genre, categoryId } = props;
   const [sorting, setSorting] = useState("Sort By");
 
-  const currentGenre = genre.find((genre) => genre.id === parseInt(categoryId));
+  const currentGenre = genre.find((genre) => genre.id === categoryId);
 
   return (
     <MoviesLayout genre={genre}>
