@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -92,7 +92,7 @@ export default function SignIn(props: SigninProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const genre = await fetchGenre();
   const guest = await createGuestSession();
   const token = await createToken();

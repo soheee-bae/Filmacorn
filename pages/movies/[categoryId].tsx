@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 
 import { Genre } from "@/interfaces/basic";
 import { fetchGenre } from "@/helpers/handleGenre";

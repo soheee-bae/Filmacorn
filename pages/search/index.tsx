@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
-import useBreakpoint from "@/hooks/useBreakpoint";
 import { Movie } from "@/interfaces/movie";
 import { LeftArrow } from "@/icons/index";
 import { fetchGenre } from "@/helpers/handleGenre";
@@ -45,8 +44,7 @@ export default function Search(props: SearchProps) {
             variant="outlined"
             size="sm"
             className={styles.clear}
-            onClick={() => setSearch("")}
-          >
+            onClick={() => setSearch("")}>
             clear
           </Button>
         </div>
@@ -62,14 +60,14 @@ export default function Search(props: SearchProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const genre = await fetchGenre();
 
   let moviesList: Movie[] = [];
 
   for (let i = 1; i < 10; i++) {
     const moviesResult = await fetchMovieByType("/movie/popular", i);
-    moviesList.push(...moviesResult);
+    if (moviesResult) moviesList.push(...moviesResult);
   }
 
   return {

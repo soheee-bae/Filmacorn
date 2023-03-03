@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 
 import { fetchGenre } from "@/helpers/handleGenre";
 import { Genre } from "@/interfaces/basic";
@@ -32,7 +32,7 @@ export default function Movies(props: MoviesProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const genre = await fetchGenre();
 
   return {
