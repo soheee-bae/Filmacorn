@@ -79,7 +79,8 @@ export default function NavbarRight() {
               onMouseLeave={() => setDropdown(false)}
               data-dropdown={dropdown}
               className={styles.navItem}
-              href={item.href ? `${item.href}` : ""}>
+              href={item.href ? `${item.href}` : ""}
+            >
               <Button
                 startIcon={item?.icon}
                 variant={item?.variant}
@@ -87,7 +88,8 @@ export default function NavbarRight() {
                 className={
                   item.label === "Account" ? styles.accountItem : undefined
                 }
-                selected={router.pathname.includes(item?.href || "")}>
+                selected={router.pathname.includes(item?.href || "")}
+              >
                 <p>{item.label}</p>
               </Button>
             </Link>
@@ -96,7 +98,8 @@ export default function NavbarRight() {
                 className={styles.navAccount}
                 onMouseEnter={() => setDropdown(true)}
                 onMouseLeave={() => setDropdown(false)}
-                data-dropdown={dropdown}>
+                data-dropdown={dropdown}
+              >
                 <div className={styles.navAccountUsername}>
                   <p className={styles.navAccountTitle}>ACCOUNT</p>
                   <p className={styles.navAccountName}>{session?.username}</p>
