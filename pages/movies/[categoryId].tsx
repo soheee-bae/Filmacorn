@@ -42,7 +42,7 @@ export default function MoviesCategory(props: MoviesProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
   const genre = await fetchGenre();
 
-  const paths = genre.map((genre: Genre) => ({
+  const paths = genre?.map((genre: Genre) => ({
     params: { categoryId: genre.id.toString() },
   }));
 
