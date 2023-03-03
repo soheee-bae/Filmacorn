@@ -39,7 +39,7 @@ export default function SignIn(props: SigninProps) {
     if (token) {
       router.push("/");
       window.open(
-        `${AUTH}${token}?redirect_to=http://localhost:3000/approve`,
+        `${AUTH}${token}?redirect_to=https://filmacorn.vercel.app/approve`,
         "_blank"
       );
     }

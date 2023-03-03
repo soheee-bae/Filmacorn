@@ -1,6 +1,7 @@
 @import "@/styles/size";
 @import "@/styles/mixin";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Russo+One&display=swap");
+
 .nav {
   display: flex;
   justify-content: center;
@@ -10,7 +11,7 @@
   min-height: $navbar-height;
   top: 0;
   padding: 16px 25px 16px 16px;
-  z-index: 100;
+  z-index: 999;
   backdrop-filter: blur(20px);
 }
 
