@@ -18,3 +18,4 @@ export { default as Error } from "./error.svg";
 export { default as Check } from "./check.svg";
 export { default as Circle } from "./circle.svg";
 export { default as User } from "./user.svg";
+export { default as Logo } from "./logo.svg";

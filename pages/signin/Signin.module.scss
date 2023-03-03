@@ -1,7 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Russo+One&display=swap");
-
 .signinContainer {
-  min-height: 90vh;
+  min-height: 100vh;
   background-color: var(--blackColor200);
   display: flex;
   justify-content: center;
@@ -16,15 +14,10 @@
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-}
-
-.signinLogo {
-  font-family: "Inter", sans-serif;
-  font-family: "Russo One", sans-serif;
-  font-size: var(--text-xl);
-  color: var(--primaryColor100);
-  background-color: transparent;
-  align-self: center;
+  svg {
+    align-self: center;
+    width: 150px;
+  }
 }
 
 .signinHeader {

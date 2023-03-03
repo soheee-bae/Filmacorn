@@ -11,6 +11,8 @@ import { fetchGenre } from "@/helpers/handleGenre";
 import { GuestSession, Token } from "@/interfaces/auth";
 
 import styles from "./Signin.module.scss";
+import { Logo } from "@/icons/index";
+
 interface SigninProps {
   guest: GuestSession;
   token: Token;
@@ -50,8 +52,7 @@ export default function SignIn(props: SigninProps) {
   return (
     <div className={styles.signinContainer}>
       <div className={styles.signin}>
-        <p className={styles.signinLogo}>FILMACORN</p>
-
+        <Logo />
         <div className={styles.signinHeader}>
           <p className={styles.signinTitle}>Welcome back to Filmacorn</p>
           <p className={styles.signinSubtitle}>Let&apos;s get you signed in</p>

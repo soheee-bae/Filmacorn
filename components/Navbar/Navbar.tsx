@@ -5,6 +5,7 @@ import { Genre } from "@/interfaces/basic";
 import { Size, Variant } from "@/components/Button/Button";
 import NavbarLeft from "@/components/NavbarLeft/NavbarLeft";
 import NavbarRight from "@/components/NavbarRight/NavbarRight";
+import { Logo } from "@/icons/index";
 
 export interface NavbarProps {
   genre: Genre[];
@@ -26,7 +27,8 @@ export default function Navbar(props: NavbarProps) {
       <div className={styles.navContainer}>
         <div className={styles.navList}>
           <Link href="/" className={styles.logoItem}>
-            <p className={styles.logo}>FILMACORN</p>
+            <Logo />
+            {/* <p className={styles.logo}>FILMACORN</p> */}
           </Link>
           <NavbarLeft genre={genre} />
         </div>

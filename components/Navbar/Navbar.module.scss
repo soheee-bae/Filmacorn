@@ -1,6 +1,5 @@
 @import "@/styles/size";
 @import "@/styles/mixin";
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Russo+One&display=swap");
 
 .nav {
   display: flex;
@@ -32,17 +31,16 @@
 }
 
 .logoItem {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
   text-decoration: none;
   background-color: transparent;
-}
-.logo {
-  margin-right: 10px;
-  font-family: "Inter", sans-serif;
-  font-family: "Russo One", sans-serif;
-  font-size: var(--text-xl);
-  color: var(--primaryColor100);
-  background-color: transparent;
   transition: transform 0.2s;
+  svg {
+    width: 150px;
+    height: 30px;
+  }
   &:hover {
     transform: scale(1.1);
   }
