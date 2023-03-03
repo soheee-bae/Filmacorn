@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 
 import { Genre } from "@/interfaces/basic";
 import { fetchGenre } from "@/helpers/handleGenre";
@@ -39,21 +39,8 @@ export default function MoviesCategory(props: MoviesProps) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const genre = await fetchGenre();
-
-  const paths = genre?.map((genre: Genre) => ({
-    params: { categoryId: genre.id.toString() },
-  }));
-
-  return {
-    paths: paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const categoryId = params?.categoryId;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { categoryId } = context.query;
   const genre = await fetchGenre();
 
   return {
