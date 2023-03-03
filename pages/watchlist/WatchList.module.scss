@@ -1,15 +1,20 @@
 @import "@/styles/mixin";
 
-.watchlist {
-  min-height: 100vh;
+.watchlistPage {
   overflow: hidden;
   position: relative;
   width: 100%;
   margin: 0;
+  padding: 0;
+  min-height: 100vh;
   background-color: var(--blackColor200);
+}
+
+.watchlist {
   display: flex;
   justify-content: center;
 }
+
 .watchlistContainer {
   width: 100%;
   max-width: 2000px;
@@ -21,6 +26,7 @@
     padding: 100px 50px;
   }
 }
+
 .watchlistHeader {
   display: flex;
   flex-direction: row;

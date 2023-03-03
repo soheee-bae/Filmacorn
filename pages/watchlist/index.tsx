@@ -13,6 +13,7 @@ import { Error, Transhbin } from "@/icons/index";
 import { fetchGenre } from "@/helpers/handleGenre";
 import { fetchWatchList, removeWatchList } from "@/helpers/handleWatchList";
 
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./WatchList.module.scss";
 
 export default function WatchList() {
@@ -85,34 +86,36 @@ export default function WatchList() {
   }, []);
 
   return (
-    <div className={styles.watchlist}>
-      <div className={styles.watchlistContainer}>
-        <div className={styles.watchlistHeader}>
-          <p className={styles.watchlistTitle}>Watchlist</p>
-          {allow && (
-            <EditWatchlist
-              setEditMode={setEditMode}
-              editMode={editMode}
-              editWatchList={editWatchList}
-              handleRemove={handleRemove}
-              handleCancel={handleCancel}
-            />
-          )}
-        </div>
-        <div className={styles.watchlistContent}>
-          {isLoading ? (
-            <div className={styles.watchlistLoading}>
-              <LoadingSpinner />
-            </div>
-          ) : (
-            <WatchListContent
-              allow={allow}
-              watchList={watchList}
-              editMode={editMode}
-              handleEdit={handleEdit}
-              checkEdit={checkEdit}
-            />
-          )}
+    <div className={styles.watchlistPage}>
+      <div className={styles.watchlist}>
+        <div className={styles.watchlistContainer}>
+          <div className={styles.watchlistHeader}>
+            <p className={styles.watchlistTitle}>Watchlist</p>
+            {allow && (
+              <EditWatchlist
+                setEditMode={setEditMode}
+                editMode={editMode}
+                editWatchList={editWatchList}
+                handleRemove={handleRemove}
+                handleCancel={handleCancel}
+              />
+            )}
+          </div>
+          <div className={styles.watchlistContent}>
+            {isLoading ? (
+              <div className={styles.watchlistLoading}>
+                <LoadingSpinner />
+              </div>
+            ) : (
+              <WatchListContent
+                allow={allow}
+                watchList={watchList}
+                editMode={editMode}
+                handleEdit={handleEdit}
+                checkEdit={checkEdit}
+              />
+            )}
+          </div>
         </div>
       </div>
       <ToastSnackbar />

@@ -51,8 +51,12 @@
 .seeAllContent {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 23px;
   a {
     margin-bottom: 23px;
+  }
+  @include md {
+    justify-content: flex-start;
   }
 }

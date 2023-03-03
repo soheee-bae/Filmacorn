@@ -9,9 +9,9 @@ import { setSessionId } from "@/utils/index";
 import { createGuestSession, createToken } from "@/helpers/handleAuth";
 import { fetchGenre } from "@/helpers/handleGenre";
 import { GuestSession, Token } from "@/interfaces/auth";
+import { Logo } from "@/icons/index";
 
 import styles from "./Signin.module.scss";
-import { Logo } from "@/icons/index";
 
 interface SigninProps {
   guest: GuestSession;

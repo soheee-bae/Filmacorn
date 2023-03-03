@@ -65,6 +65,7 @@ export default function NavbarRight() {
 
   const handleSignout = () => {
     removeSessionId();
+    router.push("/");
     setNavList(navSecondItems);
   };
 
