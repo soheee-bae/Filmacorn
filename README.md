@@ -1,10 +1,10 @@
 ## 🎬 Filmacorn
+
 [Crackle](https://www.crackle.com/) 클론코딩
 
-- Next.js 
-- TypeScript
-- TMDB API
-- Lazy loading
+### 서비스 소개 
+- 영화의 자세한 정보를 제공하는 서비스 
+- 회원가입과 로그인을 통해서 watchlist를 사용해 유저들이 원하는 영화 리스트를 보관하고 저장할수 있는 서비스 
 
 ### 핵심기능 
 - 영화를 카테고리화해 추천해주고 보여주는 기능
@@ -12,6 +12,13 @@
 - 영화 찾아보기 기능
 - 자세한 영화 정보 보기 및 비슷한 영화 추천 
 - 유저들이 원하는 영화 리스트를 보관하고 저장할수 있는 서비스 
+
+### 개발 환경
+- React 
+- Next.js 
+- TypeScript
+- TMDB API
+- Lazy loading
 
 ## :rocket: Demo
 https://filmacorn.vercel.app/
